@@ -1,7 +1,7 @@
 import React from 'react'
 import moment from 'moment'
 
-interface ActivityItemProps {
+export interface ActivityData {
   id: number
   title: string
   createdAt: moment.Moment | string
@@ -25,6 +25,11 @@ interface ActivityItemProps {
   }
 }
 
+export interface ActivityItemProps {
+  activity: ActivityData
+  onEnter?: (id: number) => void
+}
+
 export type categoriesType =
   | 'Interact'
   | 'Form'
@@ -42,79 +47,89 @@ export type categoriesType =
 /**
  * Primary UI component for user interaction
  */
-export const ActivityItem = ({
-  id,
-  title,
-  createdAt,
-  metadata,
-  closed,
-  creator
-}: ActivityItemProps) => {
+export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
   return (
-    <div className="flex">
+    <div className="flex items-center p-2 -m-2 space-x-4 rounded-xl">
       {/* infomation */}
-      <div className="sm:flex ">
-        <div className="self-center">
-          <div className="inline-flex flex-shrink-0 items-center">
-            {!closed ? (
-              <svg
-                className="text-open fill-current"
-                viewBox="0 0 16 16"
-                version="1.1"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              >
-                <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
-                <path
-                  fillRule="evenodd"
-                  d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"
-                ></path>
-              </svg>
-            ) : (
-              <svg
-                className="text-closed fill-current"
-                viewBox="0 0 16 16"
-                version="1.1"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              >
-                <path d="M11.28 6.78a.75.75 0 00-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l3.5-3.5z"></path>
-                <path
-                  fillRule="evenodd"
-                  d="M16 8A8 8 0 110 8a8 8 0 0116 0zm-1.5 0a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
-                ></path>
-              </svg>
-            )}
-          </div>
-
-          <h4 className="inline-flex items-center py-0.5 px-2.5 text-lg font-bold">
-            {title}
-          </h4>
+      <div className="flex flex-col flex-grow">
+        {/* icon+title+tags */}
+        <div className="flex flex-wrap items-center">
           <div className="inline-flex">
-            {metadata.categories.map((category, index) => {
+            <div className="inline-flex flex-shrink-0 items-center">
+              {!activity.closed ? (
+                <svg
+                  className="text-open fill-current"
+                  viewBox="0 0 16 16"
+                  version="1.1"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path d="M8 9.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"></path>
+                  <path
+                    fillRule="evenodd"
+                    d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"
+                  ></path>
+                </svg>
+              ) : (
+                <svg
+                  className="text-closed fill-current"
+                  viewBox="0 0 16 16"
+                  version="1.1"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path d="M11.28 6.78a.75.75 0 00-1.06-1.06L7.25 8.69 5.78 7.22a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l3.5-3.5z"></path>
+                  <path
+                    fillRule="evenodd"
+                    d="M16 8A8 8 0 110 8a8 8 0 0116 0zm-1.5 0a6.5 6.5 0 11-13 0 6.5 6.5 0 0113 0z"
+                  ></path>
+                </svg>
+              )}
+            </div>
+            <h4 className="inline-flex items-center py-0.5 px-2.5 text-lg font-bold">
+              {activity.title}
+            </h4>
+          </div>
+          <div className="inline-flex">
+            {activity.metadata.categories.map((category, index) => {
               return <Badget key={index} category={category}></Badget>
             })}
           </div>
-          <p className="px-2.5 text-sm text-gray-600">
-            #{id} created at {moment(createdAt).startOf('hour').fromNow()} by{' '}
-            {creator.discord ?? creator.address}
-          </p>
         </div>
+        {/* created at by */}
+        <div className="px-2.5 text-sm text-gray-600">
+          #{activity.id} created at{' '}
+          {moment(activity.createdAt).startOf('hour').fromNow()} by{' '}
+          {activity.creator.discord ?? activity.creator.address}
+        </div>
+        {/* start-end */}
         <div className="inline-flex items-center py-0.5 mx-2 text-xs text-gray-400">
-          {moment(metadata.startDate ?? createdAt).format('lll')} ——{' '}
-          {moment(metadata.endDate).format('lll')}
+          {moment(activity.metadata.startDate ?? activity.createdAt).format(
+            'lll'
+          )}{' '}
+          —— {moment(activity.metadata.endDate).format('lll')}
         </div>
       </div>
       {/* button */}
-      <div className="sm:flex">
-        <button
-          type="button"
-          className="inline-flex items-center py-1.5 px-2.5 text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 focus:ring-2 focus:ring-offset-2 shadow-sm focus:outline-none focus:ring-indigo-500"
+      <div
+        className="flex-shrink-0 self-center flex-grow-1"
+        onClick={() => onEnter!(activity.id)}
+      >
+        <svg
+          className="w-5 h-5 text-gray-400 group-hover:text-gray-500"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
         >
-          {closed ? 'result' : 'vote'}
-        </button>
+          <path
+            fillRule="evenodd"
+            d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
+            clipRule="evenodd"
+          />
+        </svg>
       </div>
     </div>
   )
