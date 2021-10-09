@@ -1,7 +1,8 @@
 import React from 'react'
 import { Story, Meta } from '@storybook/react'
 
-import { ActivityItem, ActivityItemProps } from '.'
+import { ActivityItem } from '.'
+import { ActivityItemProps } from '../../interface/activity'
 
 export default {
   title: 'Project/ActivityItem',

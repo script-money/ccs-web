@@ -15,6 +15,8 @@ module.exports = {
       black: colors.black,
       white: colors.white,
       gray: colors.trueGray,
+      indigo: colors.indigo,
+      All: colors.trueGray,
       Interact: colors.red,
       Form: colors.amber,
       Vote: colors.lime,
@@ -26,7 +28,8 @@ module.exports = {
       Whitelist: colors.rose,
       IXO: colors.sky,
       LuckDraw: colors.pink,
-      Register: colors.teal
+      Register: colors.teal,
+      Airdrop: colors.blueGray
     },
     extend: {
       animation: {

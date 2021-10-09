@@ -1,48 +1,6 @@
 import React from 'react'
 import moment from 'moment'
-
-export interface ActivityData {
-  id: number
-  title: string
-  createdAt: moment.Moment | string
-  startDate: moment.Moment | string
-  endDate: moment.Moment | string
-  metadata: {
-    source: string | null
-    content: string | null
-    startDate: string | null
-    endDate: string | null
-    categories: categoriesType[]
-  }
-  closed: boolean
-  creator: {
-    address: string
-    avatar: string | null
-    discord: string | null
-    flowns: string | null
-    name: string | null
-    votingPower: number
-  }
-}
-
-export interface ActivityItemProps {
-  activity: ActivityData
-  onEnter?: (id: number) => void
-}
-
-export type categoriesType =
-  | 'Interact'
-  | 'Form'
-  | 'Vote'
-  | 'Test'
-  | 'Node'
-  | 'Learn'
-  | 'Create'
-  | 'Develop'
-  | 'Whitelist'
-  | 'IXO'
-  | 'LuckDraw'
-  | 'Register'
+import { ActivityItemProps, categoriesType } from '../../interface/activity'
 
 /**
  * Primary UI component for user interaction
@@ -99,13 +57,13 @@ export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
           </div>
         </div>
         {/* created at by */}
-        <div className="px-2.5 text-sm text-gray-600">
+        <div className="mt-1 text-sm text-gray-600">
           #{activity.id} created at{' '}
           {moment(activity.createdAt).startOf('hour').fromNow()} by{' '}
           {activity.creator.discord ?? activity.creator.address}
         </div>
         {/* start-end */}
-        <div className="inline-flex items-center py-0.5 mx-2 text-xs text-gray-400">
+        <div className="inline-flex items-center py-0.5 text-xs text-gray-400">
           {moment(activity.metadata.startDate ?? activity.createdAt).format(
             'lll'
           )}{' '}
@@ -135,11 +93,7 @@ export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
   )
 }
 
-interface BadgetProps {
-  category: categoriesType
-}
-
-const Badget = ({ category }: BadgetProps) => {
+const Badget = ({ category }: { category: categoriesType }) => {
   return (
     <span
       className={`inline-flex items-center py-0.5 px-2.5 mx-0.5 text-xs font-medium text-${category}-800 bg-${category}-100 rounded-full`}

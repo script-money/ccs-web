@@ -13,7 +13,7 @@ export const AuthContext = createContext<IAuthContext>({
   isLogIn: false
 })
 
-const AuthProvider = (children: any) => {
+export const AuthProvider = (children: any) => {
   const { user, isLogIn, logIn, logOut } = useCurrentUser()
 
   return (

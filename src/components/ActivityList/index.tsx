@@ -1,59 +1,211 @@
-import React from 'react'
-
-import { ActivityData, ActivityItem } from '../ActivityItem'
+import { ActivityItem } from '../ActivityItem'
+import React, { Fragment } from 'react'
+import { Listbox, Transition } from '@headlessui/react'
+import { SelectorIcon } from '@heroicons/react/solid'
+import {
+  ActivityData,
+  categories,
+  ICategoryType
+} from '../../interface/activity'
 
 export interface IActivityListProps {
-  loading: boolean
+  isLoading: boolean
   activities: ActivityData[]
   total: number
-  limit: number
+  pageSize: number
   currentPage: number
-  onPrevious?: (limit: number, current: number) => void
-  onNext?: (limit: number, current: number) => void
+  selectedCategory: ICategoryType
+  changeCurrent?: (current: number) => void
+  changeCanVoteState?: (checked: boolean) => void
+  changeCanJoinState?: (checked: boolean) => void
+  changeSelectType?: (newCategory: ICategoryType) => void
 }
 
 export const ActivityList = ({
-  loading,
+  isLoading,
   activities,
   total,
-  limit = 5,
-  currentPage = 1,
-  onPrevious,
-  onNext
+  pageSize,
+  currentPage,
+  selectedCategory,
+  changeCurrent,
+  changeCanVoteState,
+  changeCanJoinState,
+  changeSelectType
 }: IActivityListProps) => {
+  function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
+  }
+
+  const CategorySelector = (
+    <Listbox value={selectedCategory} onChange={changeSelectType!}>
+      <div className="relative ml-2">
+        <Listbox.Button className="relative py-2 pr-10 pl-2 w-full sm:text-sm text-left bg-white rounded-md border border-gray-300 focus:ring-1 shadow-sm cursor-default focus:outline-none focus:ring-main-500 focus:border-main-500">
+          <span className="block w-10 truncate">{selectedCategory.type}</span>
+          <span className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
+            <SelectorIcon
+              className="w-5 h-5 text-gray-400"
+              aria-hidden="true"
+            />
+          </span>
+        </Listbox.Button>
+
+        <Transition
+          as={Fragment}
+          leave="transition ease-in duration-100"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <Listbox.Options className="overflow-auto absolute z-10 py-1 mt-1 w-full max-h-60 text-base sm:text-sm bg-white rounded-md ring-1 ring-black ring-opacity-5 shadow-lg focus:outline-none">
+            {categories.map(category => (
+              <Listbox.Option
+                key={category.id}
+                className={({ active }) =>
+                  classNames(
+                    active
+                      ? `text-white bg-${category.type}-100`
+                      : 'text-gray-900',
+                    `cursor-default select-none relative py-2 px-2 text-${category.type}-800`
+                  )
+                }
+                value={category}
+              >
+                {({ selected }) => (
+                  <>
+                    <span
+                      className={classNames(
+                        selected ? 'font-semibold' : 'font-normal',
+                        'block truncate'
+                      )}
+                    >
+                      {category.type}
+                    </span>
+                  </>
+                )}
+              </Listbox.Option>
+            ))}
+          </Listbox.Options>
+        </Transition>
+      </div>
+    </Listbox>
+  )
+
+  const Filter = (
+    <div className="flex items-center py-2 pl-3 shadow">
+      {/* canVote */}
+      <div className="flex relative items-start m-1">
+        <div className="flex items-center h-5">
+          <input
+            type="checkbox"
+            className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+            onChange={event => changeCanVoteState!(event.target.checked)}
+          />
+        </div>
+        <div className="ml-1 text-sm">
+          <label htmlFor="comments" className="font-medium text-gray-700">
+            CanVote
+          </label>
+        </div>
+      </div>
+
+      {/* canJoin */}
+      <div className="flex relative items-start m-1">
+        <div className="flex items-center h-5">
+          <input
+            type="checkbox"
+            className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+            onChange={event => changeCanJoinState!(event.target.checked)}
+          />
+        </div>
+        <div className="ml-1 text-sm">
+          <label htmlFor="comments" className="font-medium text-gray-700">
+            CanJoin
+          </label>
+        </div>
+      </div>
+      <div className="flex relative items-start my-1 mr-6 ml-auto">
+        {CategorySelector}
+      </div>
+      {/* createByme */}
+      {/* <div className="flex relative items-start m-1">
+        <div className="flex items-center h-5">
+          <input
+            type="checkbox"
+            className="w-4 h-4 rounded border-gray-300 focus:ring-indigo-500 text-indigo-600"
+          />
+        </div>
+        <div className="ml-1 text-sm">
+          <label htmlFor="comments" className="font-medium text-gray-700">
+            CreateByMe
+          </label>
+        </div>
+      </div> */}
+    </div>
+  )
+
+  const InfoList = (
+    <div className="overflow-hidden bg-white shadow">
+      <ul role="list" className="divide-y divide-gray-200">
+        {activities.map(activity => (
+          <li key={activity.id} className="py-4 px-4 sm:px-6">
+            <ActivityItem activity={activity} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  )
+
   const Pagination = (
     <nav
       className="flex justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200"
       aria-label="Pagination"
     >
-      <div className="hidden sm:block">
+      <div className="hidden sm:block mr-4">
         <p className="text-sm text-gray-700">
           Showing{' '}
-          <span className="font-medium">{(currentPage - 1) * limit + 1}</span>{' '}
-          to <span className="font-medium">{currentPage * limit}</span> of{' '}
-          <span className="font-medium">{total}</span> results
+          <span className="font-medium">
+            {(currentPage - 1) * pageSize + 1}
+          </span>{' '}
+          to{' '}
+          <span className="font-medium">
+            {Math.min(currentPage * pageSize, total)}
+          </span>{' '}
+          of <span className="font-medium">{total}</span> results
         </p>
       </div>
       <div className="flex flex-1 justify-between sm:justify-end">
-        <a
-          href="#"
-          className="inline-flex relative items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300"
-          onClick={() => onPrevious!(limit, currentPage - 1)}
-        >
-          Previous
-        </a>
-        <a
-          href="#"
-          className="inline-flex relative items-center py-2 px-4 ml-3 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300"
-          onClick={() => onNext!(limit, currentPage + 1)}
-        >
-          Next
-        </a>
+        {currentPage > 1 ? (
+          <a
+            // href="#"
+            className="inline-flex relative items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300"
+            onClick={() => {
+              changeCurrent!(currentPage - 1)
+            }}
+          >
+            Previous
+          </a>
+        ) : (
+          <></>
+        )}
+
+        {currentPage * pageSize < total ? (
+          <a
+            // href="#"
+            className="inline-flex relative items-center py-2 px-4 ml-auto text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300"
+            onClick={() => {
+              changeCurrent!(currentPage + 1)
+            }}
+          >
+            Next
+          </a>
+        ) : (
+          <></>
+        )}
       </div>
     </nav>
   )
 
-  if (loading) {
+  if (isLoading) {
     return <div className="list-items">loading</div>
   }
 
@@ -63,15 +215,8 @@ export const ActivityList = ({
 
   return (
     <div>
-      <div className="overflow-hidden bg-white sm:rounded-md shadow">
-        <ul role="list" className="divide-y divide-gray-200">
-          {activities.map(activity => (
-            <li key={activity.id} className="py-4 px-4 sm:px-6">
-              <ActivityItem activity={activity} />
-            </li>
-          ))}
-        </ul>
-      </div>
+      {Filter}
+      {InfoList}
       {Pagination}
     </div>
   )
