@@ -1,4 +1,7 @@
-# react-vite-tailwindcss-storybook-template
+# ccs-web
 
-use **vite storybook tailwindcss typescript react-hooks
-prettier eslint linterstage**
+## run local
+
+use `yarn` install and `yarn dev` run local develop environment
+need [ccs-server](https://github.com/script-money/ccs-server)
+and [docker-nginx-cors](./docker-nginx-cors) run first
