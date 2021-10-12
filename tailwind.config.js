@@ -16,6 +16,7 @@ module.exports = {
       white: colors.white,
       gray: colors.trueGray,
       indigo: colors.indigo,
+      orange: colors.orange,
       All: colors.trueGray,
       Interact: colors.red,
       Form: colors.amber,

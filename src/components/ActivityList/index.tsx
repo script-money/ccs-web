@@ -21,6 +21,10 @@ export interface IActivityListProps {
   changeSelectType?: (newCategory: ICategoryType) => void
 }
 
+function classNames(...classes: string[]) {
+  return classes.filter(Boolean).join(' ')
+}
+
 export const ActivityList = ({
   isLoading,
   activities,
@@ -33,10 +37,6 @@ export const ActivityList = ({
   changeCanJoinState,
   changeSelectType
 }: IActivityListProps) => {
-  function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
-  }
-
   const CategorySelector = (
     <Listbox value={selectedCategory} onChange={changeSelectType!}>
       <div className="relative ml-2">
@@ -97,7 +97,7 @@ export const ActivityList = ({
         <div className="flex items-center h-5">
           <input
             type="checkbox"
-            className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+            className="w-4 h-4 rounded border-gray-300"
             onChange={event => changeCanVoteState!(event.target.checked)}
           />
         </div>
@@ -113,7 +113,7 @@ export const ActivityList = ({
         <div className="flex items-center h-5">
           <input
             type="checkbox"
-            className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+            className="w-4 h-4 rounded border-gray-300"
             onChange={event => changeCanJoinState!(event.target.checked)}
           />
         </div>
@@ -126,20 +126,6 @@ export const ActivityList = ({
       <div className="flex relative items-start my-1 mr-6 ml-auto">
         {CategorySelector}
       </div>
-      {/* createByme */}
-      {/* <div className="flex relative items-start m-1">
-        <div className="flex items-center h-5">
-          <input
-            type="checkbox"
-            className="w-4 h-4 rounded border-gray-300 focus:ring-indigo-500 text-indigo-600"
-          />
-        </div>
-        <div className="ml-1 text-sm">
-          <label htmlFor="comments" className="font-medium text-gray-700">
-            CreateByMe
-          </label>
-        </div>
-      </div> */}
     </div>
   )
 
