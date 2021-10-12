@@ -1,5 +1,5 @@
 import React, { createContext, useContext } from 'react'
-
+import { PageHeadings } from '../components/PageHeadings'
 import useCurrentUser, { SessionUser } from '../hooks/use-current-user.hook'
 
 interface IAuthContext {
@@ -16,6 +16,12 @@ export const AuthContext = createContext<IAuthContext>({
 export const AuthProvider = (children: any) => {
   const { user, isLogIn, logIn, logOut } = useCurrentUser()
 
+  if (!user || !isLogIn)
+    return (
+      <>
+        <PageHeadings isLogin={false} address={null}></PageHeadings>
+      </>
+    )
   return (
     <AuthContext.Provider
       value={{
