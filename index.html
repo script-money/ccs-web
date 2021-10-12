@@ -5,6 +5,25 @@
     <link rel="icon" type="image/svg+xml" href="/src/cryptochasers.ico" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Crypto Chasers</title>
+    <!-- web3 setup (for Vitejs react project only) -->
+    <script>
+      window.global = window // https://github.com/vitejs/vite/issues/3817#issuecomment-864450199
+    </script>
+    <script type="module">
+      import process from 'process'
+      import { Buffer } from 'buffer'
+      import EventEmitter from 'events'
+      import queueMicrotask from 'queue-microtask'
+      import url from 'url'
+
+      window.Buffer = Buffer
+      window.process = process
+      window.EventEmitter = EventEmitter
+      window.queueMicrotask = queueMicrotask
+      window.url = url
+    </script>
+    <!-- for PROD build only -->
+    <script lang="javascript" src="./browserified-libs.js"></script>
   </head>
   <body>
     <div id="root"></div>
