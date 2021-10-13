@@ -39,7 +39,7 @@ export const ActivityList = ({
 }: IActivityListProps) => {
   const CategorySelector = (
     <Listbox value={selectedCategory} onChange={changeSelectType!}>
-      <div className="relative ml-2">
+      <div className="relative mx-2">
         <Listbox.Button className="relative py-2 pr-10 pl-2 w-full sm:text-sm text-left bg-white rounded-md border border-gray-300 focus:ring-1 shadow-sm cursor-default focus:outline-none focus:ring-main-500 focus:border-main-500">
           <span className="block w-10 truncate">{selectedCategory.type}</span>
           <span className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
@@ -91,9 +91,9 @@ export const ActivityList = ({
   )
 
   const Filter = (
-    <div className="flex items-center py-2 pl-3 shadow">
+    <div className="flex items-center py-2 pr-2 sm:pr-4 pl-4 sm:pl-6 shadow">
       {/* canVote */}
-      <div className="flex relative items-start m-1">
+      <div className="flex relative items-start">
         <div className="flex items-center h-5">
           <input
             type="checkbox"
@@ -123,9 +123,7 @@ export const ActivityList = ({
           </label>
         </div>
       </div>
-      <div className="flex relative items-start my-1 mr-6 ml-auto">
-        {CategorySelector}
-      </div>
+      <div className="flex my-1 ml-auto">{CategorySelector}</div>
     </div>
   )
 
@@ -143,7 +141,7 @@ export const ActivityList = ({
 
   const Pagination = (
     <nav
-      className="flex justify-between items-center py-3 px-4 sm:px-6 bg-white border-t border-gray-200"
+      className="flex justify-between items-center py-3 pr-2 sm:pr-4 pl-4 sm:pl-6 bg-white border-t border-gray-200"
       aria-label="Pagination"
     >
       <div className="hidden sm:block mr-4">

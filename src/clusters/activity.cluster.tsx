@@ -14,7 +14,7 @@ export const ActivityCluster = () => {
     ({ current, pageSize }) =>
       getActivityList(
         current,
-        pageSize,
+        pageSize, // should adjust reference screen height
         selectedCategory.type === 'All' ? undefined : selectedCategory.type,
         canVoteState ? true : undefined,
         canJoinState ? true : undefined
@@ -34,7 +34,7 @@ export const ActivityCluster = () => {
       isLoading={loading ?? true}
       activities={data === undefined ? [] : data.list}
       total={pagination.total}
-      pageSize={5}
+      pageSize={10}
       currentPage={pagination.current}
       changeCurrent={pagination.changeCurrent}
       changeCanVoteState={value => setCanVoteState(value)}

@@ -21,7 +21,7 @@ export const PageHeadings = ({
   return (
     <header>
       <nav className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl" aria-label="Top">
-        <div className="flex justify-between items-center py-6 w-full border-b">
+        <div className="flex justify-between items-center py-3 w-full border-b">
           {/* logo */}
           <div className="flex items-center">
             <a href="#">
@@ -33,12 +33,12 @@ export const PageHeadings = ({
               {/* ballots */}
               <div className="flex justify-between items-baseline mr-4 text-xs">
                 <div>🗳</div>
-                <div className="ml-1 text-gray-500">{ballots ?? 0}</div>
+                <div className="ml-1 text-gray-500">{ballots ?? -1}</div>
               </div>
               {/* $CCS */}
               <div className="flex justify-between items-baseline mr-4 text-xs">
                 <div>$CCS</div>
-                <div className="ml-1 text-gray-500">{ccsToken ?? 0}</div>
+                <div className="ml-1 text-gray-500">{ccsToken ?? -1}</div>
               </div>
             </div>
           ) : (

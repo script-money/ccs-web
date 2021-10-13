@@ -212,7 +212,7 @@ export const CreateActivityForm = ({
                 })
                 onSubmit!(title!.trim(), metadata)
               }}
-              className="inline-flex justify-center items-center py-3 px-6 w-full text-base font-medium text-white bg-main hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"
+              className="main-button"
             >
               Spend {sendAmount} to CCS Create Activity
             </button>

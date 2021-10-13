@@ -70,5 +70,6 @@ Loading.args = {
 export const Empty = Template.bind({})
 Empty.args = {
   ...Loading.args,
-  activities: []
+  activities: [],
+  isLoading: false
 }

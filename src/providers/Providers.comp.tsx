@@ -1,12 +1,18 @@
 import React from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import { AuthProvider } from './AuthProvider'
+import { TxsProvider } from './TxsProvider'
+import { UserProvider } from './UserProvider'
 
-function Providers(children: React.ReactNode) {
+function Providers({ children }: { children: React.ReactNode }) {
   return (
     <BrowserRouter>
       <AuthProvider>
-        <div className="app">{children}</div>
+        <TxsProvider>
+          <UserProvider>
+            <div className="app">{children}</div>
+          </UserProvider>
+        </TxsProvider>
       </AuthProvider>
     </BrowserRouter>
   )

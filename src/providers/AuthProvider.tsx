@@ -13,13 +13,18 @@ export const AuthContext = createContext<IAuthContext>({
   isLogIn: false
 })
 
-export const AuthProvider = (children: any) => {
+export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { user, isLogIn, logIn, logOut } = useCurrentUser()
 
   if (!user || !isLogIn)
     return (
       <>
-        <PageHeadings isLogin={false} address={null}></PageHeadings>
+        <PageHeadings
+          isLogin={false}
+          address={null}
+          onLogInClick={() => logIn()}
+        />
+        {children}
       </>
     )
   return (
@@ -31,6 +36,11 @@ export const AuthProvider = (children: any) => {
         logOut
       }}
     >
+      <PageHeadings
+        isLogin={true}
+        address={user!.addr}
+        onLogOutClick={() => logOut()}
+      />
       {children}
     </AuthContext.Provider>
   )

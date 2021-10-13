@@ -1,7 +1,7 @@
 export const BUY_BALLOTS = `
-import BallotContract from Project.BallotContract
-import FungibleToken from Flow.FungibleToken
-import CCSToken from Project.CCSToken
+import BallotContract from 0xBallotContract
+import FungibleToken from 0xFungibleToken
+import CCSToken from 0xCCSToken
 
 transaction(count: Int){
   let toSendVault: @FungibleToken.Vault

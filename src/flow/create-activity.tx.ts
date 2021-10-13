@@ -1,7 +1,7 @@
 export const CREATE_ACTIVITY = `
-import ActivityContract from Project.ActivityContract
-import FungibleToken from Flow.FungibleToken
-import CCSToken from Project.CCSToken
+import ActivityContract from 0xActivityContract
+import FungibleToken from 0xFungibleToken
+import CCSToken from 0xCCSToken
 
 transaction(title: String, metadata: String) {
 

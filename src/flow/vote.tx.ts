@@ -1,8 +1,8 @@
 export const VOTE = `
-import ActivityContract from Project.ActivityContract
-import FungibleToken from Flow.FungibleToken
-import BallotContract from Project.BallotContract
-import CCSToken from Project.CCSToken
+import ActivityContract from 0xActivityContract
+import FungibleToken from 0xFungibleToken
+import BallotContract from 0xBallotContract
+import CCSToken from 0xCCSToken
 
 transaction(activityId: UInt64, isUpVote: Bool) {
 
