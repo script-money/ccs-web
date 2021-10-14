@@ -12,15 +12,9 @@
     <script type="module">
       import process from 'process'
       import { Buffer } from 'buffer'
-      import EventEmitter from 'events'
-      import queueMicrotask from 'queue-microtask'
-      import url from 'url'
 
       window.Buffer = Buffer
       window.process = process
-      window.EventEmitter = EventEmitter
-      window.queueMicrotask = queueMicrotask
-      window.url = url
     </script>
     <!-- for PROD build only -->
     <!-- <script lang="javascript" src="./browserified-libs.js"></script> -->
