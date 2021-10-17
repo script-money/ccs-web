@@ -1,10 +1,22 @@
 import React from 'react'
 import Providers from './providers/Providers.comp'
-import Routes from './components/Routes'
-import { ROUTES } from './config/routes.config'
+import { Switch, Route } from 'react-router-dom'
+import { ActivityCluster } from './clusters/activity.cluster'
+import { CreateActivityCluster } from './clusters/create.cluster'
 
 function App() {
-  return <Providers>{/* <Routes routes={ROUTES} /> */}</Providers>
+  return (
+    <Providers>
+      <Switch>
+        <Route path="/create-activity">
+          <CreateActivityCluster />
+        </Route>
+        <Route path="/">
+          <ActivityCluster />
+        </Route>
+      </Switch>
+    </Providers>
+  )
 }
 
 export default App

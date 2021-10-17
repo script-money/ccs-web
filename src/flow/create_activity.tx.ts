@@ -10,7 +10,7 @@ transaction(title: String, metadata: String) {
 
   prepare(signer: AuthAccount) {
     // Get a reference to the signer's stored vault
-    let vaultRef = signer.borrow<& CCSToken.Vault>(from: CCSToken.VaultStoragePath)
+    let vaultRef = signer.borrow<&CCSToken.Vault>(from: CCSToken.VaultStoragePath)
       ?? panic("Could not borrow reference to the owner's Vault!")
 
     self.signerAddress = signer.address

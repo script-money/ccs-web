@@ -18,5 +18,6 @@ const Template: ComponentStory<typeof CreateActivityForm> = args => (
 
 export const Primary = Template.bind({})
 Primary.args = {
-  sendAmount: 100.0
+  sendAmount: 100.0,
+  hasAmount: 10.23343
 }

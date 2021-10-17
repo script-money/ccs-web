@@ -1,54 +1,77 @@
 import logo from '../../images/cryptochasers.png'
 import React from 'react'
+import { Link, MemoryRouter } from 'react-router-dom'
 
 export interface IPageHeadingsProps {
   isLogin: boolean
   address: string | null
-  ballots?: number
-  ccsToken?: number
+  isSetup?: boolean
   onLogInClick?: () => void
   onLogOutClick?: () => void
+  onSetUpClick?: () => void
+  onCreateClick?: () => void
 }
 
 export const PageHeadings = ({
   isLogin,
   address,
-  ballots,
-  ccsToken,
+  isSetup,
   onLogInClick,
-  onLogOutClick
+  onLogOutClick,
+  onSetUpClick
 }: IPageHeadingsProps) => {
   return (
-    <header>
-      <nav className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl" aria-label="Top">
-        <div className="flex justify-between items-center py-3 w-full border-b">
+    <header className="relative z-10">
+      <nav className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+        <div className="flex py-3 w-full border-b">
+          {/* <MemoryRouter> */}
           {/* logo */}
           <div className="flex items-center">
-            <a href="#">
+            <Link to="/">
               <img className="w-auto h-8" src={logo} alt="" />
-            </a>
+            </Link>
           </div>
-          {isLogin ? (
-            <div className="flex ml-auto">
-              {/* ballots */}
-              <div className="flex justify-between items-baseline mr-4 text-xs">
-                <div>🗳</div>
-                <div className="ml-1 text-gray-500">{ballots ?? -1}</div>
-              </div>
-              {/* $CCS */}
-              <div className="flex justify-between items-baseline mr-4 text-xs">
-                <div>$CCS</div>
-                <div className="ml-1 text-gray-500">{ccsToken ?? -1}</div>
-              </div>
-            </div>
+          {/* my memorials */}
+          {isSetup ? (
+            <Link
+              to="/"
+              className="py-2 px-4 text-xs text-main hover:bg-orange-600"
+            >
+              My Memorials
+            </Link>
           ) : (
             <></>
           )}
-          {/* logInButton */}
-          <div className="space-x-4">
+          {/* createActivity */}
+          {isSetup ? (
+            <Link
+              to="/create-activity"
+              className="py-2 px-4 text-xs text-main hover:bg-orange-600"
+            >
+              Create Activity
+            </Link>
+          ) : (
+            <></>
+          )}
+          {/* </MemoryRouter> */}
+          {/* tokens */}
+
+          <div className="flex-shrink-0 self-end ml-auto">
+            {isLogin && !isSetup ? (
+              <a
+                className="inline-block py-2 px-4 mr-1 text-xs text-white bg-main hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"
+                onClick={() => onSetUpClick!()}
+              >
+                SetUp
+              </a>
+            ) : (
+              <></>
+            )}
+
+            {/* logInButton */}
             {!isLogin ? (
               <a
-                className="inline-block py-2 px-4 text-white bg-main hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"
+                className="inline-block py-2 px-4 text-xs text-white bg-main hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"
                 onClick={() => onLogInClick!()}
               >
                 Sign in

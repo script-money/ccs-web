@@ -13,12 +13,7 @@ export default function useBallot(user: SessionUser) {
     data: null
   })
 
-  const { addTx } = useTxs()
-
-  useEffect(() => {
-    getHodings()
-    //eslint-disable-next-line
-  }, [])
+  // const { addTx } = useTxs()
 
   const getHodings = async () => {
     dispatch({ type: 'PROCESSING' })
@@ -31,7 +26,6 @@ export default function useBallot(user: SessionUser) {
       dispatch({ type: 'SUCCESS', payload: response })
     } catch (err) {
       dispatch({ type: 'ERROR' })
-      console.log(err)
     }
   }
 
@@ -43,7 +37,7 @@ export default function useBallot(user: SessionUser) {
         limit: 100,
         args: (arg: any, t: any) => [arg(count, t.Int)]
       })
-      addTx!(transaction)
+      // addTx!(transaction)
       await tx(transaction).onceSealed()
       dispatch({ type: 'SUCCESS' })
     } catch (err) {

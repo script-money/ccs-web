@@ -7,6 +7,7 @@ import './DatePicker.css'
 
 export interface ICreateActivityFormProps {
   sendAmount: number
+  hasAmount: number
   onSubmit?: (title: string, metadata: string) => void
 }
 
@@ -21,15 +22,15 @@ function classNames(...classes: string[]) {
 
 export const CreateActivityForm = ({
   sendAmount,
+  hasAmount,
   onSubmit
 }: ICreateActivityFormProps) => {
-  const [title, setTitle] = useState<string>()
-  const [source, setSource] = useState<string>()
-  const [content, setContent] = useState<string>()
+  const [title, setTitle] = useState<string>('')
+  const [source, setSource] = useState<string>('')
+  const [content, setContent] = useState<string>('')
   const [startDate, setStartDate] = useState(new Date())
   const [endDate, setEndDate] = useState<Date | null>(null)
-  const { selected, allSelected, isSelected, toggle } =
-    useSelections(categoriesToSelect)
+  const { selected, isSelected, toggle } = useSelections(categoriesToSelect)
 
   return (
     <div className="overflow-hidden p-4 sm:px-6 lg:px-8 bg-white">
@@ -78,7 +79,6 @@ export const CreateActivityForm = ({
                 value={content}
                 onChange={e => setContent!(e.target.value)}
                 className="block py-3 px-4 w-full rounded-md border border-gray-300 focus:border-main focus:ring-main shadow-sm"
-                defaultValue={''}
                 placeholder="(optional) the details of what you need to pay attention for participate"
               />
             </div>
@@ -165,6 +165,9 @@ export const CreateActivityForm = ({
                       name={category.type}
                       type="checkbox"
                       checked={isSelected(category)}
+                      onChange={value => {
+                        return console.log('clicked', value)
+                      }}
                       onClick={() => toggle(category)}
                       className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
                     />
@@ -189,6 +192,7 @@ export const CreateActivityForm = ({
           <div className="sm:flex sm:col-start-2 self-end h-12">
             <button
               type="submit"
+              disabled={sendAmount > hasAmount}
               onClick={e => {
                 e.preventDefault()
                 if (
@@ -214,7 +218,8 @@ export const CreateActivityForm = ({
               }}
               className="main-button"
             >
-              Spend {sendAmount} to CCS Create Activity
+              Spend {sendAmount} to CCS Create Activity. Has {hasAmount} in
+              wallet
             </button>
           </div>
         </form>

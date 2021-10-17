@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import React, { useReducer, useEffect } from 'react'
 import { GET_CCS_BALANCE } from '../flow/get-ccs-balance.script'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { query } from '@onflow/fcl'
@@ -11,6 +11,10 @@ export default function useCCSToken(user: SessionUser) {
     data: null
   })
 
+  useEffect(() => {
+    getCCSBalance()
+  }, [])
+
   const getCCSBalance = async () => {
     dispatch({ type: 'PROCESSING' })
 
@@ -22,7 +26,6 @@ export default function useCCSToken(user: SessionUser) {
       dispatch({ type: 'SUCCESS', payload: response })
     } catch (err) {
       dispatch({ type: 'ERROR' })
-      console.log(err)
     }
   }
 

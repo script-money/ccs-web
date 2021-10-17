@@ -9,6 +9,7 @@ interface IUserContext {
   isInitialized: boolean
   ccsAmount: number
   ballotAmount: number
+  isAccountInitialized?: () => Promise<boolean | undefined>
   initializeAccount?: () => Promise<void>
   getHodings?: () => Promise<void>
   buyBallots?: (count: number) => Promise<void>
@@ -23,7 +24,11 @@ export const UserContext = createContext<IUserContext>({
 
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth()
-  const { data: isInitialized, initializeAccount } = useAccount(user!)
+  const {
+    data: isInitialized,
+    isAccountInitialized,
+    initializeAccount
+  } = useAccount(user!)
   const { data: ballotAmount, getHodings, buyBallots } = useBallot(user!)
   const { data: ccsAmount, getCCSBalance } = useCCSToken(user!)
 
@@ -33,6 +38,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
         isInitialized,
         ccsAmount,
         ballotAmount,
+        isAccountInitialized,
         initializeAccount,
         getHodings,
         buyBallots,

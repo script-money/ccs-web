@@ -1,8 +1,14 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
 import { send, getTransactionStatus, decode, tx } from '@onflow/fcl'
-import React from 'react'
+import { TxDetail } from '../components/TxDetail'
 
-type txType = { id: string }
+export type txType = { id: string; status?: number }
+export interface ITxStatusReturn {
+  errorMessage: string
+  events: any[]
+  status: number
+  statusCode: number
+}
 
 interface ITxContext {
   runningTxs: boolean
@@ -16,6 +22,31 @@ export const TxContext = createContext<ITxContext>({
 export const TxsProvider = ({ children }: { children: React.ReactNode }) => {
   const [txs, setTxs] = useState<txType[]>([])
   const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    getLocalTxs()
+    //eslint-disable-next-line
+  }, [])
+
+  useEffect(() => {
+    console.log('txs', txs)
+    //eslint-disable-next-line
+  }, [txs])
+
+  useEffect(() => {
+    console.log('loading', loading)
+    //eslint-disable-next-line
+  }, [loading])
+
+  const renderTxs = () => {
+    loading ? (
+      txs.map((tx, index) => {
+        return <TxDetail key={index} id={tx.id} status={'PROCESSING'} />
+      })
+    ) : (
+      <></>
+    )
+  }
 
   const getLocalTxs = async () => {
     const txString = window.localStorage.getItem('txs')
@@ -44,15 +75,19 @@ export const TxsProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const addTx = (txID: string) => {
+    setLoading(true)
     const transaction = { id: txID }
     setTxs(prev => [...prev, transaction])
-    tx(txID).subscribe((s: any) => updateTxStatus(s?.status, transaction?.id))
+    tx(txID).subscribe((s: ITxStatusReturn) =>
+      updateTxStatus(s?.status, transaction?.id)
+    )
     window.localStorage.setItem('txs', [...txs, transaction?.id].toString())
   }
 
   const updateTxStatus = (status: number, txID: string) => {
     if (status === 4) {
       removeTx(txID)
+      setLoading(false)
       return
     }
     const tx = txs.find(t => t.id === txID)
@@ -79,6 +114,7 @@ export const TxsProvider = ({ children }: { children: React.ReactNode }) => {
         addTx
       }}
     >
+      {renderTxs()}
       {children}
     </TxContext.Provider>
   )

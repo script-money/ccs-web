@@ -8,6 +8,9 @@ export default {
   argTypes: {
     onLogInClick: {
       action: 'logIn'
+    },
+    onCreateClick: {
+      action: 'create'
     }
   }
 } as ComponentMeta<typeof PageHeadings>
@@ -26,6 +29,11 @@ export const LogIn = Template.bind({})
 LogIn.args = {
   isLogin: true,
   address: '0xbe3dd040a44a36b3',
-  ballots: 2,
-  ccsToken: 21132.42343552
+  isSetup: true
+}
+
+export const NotSetup = Template.bind({})
+NotSetup.args = {
+  ...LogIn.args,
+  isSetup: false
 }

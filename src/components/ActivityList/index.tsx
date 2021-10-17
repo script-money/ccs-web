@@ -7,6 +7,7 @@ import {
   categories,
   ICategoryType
 } from '../../interface/activity'
+import './loading.css'
 
 export interface IActivityListProps {
   isLoading: boolean
@@ -190,11 +191,23 @@ export const ActivityList = ({
   )
 
   if (isLoading) {
-    return <div className="list-items">loading</div>
+    return (
+      <div className="flex overflow-hidden fixed top-0 right-0 bottom-0 left-0 z-50 flex-col justify-center items-center w-full h-scree">
+        <h2 className="text-xl font-semibold text-center text-gray-500 loading">
+          Loading
+        </h2>
+      </div>
+    )
   }
 
   if (activities.length === 0) {
-    return <div className="list-items">empty</div>
+    return (
+      <div className="flex overflow-hidden fixed top-0 right-0 bottom-0 left-0 flex-col justify-center items-center w-full h-scree">
+        <h2 className="text-xl font-semibold text-center text-gray-500">
+          No activities found
+        </h2>
+      </div>
+    )
   }
 
   return (

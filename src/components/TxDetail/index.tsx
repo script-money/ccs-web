@@ -54,7 +54,7 @@ export const TxDetail = ({ id, status }: ITxDetailProps) => {
               <div>
                 <div className="flex justify-center items-center mx-auto w-16 h-16">
                   {status === 'PROCESSING' ? (
-                    <div className="w-16 h-16 rounded-full border-b-2 border-gray-900 animate-spin"></div>
+                    <div className="w-12 h-12 rounded-full border-b-2 border-gray-500 animate-spin"></div>
                   ) : status === 'SUCCESS' ? (
                     <div className="flex justify-center items-center mx-auto w-12 h-12 bg-green-100 rounded-full">
                       <CheckIcon
