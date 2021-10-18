@@ -38,4 +38,16 @@
   .main-button {
     @apply inline-flex justify-center items-center py-3 px-6 w-full text-base font-medium text-white bg-main hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none;
   }
+
+  .userdetail-item {
+    @apply flex items-center space-x-1 sm:text-left py-1;
+  }
+
+  .userdetail-title {
+    @apply w-1/3 text-xs sm:text-base font-medium text-gray-900 whitespace-nowrap;
+  }
+
+  .userdetail-info {
+    @apply text-xs sm:text-base text-gray-500;
+  }
 }

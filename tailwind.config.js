@@ -34,6 +34,13 @@ module.exports = {
       Register: colors.teal,
       Airdrop: colors.blueGray
     },
+    screens: {
+      sm: '412px',
+      md: '768px',
+      lg: '1024px',
+      xl: '1280px',
+      '2xl': '1536px'
+    },
     extend: {
       animation: {
         'spin-slow': 'spin 20s linear infinite'
@@ -44,7 +51,8 @@ module.exports = {
       colors: {
         main: '#F7931A',
         open: '#1a7f37',
-        closed: '#cf222e'
+        closed: '#cf222e',
+        discord: '#586aea'
       },
       borderRadius: {
         '6xl': '3rem'
