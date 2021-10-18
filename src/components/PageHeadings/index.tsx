@@ -7,7 +7,7 @@ export interface IPageHeadingsProps {
   address: string | null
   isSetup?: boolean
   onLogInClick?: () => void
-  onLogOutClick?: () => void
+  onUserDetailClick?: () => void
   onSetUpClick?: () => void
   onCreateClick?: () => void
 }
@@ -17,7 +17,7 @@ export const PageHeadings = ({
   address,
   isSetup,
   onLogInClick,
-  onLogOutClick,
+  onUserDetailClick,
   onSetUpClick
 }: IPageHeadingsProps) => {
   return (
@@ -31,17 +31,6 @@ export const PageHeadings = ({
               <img className="w-auto h-8" src={logo} alt="" />
             </Link>
           </div>
-          {/* my memorials */}
-          {isSetup ? (
-            <Link
-              to="/"
-              className="py-2 px-4 text-xs text-main hover:bg-orange-600"
-            >
-              My Memorials
-            </Link>
-          ) : (
-            <></>
-          )}
           {/* createActivity */}
           {isSetup ? (
             <Link
@@ -79,7 +68,7 @@ export const PageHeadings = ({
             ) : (
               <a
                 className="inline-flex items-center py-2 px-4 text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm focus:outline-none"
-                onClick={() => onLogOutClick!()}
+                onClick={() => onUserDetailClick!()}
               >
                 {address!.substring(0, 6) + '...' + address!.substring(14, 18)}
               </a>

@@ -6,7 +6,7 @@ import { GET_HODINGS } from '../flow/get-holdings.script'
 import { BUY_BALLOTS } from '../flow/buy-ballots.tx'
 import { useTxs } from '../providers/TxsProvider'
 
-export default function useBallot(user: SessionUser) {
+export default function useBallot(user: SessionUser | undefined) {
   const [state, dispatch] = useReducer(defaultReducer, {
     loading: true,
     error: false,

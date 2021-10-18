@@ -4,7 +4,7 @@ import { defaultReducer } from '../reducer/defaultReducer'
 import { query } from '@onflow/fcl'
 import { SessionUser } from './use-current-user.hook'
 
-export default function useCCSToken(user: SessionUser) {
+export default function useCCSToken(user: SessionUser | undefined) {
   const [state, dispatch] = useReducer(defaultReducer, {
     loading: true,
     error: false,
@@ -12,7 +12,9 @@ export default function useCCSToken(user: SessionUser) {
   })
 
   useEffect(() => {
-    getCCSBalance()
+    if (user !== undefined) {
+      getCCSBalance()
+    }
   }, [])
 
   const getCCSBalance = async () => {

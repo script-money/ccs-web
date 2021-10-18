@@ -9,8 +9,11 @@ export default {
     onLogInClick: {
       action: 'logIn'
     },
-    onCreateClick: {
-      action: 'create'
+    onUserDetailClick: {
+      action: 'open User Detail'
+    },
+    onSetUpClick: {
+      action: 'set up account'
     }
   }
 } as ComponentMeta<typeof PageHeadings>

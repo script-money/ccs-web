@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import React, { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 
@@ -8,9 +8,11 @@ interface IUserDetailProps {
   ballotAmount?: number
   votingPower?: number
   tokenAmount?: number
+  open: boolean
   onBuyClick?: (amount: number) => void
   onLinkClick?: () => void
   onLogoutClick?: () => void
+  onCloseWindow?: () => void
 }
 
 export const UserDetail = ({
@@ -19,11 +21,13 @@ export const UserDetail = ({
   ballotAmount,
   votingPower,
   tokenAmount,
+  open,
   onBuyClick,
   onLinkClick,
-  onLogoutClick
+  onLogoutClick,
+  onCloseWindow
 }: IUserDetailProps) => {
-  const [open, setOpen] = useState(true)
+  // const [open, setOpen] = useState(false)
   const [ballotCount, setBallotCount] = useState(0)
 
   return (
@@ -31,7 +35,10 @@ export const UserDetail = ({
       <Dialog
         as="div"
         className="overflow-y-auto fixed inset-0 z-10"
-        onClose={setOpen}
+        onClose={() => {
+          // setOpen(false)
+          onCloseWindow!()
+        }}
       >
         <div className="flex justify-center items-center px-4 pt-4 pb-20 min-h-screen text-center">
           <Transition.Child
@@ -62,7 +69,10 @@ export const UserDetail = ({
                 <button
                   type="button"
                   className="text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
-                  onClick={() => setOpen(false)}
+                  onClick={() => {
+                    onCloseWindow!()
+                    // setOpen(false)
+                  }}
                 >
                   <span className="sr-only">Close</span>
                   <XIcon className="w-6 h-6" aria-hidden="true" />
@@ -177,6 +187,7 @@ export const UserDetail = ({
                       className="flex items-center w-full font-semibold text-center text-gray-700 hover:text-black focus:text-black bg-gray-300 outline-none focus:outline-none text-md md:text-basecursor-default"
                       name="custom-input-number"
                       value={ballotCount}
+                      onChange={value => console.log(value)}
                     ></input>
                     <button
                       data-action="increment"
@@ -202,8 +213,9 @@ export const UserDetail = ({
                   type="button"
                   className="inline-flex justify-center py-2 px-4 sm:ml-3 w-full sm:w-auto text-base sm:text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"
                   onClick={() => {
-                    setOpen(false)
+                    // setOpen(false)
                     onLogoutClick!()
+                    onCloseWindow!()
                   }}
                 >
                   LogOut

@@ -1,7 +1,9 @@
 import axios from 'axios'
+import { SessionUser } from '../hooks/use-current-user.hook'
 import { categoriesType, IGetActivitiesResponse } from '../interface/activity'
+import { IGetUserResponse } from '../interface/user'
 
-const BASE_URL = 'http://localhost:7005'
+const BASE_URL = 'http://localhost:7005/api'
 
 export const getActivityList = async (
   current: number,
@@ -11,7 +13,7 @@ export const getActivityList = async (
   canJoin?: boolean,
   createBy?: string
 ): Promise<IGetActivitiesResponse> => {
-  const result = await axios.get(`${BASE_URL}/api/activity`, {
+  const result = await axios.get(`${BASE_URL}/activity`, {
     params: {
       limit: pageSize,
       offset: pageSize * (current - 1),
@@ -22,4 +24,8 @@ export const getActivityList = async (
     }
   })
   return result.data
+}
+
+export const getUser = async (user: SessionUser): Promise<IGetUserResponse> => {
+  return await axios.get(`${BASE_URL}/user/${user.addr}`)
 }

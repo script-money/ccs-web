@@ -1,5 +1,5 @@
 import { useRequest } from 'ahooks'
-import { getActivityList } from '../api/activity'
+import { getActivityList } from '../api/server'
 import { ActivityList } from '../components/ActivityList'
 import React, { useState } from 'react'
 import { categories, ICategoryType } from '../interface/activity'
