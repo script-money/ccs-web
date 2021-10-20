@@ -9,10 +9,6 @@ export const CreateActivityCluster = () => {
   const { createActivity } = useActivity()
   const { data: ccsToken } = useCCSToken(user!)
 
-  // useEffect(() => {
-  //   console.log('consumptionAmount', consumptionAmount)
-  // }, [consumptionAmount])
-
   return (
     <>
       <CreateActivityForm

@@ -47,14 +47,15 @@ export default function useActivity() {
         cadence: VOTE,
         limit: 100,
         args: (arg: any, t: any) => [
-          arg(activityId, t.Int),
-          arg(isUpVote, t.Boolean)
+          arg(activityId, t.UInt64),
+          arg(isUpVote, t.Bool)
         ]
       })
-      // addTx!(transaction)
+      addTx!(transaction)
       await tx(transaction).onceSealed()
       dispatch({ type: 'SUCCESS' })
     } catch (err) {
+      console.log(err)
       dispatch({ type: 'ERROR' })
     }
   }

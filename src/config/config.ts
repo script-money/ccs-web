@@ -12,4 +12,4 @@ config({
   '0xMemorials': import.meta.env.VITE_PROJECT_MEMORIALS
 })
 
-console.log(await config().all())
+export const BASE_URL = 'http://localhost:7005/api'

@@ -33,11 +33,6 @@ export const TxsProvider = ({ children }: { children: React.ReactNode }) => {
     //eslint-disable-next-line
   }, [txs])
 
-  useEffect(() => {
-    console.log('loading', loading)
-    //eslint-disable-next-line
-  }, [loading])
-
   const renderTxs = () => {
     loading ? (
       txs.map((tx, index) => {

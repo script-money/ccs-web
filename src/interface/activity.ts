@@ -5,6 +5,15 @@ export interface IGetActivitiesResponse extends IResponse {
   total: number
 }
 
+export interface GetActivityParams {
+  id: string
+}
+
+export interface IGetActivityResponse extends IResponse {
+  data: ActivityData | null
+  total: number
+}
+
 export interface IActivityListProps {
   isLoading: boolean
   activities: ActivityData[]
@@ -21,10 +30,19 @@ export interface IActivityListProps {
   ) => void
 }
 
+interface VoteResult {
+  id: number
+  voterAddr: string
+  isUpVote: boolean
+  power: number
+  activityId: number
+}
+
 export interface ActivityData {
   id: number
   title: string
   createdAt: moment.Moment | string
+  updatedAt: moment.Moment | string
   startDate: moment.Moment | string
   endDate: moment.Moment | string
   metadata: {
@@ -34,7 +52,17 @@ export interface ActivityData {
     endDate: string | null
     categories: categoriesType[]
   }
+  creatorAddr: string
+  content: string | null
+  source: string | null
+  lockDate: moment.Moment | string | null
+  upVote: number
+  downVote: number
   closed: boolean
+  rewardToken: number | null
+  absTotalPower: number | null
+  bouns: number | null
+  voteResult?: VoteResult[]
   creator: {
     address: string
     avatar: string | null
@@ -48,6 +76,13 @@ export interface ActivityData {
 export interface ActivityItemProps {
   activity: ActivityData
   onEnter?: (id: number) => void
+}
+
+export interface ActivityDetailProps {
+  activity: ActivityData
+  currentUserAddr?: string
+  onUpVote?: () => void
+  onDownVote?: () => void
 }
 
 export const categories = [

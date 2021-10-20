@@ -19,6 +19,8 @@ module.exports = {
       red: colors.red,
       indigo: colors.indigo,
       orange: colors.orange,
+      blue: colors.blue,
+      purple: colors.purple,
       All: colors.trueGray,
       Interact: colors.red,
       Form: colors.amber,
@@ -59,6 +61,11 @@ module.exports = {
       }
     }
   },
-  variants: {},
+  variants: {
+    extend: {
+      textColor: ['visited'],
+      opacity: ['disabled']
+    }
+  },
   plugins: []
 }

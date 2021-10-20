@@ -21,7 +21,7 @@ export const UserDetail = ({
   ballotAmount,
   votingPower,
   tokenAmount,
-  open,
+  open = true,
   onBuyClick,
   onLinkClick,
   onLogoutClick,

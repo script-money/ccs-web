@@ -1,4 +1,4 @@
-import { useReducer, useEffect } from 'react'
+import React, { useReducer } from 'react'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { query, mutate, tx } from '@onflow/fcl'
 import { useTxs } from '../providers/TxsProvider'

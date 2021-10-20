@@ -1,11 +1,23 @@
 import React from 'react'
 import moment from 'moment'
 import { ActivityItemProps, categoriesType } from '../../interface/activity'
+import { Link } from 'react-router-dom'
+import { BASE_URL } from '../../config/config'
 
 /**
  * Primary UI component for user interaction
  */
 export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
+  const Badget = ({ category }: { category: categoriesType }) => {
+    return (
+      <span
+        className={`inline-flex items-center py-0.5 px-2.5 mx-0.5 text-xs font-medium text-${category}-800 bg-${category}-100 rounded-full`}
+      >
+        {category}
+      </span>
+    )
+  }
+
   return (
     <div className="flex items-center px-2 -my-3 -mx-2 space-x-4 rounded-xl">
       {/* infomation */}
@@ -71,9 +83,10 @@ export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
         </div>
       </div>
       {/* button */}
-      <div
+      <Link
         className="flex-shrink-0 self-center flex-grow-1"
-        onClick={() => onEnter!(activity.id)}
+        to={`/activity/${activity.id}`}
+        rel="noopener noreferrer"
       >
         <svg
           className="w-5 h-5 text-gray-400 group-hover:text-gray-500"
@@ -88,17 +101,7 @@ export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
             clipRule="evenodd"
           />
         </svg>
-      </div>
+      </Link>
     </div>
-  )
-}
-
-const Badget = ({ category }: { category: categoriesType }) => {
-  return (
-    <span
-      className={`inline-flex items-center py-0.5 px-2.5 mx-0.5 text-xs font-medium text-${category}-800 bg-${category}-100 rounded-full`}
-    >
-      {category}
-    </span>
   )
 }
