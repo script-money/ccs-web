@@ -130,7 +130,7 @@ const ActivityDetail = ({
                   </h2>
                 </div>
                 <div className="py-5 px-4 sm:px-6 border-t border-gray-200">
-                  <dl className="grid grid-cols-2 sm:grid-cols-4 gap-y-4 sm:gap-y-8">
+                  <dl className="grid grid-cols-2 sm:grid-cols-4 gap-y-6">
                     <div className="sm:col-span-2 md:col-span-1">
                       <dt className="text-sm font-medium text-gray-500">
                         Create At
@@ -213,7 +213,7 @@ const ActivityDetail = ({
                     </h2>
                   </div>
                   <div className="py-5 px-4 sm:px-6 border-t border-gray-200">
-                    <dl className="grid grid-cols-1 sm:grid-cols-4 gap-y-8">
+                    <dl className="grid grid-cols-1 sm:grid-cols-4 gap-y-6">
                       <div className="sm:col-span-2 md:col-span-1">
                         <dt className="text-sm font-medium text-gray-500">
                           Vote Result
@@ -302,16 +302,16 @@ const ActivityDetail = ({
                     <tbody>
                       {activity!.voteResult!.map(vote => (
                         <tr key={vote.id}>
-                          <td className="hidden md:block py-4 lg:px-0 text-sm text-gray-500 whitespace-nowrap">
+                          <td className="hidden md:block py-3 lg:px-0 text-sm text-gray-500 whitespace-nowrap">
                             {vote.id}
                           </td>
-                          <td className="py-4 text-xs sm:text-sm font-medium text-gray-900 whitespace-nowrap">
+                          <td className="py-3 text-xs sm:text-sm font-medium text-gray-900 whitespace-nowrap">
                             {vote.voterAddr}
                           </td>
-                          <td className="py-4 text-xs sm:text-sm text-gray-500 whitespace-nowrap">
+                          <td className="py-3 text-xs sm:text-sm text-gray-500 whitespace-nowrap">
                             {vote.isUpVote ? '👍' : '👎'}
                           </td>
-                          <td className="py-4 text-xs sm:text-sm text-gray-500 whitespace-nowrap">
+                          <td className="py-3 text-xs sm:text-sm text-gray-500 whitespace-nowrap">
                             {vote.power}
                           </td>
                         </tr>

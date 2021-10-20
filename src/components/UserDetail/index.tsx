@@ -68,7 +68,7 @@ export const UserDetail = ({
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
-                  className="text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                  className="text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-main focus:ring-offset-2 focus:outline-none"
                   onClick={() => {
                     onCloseWindow!()
                     // setOpen(false)
@@ -87,7 +87,7 @@ export const UserDetail = ({
                   <p className="userdetail-info">{address}</p>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-5 h-5 text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                    className="w-5 h-5 text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-main focus:ring-offset-2 focus:outline-none"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

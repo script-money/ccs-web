@@ -158,7 +158,7 @@ export const ActivityList = ({
           of <span className="font-medium">{total}</span> results
         </p>
       </div>
-      <div className="flex flex-1 justify-between sm:justify-end">
+      <div className="flex flex-1 justify-between sm:justify-end space-x-1">
         {currentPage > 1 ? (
           <a
             // href="#"

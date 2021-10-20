@@ -1,7 +1,6 @@
 import { useEffect, useReducer } from 'react'
 import { query, mutate, tx } from '@onflow/fcl'
 import { defaultReducer } from '../reducer/defaultReducer'
-import { useTxs } from '../providers/TxsProvider'
 import { GET_CREATE_CONSUMPTION } from '../flow/get_create_consumption.script'
 import { VOTE } from '../flow/vote.tx'
 import { CREATE_ACTIVITY } from '../flow/create-activity.tx'
@@ -16,7 +15,6 @@ export default function useActivity() {
   })
 
   const { user } = useAuth()
-  const { addTx } = useTxs()
   const { getCCSBalance } = useCCSToken(user!)
 
   useEffect(() => {
@@ -51,7 +49,6 @@ export default function useActivity() {
           arg(isUpVote, t.Bool)
         ]
       })
-      addTx!(transaction)
       await tx(transaction).onceSealed()
       dispatch({ type: 'SUCCESS' })
     } catch (err) {
@@ -71,7 +68,6 @@ export default function useActivity() {
           arg(metadata, t.String)
         ]
       })
-      addTx!(transaction)
       await tx(transaction).onceSealed()
       dispatch({ type: 'SUCCESS' })
       console.log('getCCSBalance')

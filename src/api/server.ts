@@ -7,6 +7,7 @@ import {
   IGetActivityResponse
 } from '../interface/activity'
 import { IGetUserResponse } from '../interface/user'
+import { IResponse } from '../interface/util'
 
 export const getActivityList = async (
   current: number,
@@ -38,5 +39,12 @@ export const getActivityDetail = async (
   activityId: number
 ): Promise<IGetActivityResponse> => {
   const result = await axios.get(`${BASE_URL}/activity/${activityId}`)
+  return result.data
+}
+
+export const requestToken = async (addr: string): Promise<IResponse> => {
+  const result = (await axios.post(
+    `${BASE_URL}/token/free?address=${addr}`
+  )) as IResponse
   return result.data
 }

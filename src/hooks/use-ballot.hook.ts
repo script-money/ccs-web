@@ -1,10 +1,9 @@
-import { useEffect, useReducer } from 'react'
+import { useReducer } from 'react'
 import { query, mutate, tx } from '@onflow/fcl'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { SessionUser } from './use-current-user.hook'
 import { GET_HODINGS } from '../flow/get-holdings.script'
 import { BUY_BALLOTS } from '../flow/buy-ballots.tx'
-import { useTxs } from '../providers/TxsProvider'
 
 export default function useBallot(user: SessionUser | undefined) {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -12,8 +11,6 @@ export default function useBallot(user: SessionUser | undefined) {
     error: false,
     data: null
   })
-
-  // const { addTx } = useTxs()
 
   const getHodings = async () => {
     dispatch({ type: 'PROCESSING' })
@@ -37,7 +34,6 @@ export default function useBallot(user: SessionUser | undefined) {
         limit: 100,
         args: (arg: any, t: any) => [arg(count, t.Int)]
       })
-      // addTx!(transaction)
       await tx(transaction).onceSealed()
       dispatch({ type: 'SUCCESS' })
     } catch (err) {

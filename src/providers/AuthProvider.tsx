@@ -1,8 +1,11 @@
+import useRequest from '@ahooksjs/use-request'
 import React, { createContext, useContext, useEffect, useState } from 'react'
+import { requestToken } from '../api/server'
 import { PageHeadings } from '../components/PageHeadings'
 import { UserDetail } from '../components/UserDetail'
 import useAccount from '../hooks/use-account.hook'
 import useBallot from '../hooks/use-ballot.hook'
+import useCCSToken from '../hooks/use-ccs-token.hook'
 import useCurrentUser, { SessionUser } from '../hooks/use-current-user.hook'
 import useUserDetail from '../hooks/use-user-detail.hook'
 
@@ -22,6 +25,8 @@ export const AuthContext = createContext<IAuthContext>({
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { user, isLogIn, logIn, logOut } = useCurrentUser()
   const [openUserDetail, setOpenUserDetail] = useState(false)
+  const { data: ccsTokenAmount, getCCSBalance } = useCCSToken(user)
+  const { data: ballotsAmount, buyBallots, getHodings } = useBallot(user!)
 
   const {
     data: isInitialized,
@@ -29,19 +34,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     initializeAccount
   } = useAccount(user!)
 
-  const {
-    error,
-    loading,
-    run,
-    address,
-    userName,
-    discord,
-    votingPower,
-    ccsToken,
-    ballots
-  } = useUserDetail(user!)
+  const { run: requestTokenRun } = useRequest(requestToken, {
+    manual: true,
+    onSuccess: () => {
+      console.log('getCCSBalance')
+      getCCSBalance()
+    },
+    onError: () => {
+      console.log('invoke modal')
+    }
+  })
 
-  const { buyBallots } = useBallot(user!)
+  const { error, loading, run, address, userName, discord, votingPower } =
+    useUserDetail(user!)
 
   useEffect(() => {
     if (isLogIn) {
@@ -49,6 +54,19 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       isAccountInitialized()
     }
   }, [isLogIn])
+
+  useEffect(() => {
+    if (openUserDetail) {
+      getCCSBalance()
+      getHodings()
+    }
+  }, [openUserDetail])
+
+  const handleBuyBallots = async (count: number) => {
+    await buyBallots(count)
+    await getHodings()
+    await getCCSBalance()
+  }
 
   const showUserDetail = () => {
     setOpenUserDetail(true)
@@ -89,20 +107,24 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             isLogin={true}
             address={user!.addr}
             isSetup={isInitialized}
+            isMainnet={import.meta.env.VITE_IS_MAINNET === 'true'}
             onUserDetailClick={() => {
               run(user)
               showUserDetail()
             }}
             onCreateClick={() => (window.location.href = '/create-activity')}
+            onFaucetClick={() => {
+              requestTokenRun(user.addr!)
+            }}
           />
           <UserDetail
             address={address!}
             userName={userName ?? 'not set'}
-            ballotAmount={ballots}
+            ballotAmount={ballotsAmount}
             votingPower={votingPower}
-            tokenAmount={ccsToken}
+            tokenAmount={ccsTokenAmount}
             open={openUserDetail}
-            onBuyClick={buyBallots}
+            onBuyClick={handleBuyBallots}
             onLinkClick={() => alert('coming soon')}
             onLogoutClick={() => logOut()}
             onCloseWindow={hideUserDetail}

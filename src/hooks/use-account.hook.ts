@@ -1,7 +1,6 @@
 import React, { useReducer } from 'react'
 import { defaultReducer } from '../reducer/defaultReducer'
-import { query, mutate, tx } from '@onflow/fcl'
-import { useTxs } from '../providers/TxsProvider'
+import { query, mutate, tx, currentUser } from '@onflow/fcl'
 import { SessionUser } from './use-current-user.hook'
 import { IS_ACCOUNT_INITIALIZED } from '../flow/is_account_initialized.script'
 import { INITIALIZED_ACCOUNT } from '../flow/initialized-account.tx'
@@ -17,8 +16,6 @@ export default function useAccount(user: SessionUser) {
   const [accountInitStatus, setAccountInitStatus] = useLocalStorageState<{
     [address: string]: boolean
   }>('accountInitStatus')
-
-  // const { addTx } = useTxs()
 
   const isAccountInitialized = async () => {
     if (
@@ -47,7 +44,7 @@ export default function useAccount(user: SessionUser) {
   }
 
   const initializeAccount = async () => {
-    console.log('start initiate')
+    console.log('start initiate account')
 
     dispatch({ type: 'PROCESSING' })
     try {
@@ -55,14 +52,13 @@ export default function useAccount(user: SessionUser) {
         cadence: INITIALIZED_ACCOUNT,
         limit: 100
       })
-      // addTx!(transaction)
       await tx(transaction).onceSealed()
       const newStorageUsers = { ...accountInitStatus, [user!.addr!]: true }
       setAccountInitStatus(newStorageUsers)
       dispatch({ type: 'SUCCESS', payload: true })
     } catch (err) {
-      dispatch({ type: 'ERROR' })
       console.log(err)
+      dispatch({ type: 'ERROR' })
     }
   }
 

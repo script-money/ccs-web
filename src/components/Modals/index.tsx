@@ -13,7 +13,7 @@ export const Modals = ({ onSubmit }: IModalsProps) => {
     <Transition.Root show={open} as={Fragment}>
       <Dialog
         as="div"
-        className="overflow-y-auto fixed inset-0 z-10"
+        className="overflow-y-auto fixed inset-0 z-10 px-4"
         onClose={setOpen}
       >
         <div className="flex sm:block justify-center items-end sm:p-0 px-4 pt-4 pb-20 min-h-screen text-center">
