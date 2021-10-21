@@ -6,6 +6,8 @@ import { VOTE } from '../flow/vote.tx'
 import { CREATE_ACTIVITY } from '../flow/create-activity.tx'
 import useCCSToken from './use-ccs-token.hook'
 import { useAuth } from '../providers/AuthProvider'
+import { useTx } from '../providers/TxProvider'
+import { ActionType } from '../reducer/txReducer'
 
 export default function useActivity() {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -16,6 +18,8 @@ export default function useActivity() {
 
   const { user } = useAuth()
   const { getCCSBalance } = useCCSToken(user!)
+
+  const { state: txState, dispatch: txDispatch } = useTx()
 
   useEffect(() => {
     getConsumption()
@@ -39,7 +43,7 @@ export default function useActivity() {
   }
 
   const vote = async (activityId: number, isUpVote: boolean) => {
-    dispatch({ type: 'PROCESSING' })
+    txDispatch({ type: ActionType.AddProccesing })
     try {
       const transaction = await mutate({
         cadence: VOTE,
@@ -50,15 +54,22 @@ export default function useActivity() {
         ]
       })
       await tx(transaction).onceSealed()
-      dispatch({ type: 'SUCCESS' })
+      txDispatch({
+        type: ActionType.AddSuccess,
+        payload: { txID: transaction }
+      })
     } catch (err) {
-      console.log(err)
-      dispatch({ type: 'ERROR' })
+      txDispatch({
+        type: ActionType.AddError,
+        payload: {
+          error: err as string
+        }
+      })
     }
   }
 
   const createActivity = async (title: string, metadata: string) => {
-    dispatch({ type: 'PROCESSING' })
+    txDispatch({ type: ActionType.AddProccesing })
     try {
       const transaction = await mutate({
         cadence: CREATE_ACTIVITY,
@@ -69,12 +80,18 @@ export default function useActivity() {
         ]
       })
       await tx(transaction).onceSealed()
-      dispatch({ type: 'SUCCESS' })
-      console.log('getCCSBalance')
+      txDispatch({
+        type: ActionType.AddSuccess,
+        payload: { txID: transaction }
+      })
       await getCCSBalance()
     } catch (err) {
-      console.log(err)
-      dispatch({ type: 'ERROR' })
+      txDispatch({
+        type: ActionType.AddError,
+        payload: {
+          error: err as string
+        }
+      })
     }
   }
 

@@ -5,6 +5,9 @@ import { SessionUser } from './use-current-user.hook'
 import { IS_ACCOUNT_INITIALIZED } from '../flow/is_account_initialized.script'
 import { INITIALIZED_ACCOUNT } from '../flow/initialized-account.tx'
 import { useLocalStorageState } from 'ahooks'
+import { useTx } from '../providers/TxProvider'
+import { ActionType } from '../reducer/txReducer'
+import { formatError } from '../utils'
 
 export default function useAccount(user: SessionUser) {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -12,6 +15,8 @@ export default function useAccount(user: SessionUser) {
     error: false,
     data: null
   })
+
+  const { state: txState, dispatch: txDispatch } = useTx()
 
   const [accountInitStatus, setAccountInitStatus] = useLocalStorageState<{
     [address: string]: boolean
@@ -44,9 +49,8 @@ export default function useAccount(user: SessionUser) {
   }
 
   const initializeAccount = async () => {
-    console.log('start initiate account')
+    txDispatch({ type: ActionType.AddProccesing })
 
-    dispatch({ type: 'PROCESSING' })
     try {
       const transaction = await mutate({
         cadence: INITIALIZED_ACCOUNT,
@@ -55,10 +59,17 @@ export default function useAccount(user: SessionUser) {
       await tx(transaction).onceSealed()
       const newStorageUsers = { ...accountInitStatus, [user!.addr!]: true }
       setAccountInitStatus(newStorageUsers)
-      dispatch({ type: 'SUCCESS', payload: true })
+      txDispatch({
+        type: ActionType.AddSuccess,
+        payload: { txID: transaction }
+      })
     } catch (err) {
-      console.log(err)
-      dispatch({ type: 'ERROR' })
+      txDispatch({
+        type: ActionType.AddError,
+        payload: {
+          error: err as string
+        }
+      })
     }
   }
 

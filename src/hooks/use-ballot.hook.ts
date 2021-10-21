@@ -1,9 +1,12 @@
-import { useReducer } from 'react'
+import React, { useReducer } from 'react'
 import { query, mutate, tx } from '@onflow/fcl'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { SessionUser } from './use-current-user.hook'
 import { GET_HODINGS } from '../flow/get-holdings.script'
 import { BUY_BALLOTS } from '../flow/buy-ballots.tx'
+import { formatError } from '../utils'
+import { useTx } from '../providers/TxProvider'
+import { ActionType } from '../reducer/txReducer'
 
 export default function useBallot(user: SessionUser | undefined) {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -11,6 +14,18 @@ export default function useBallot(user: SessionUser | undefined) {
     error: false,
     data: null
   })
+
+  const { state: txState, dispatch: txDispatch } = useTx()
+
+  // useEffect(() => {
+  //   if (txState.txStatusType === 'PROCESSING')
+  //     console.log('txState useBallot loading')
+  //   if (txState.txStatusType === 'ERROR')
+  //     console.log('txState useBallot error', txState.errorMessage)
+  //   if (txState.txStatusType === 'SUCCESS')
+  //     console.log('txState useBallot success', txState.id)
+  //   if (txState.txStatusType === 'NONE') console.log('txState useBallot reset')
+  // }, [txState.isLoading, txState.isError])
 
   const getHodings = async () => {
     dispatch({ type: 'PROCESSING' })
@@ -27,17 +42,25 @@ export default function useBallot(user: SessionUser | undefined) {
   }
 
   const buyBallots = async (count: number) => {
-    dispatch({ type: 'PROCESSING' })
+    txDispatch({ type: ActionType.AddProccesing })
     try {
       const transaction = await mutate({
         cadence: BUY_BALLOTS,
-        limit: 100,
+        limit: 9999,
         args: (arg: any, t: any) => [arg(count, t.Int)]
       })
       await tx(transaction).onceSealed()
-      dispatch({ type: 'SUCCESS' })
+      txDispatch({
+        type: ActionType.AddSuccess,
+        payload: { txID: transaction }
+      })
     } catch (err) {
-      dispatch({ type: 'ERROR' })
+      txDispatch({
+        type: ActionType.AddError,
+        payload: {
+          error: err as string
+        }
+      })
     }
   }
 
