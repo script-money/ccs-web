@@ -78,7 +78,10 @@ export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
           {moment(activity.metadata.startDate ?? activity.createdAt).format(
             'lll'
           )}{' '}
-          —— {moment(activity.metadata.endDate).format('lll')}
+          ——{' '}
+          {activity.metadata.endDate === undefined
+            ? 'TBD'
+            : moment(activity.metadata.endDate).format('lll')}
         </div>
       </div>
       {/* button */}

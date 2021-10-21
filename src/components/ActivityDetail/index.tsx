@@ -10,7 +10,7 @@ const ActivityDetail = ({
 }: ActivityDetailProps) => {
   return (
     <div className="relative min-h-screen">
-      <main className="sm:py-10">
+      <main className="sm:py-4">
         {/* title+voteButton*/}
         <div className="md:flex md:justify-between md:items-center sm:px-6 lg:px-8 mx-auto md:space-x-5 max-w-3xl lg:max-w-7xl">
           {/* infomation */}
@@ -26,7 +26,7 @@ const ActivityDetail = ({
                 </span>
               </div>
             </div>
-            <div className="flex flex-wrap items-center mt-0 mb-4">
+            <div className="flex flex-wrap items-center">
               {/* status */}
               <div className="flex-shrink-0 self-center my-2 mr-2">
                 {!activity.closed ? (
@@ -117,7 +117,7 @@ const ActivityDetail = ({
         </div>
 
         {/* Activity Detail*/}
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-flow-col-dense gap-6 sm:px-6 mx-auto max-w-3xl lg:max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-flow-col-dense gap-6 sm:px-6 mx-auto mt-2 max-w-3xl lg:max-w-7xl">
           <div className="col-span-3 col-start-1 space-y-6">
             <section aria-labelledby="applicant-information-title">
               <div className="bg-white sm:rounded-lg border">
@@ -144,7 +144,12 @@ const ActivityDetail = ({
                         Close At
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        {moment(activity.lockDate).startOf('hour').fromNow()}
+                        {activity.lockDate === null
+                          ? moment(activity.startDate)
+                              .add(1, 'days')
+                              .startOf('hour')
+                              .fromNow()
+                          : moment(activity.lockDate).startOf('hour').fromNow()}
                       </dd>
                     </div>
                     <div className="sm:col-span-2 md:col-span-1">
@@ -152,7 +157,11 @@ const ActivityDetail = ({
                         Start At
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        {moment(activity.startDate).startOf('hour').fromNow()}
+                        {activity.startDate === null
+                          ? 'TBD'
+                          : moment(activity.startDate)
+                              .startOf('hour')
+                              .fromNow()}
                       </dd>
                     </div>
                     <div className="sm:col-span-2 md:col-span-1">
@@ -160,7 +169,9 @@ const ActivityDetail = ({
                         End At
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        {moment(activity.endDate).startOf('hour').fromNow()}
+                        {activity.endDate === null
+                          ? 'TBD'
+                          : moment(activity.endDate).startOf('hour').fromNow()}
                       </dd>
                     </div>
                     <div className="col-span-2 sm:col-span-4 lg:col-span-2">
@@ -180,7 +191,7 @@ const ActivityDetail = ({
                         Categories
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        {activity.metadata.categories.join(' ')}
+                        {activity.metadata.categories.join(' / ')}
                       </dd>
                     </div>
                     <div className="col-span-2 sm:col-span-4">

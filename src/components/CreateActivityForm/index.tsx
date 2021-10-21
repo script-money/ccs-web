@@ -202,13 +202,13 @@ export const CreateActivityForm = ({
               if (selected.length === 0 || selected === undefined) {
                 alert('please select a category')
               }
-              const types = selected.map(category => category.type)
+              const categories = selected.map(category => category.type)
               const metadata = JSON.stringify({
                 source,
                 content: content?.trim() === '' ? undefined : content,
                 startDate: startDate === null ? undefined : startDate,
                 endDate: endDate === null ? undefined : endDate,
-                types: [...new Set(types)]
+                categories: [...new Set(categories)]
               })
               onSubmit!(title!.trim(), metadata)
             }}

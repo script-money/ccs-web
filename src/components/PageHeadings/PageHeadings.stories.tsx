@@ -36,7 +36,8 @@ LogIn.args = {
   isLogin: true,
   address: '0xbe3dd040a44a36b3',
   isSetup: true,
-  isMainnet: false
+  isMainnet: false,
+  isFaucetLoading: false
 }
 
 export const NotSetup = Template.bind({})

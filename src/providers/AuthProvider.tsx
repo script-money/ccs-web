@@ -8,6 +8,7 @@ import useBallot from '../hooks/use-ballot.hook'
 import useCCSToken from '../hooks/use-ccs-token.hook'
 import useCurrentUser, { SessionUser } from '../hooks/use-current-user.hook'
 import useUserDetail from '../hooks/use-user-detail.hook'
+import { IResponse } from '../interface/util'
 
 export interface IAuthContext {
   user?: SessionUser
@@ -34,16 +35,23 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     initializeAccount
   } = useAccount(user!)
 
-  const { run: requestTokenRun } = useRequest(requestToken, {
-    manual: true,
-    onSuccess: () => {
-      console.log('getCCSBalance')
-      getCCSBalance()
-    },
-    onError: () => {
-      console.log('invoke modal')
+  const { loading: facuetIsLoading, run: requestTokenRun } = useRequest(
+    requestToken,
+    {
+      manual: true,
+      throwOnError: true,
+      onSuccess: (data: IResponse) => {
+        if (data.errorMessage) {
+          alert(data.errorMessage)
+        } else {
+          alert('get 1000 ccsToken success')
+        }
+      },
+      onError: (err: any) => {
+        alert(err)
+      }
     }
-  })
+  )
 
   const { error, loading, run, address, userName, discord, votingPower } =
     useUserDetail(user!)
@@ -108,13 +116,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             address={user!.addr}
             isSetup={isInitialized}
             isMainnet={import.meta.env.VITE_IS_MAINNET === 'true'}
+            isFaucetLoading={facuetIsLoading ?? false}
             onUserDetailClick={() => {
               run(user)
               showUserDetail()
             }}
             onCreateClick={() => (window.location.href = '/create-activity')}
             onFaucetClick={() => {
-              requestTokenRun(user.addr!)
+              requestTokenRun(user.addr!) // TODO 这儿要用个reducer来处理，成功后刷新状态
             }}
           />
           <UserDetail
