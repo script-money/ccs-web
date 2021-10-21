@@ -214,7 +214,7 @@ export const CreateActivityForm = ({
             }}
             className="main-button"
           >
-            Spend {sendAmount} to CCS Create Activity. Has {hasAmount} in wallet
+            Spend {sendAmount} CCS to Create Activity. Has {hasAmount} in wallet
           </button>
         </div>
       </form>
