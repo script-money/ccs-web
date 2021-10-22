@@ -63,6 +63,7 @@ export default function useAccount(user: SessionUser) {
         type: ActionType.AddSuccess,
         payload: { txID: transaction }
       })
+      await isAccountInitialized()
     } catch (err) {
       txDispatch({
         type: ActionType.AddError,

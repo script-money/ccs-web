@@ -4,6 +4,7 @@ import { formatError } from '../utils'
 export enum ActionType {
   AddProccesing = 'PROCESSING',
   AddSuccess = 'SUCCESS',
+  AddTip = 'TIP',
   AddError = 'ERROR',
   Reset = 'NONE'
 }
@@ -12,6 +13,7 @@ export interface TxState {
   txStatusType: ActionType
   id?: string
   errorMessage?: string
+  notification?: string
   isLoading: boolean
   isError: boolean
 }
@@ -31,6 +33,11 @@ interface AddSuccess {
   payload: { txID: string }
 }
 
+interface AddTips {
+  type: ActionType.AddTip
+  payload: { text: string }
+}
+
 interface AddError {
   type: ActionType.AddError
   payload: { error: string }
@@ -40,7 +47,7 @@ interface Reset {
   type: ActionType.Reset
 }
 
-export type TxActions = AddProccesing | AddSuccess | AddError | Reset
+export type TxActions = AddProccesing | AddSuccess | AddTips | AddError | Reset
 
 export const txReducer = (state: TxState, action: TxActions) => {
   switch (action.type) {
@@ -58,6 +65,12 @@ export const txReducer = (state: TxState, action: TxActions) => {
         id: action.payload.txID,
         isLoading: false,
         isError: false
+      }
+    case ActionType.AddTip:
+      return {
+        ...state,
+        txStatusType: action.type,
+        notification: action.payload.text
       }
     case ActionType.AddError:
       return {

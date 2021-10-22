@@ -28,7 +28,7 @@ export const PageHeadings = ({
 }: IPageHeadingsProps) => {
   return (
     <header className="relative z-10">
-      <nav className="sm:px-6 lg:px-8 mx-auto max-w-7xl">
+      <nav className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
         <div className="flex py-3 w-full border-b">
           {/* uncomment below line in storybook */}
           {/* <MemoryRouter> */}
@@ -121,12 +121,16 @@ export const PageHeadings = ({
                 Sign in
               </a>
             ) : (
-              <a
-                className="inline-flex overflow-hidden items-center py-2 px-2 sm:px-4 w-16 sm:w-auto text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm focus:outline-none"
-                onClick={() => onUserDetailClick!()}
-              >
-                {address!.substring(0, 6) + '...' + address!.substring(14, 18)}
-              </a>
+              <div className="inline-flex items-center py-2 px-2 sm:px-4 w-16 sm:w-auto text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm focus:outline-none">
+                <a
+                  className="overflow-hidden"
+                  onClick={() => onUserDetailClick!()}
+                >
+                  {address!.substring(0, 6) +
+                    '......' +
+                    address!.substring(14, 18)}
+                </a>
+              </div>
             )}
           </div>
         </div>

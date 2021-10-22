@@ -103,14 +103,17 @@ export const ActivityList = ({
           />
         </div>
         <div className="ml-1 text-sm">
-          <label htmlFor="comments" className="font-medium text-gray-700">
-            CanVote
+          <label
+            htmlFor="comments"
+            className="font-medium tracking-tighter text-gray-700"
+          >
+            Can Vote Only
           </label>
         </div>
       </div>
 
       {/* canJoin */}
-      <div className="flex relative items-start m-1">
+      <div className="flex relative items-start ml-3">
         <div className="flex items-center h-5">
           <input
             type="checkbox"
@@ -119,8 +122,11 @@ export const ActivityList = ({
           />
         </div>
         <div className="ml-1 text-sm">
-          <label htmlFor="comments" className="font-medium text-gray-700">
-            CanJoin
+          <label
+            htmlFor="comments"
+            className="font-medium tracking-tighter text-gray-700"
+          >
+            Can Join Only
           </label>
         </div>
       </div>

@@ -161,8 +161,8 @@ export const CreateActivityForm = ({
                     name={category.type}
                     type="checkbox"
                     checked={isSelected(category)}
-                    onChange={value => {
-                      return console.log('clicked', value)
+                    onChange={() => {
+                      void 0
                     }}
                     onClick={() => toggle(category)}
                     className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"

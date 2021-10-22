@@ -123,7 +123,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             }}
             onCreateClick={() => (window.location.href = '/create-activity')}
             onFaucetClick={() => {
-              requestTokenRun(user.addr!) // TODO 这儿要用个reducer来处理，成功后刷新状态
+              requestTokenRun(user.addr!)
             }}
           />
           <UserDetail
@@ -145,7 +145,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           address={user!.addr}
           isSetup={false}
           onUserDetailClick={() => logOut()}
-          onSetUpClick={() => initializeAccount()}
+          onSetUpClick={() => {
+            initializeAccount()
+          }}
         />
       )}
       {children}

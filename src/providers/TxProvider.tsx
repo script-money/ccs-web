@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer, useContext, createContext } from 'react'
 import { TxInfo } from '../components/TxInfo'
 import usePrevious from '../hooks/use-previous.hook'
-import { useTimeout } from 'ahooks'
 
 import {
   txReducer,
@@ -10,6 +9,7 @@ import {
   TxState,
   ActionType
 } from '../reducer/txReducer'
+import { TxDetail } from '../components/TxDetail'
 
 export const TxContext = createContext<{
   state: TxState
@@ -37,6 +37,7 @@ export default function TxProvider({
       timer = setTimeout(() => dispatch({ type: ActionType.Reset }), 5000)
     }
     return () => clearTimeout(timer)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.txStatusType])
 
   return (
@@ -54,6 +55,19 @@ export default function TxProvider({
         show={state.txStatusType !== 'NONE' && state.txStatusType !== undefined}
         setShow={() => dispatch({ type: ActionType.Reset })}
       ></TxInfo>
+      {state.txStatusType === 'TIP' ? (
+        <TxDetail
+          id={state.id}
+          status={'SUCCESS'}
+          notification={state.notification!}
+          onConfirm={() => {
+            window.location.href = '/'
+            dispatch({ type: ActionType.Reset })
+          }}
+        ></TxDetail>
+      ) : (
+        <></>
+      )}
     </TxContext.Provider>
   )
 }

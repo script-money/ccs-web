@@ -85,6 +85,12 @@ export default function useActivity() {
         payload: { txID: transaction }
       })
       await getCCSBalance()
+      txDispatch({
+        type: ActionType.AddTip,
+        payload: {
+          text: 'Activity will show in 1 - 2 minites'
+        }
+      })
     } catch (err) {
       txDispatch({
         type: ActionType.AddError,

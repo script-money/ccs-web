@@ -23,6 +23,12 @@ SUCCESS.args = {
   show: true
 }
 
+export const TIP = Template.bind({})
+TIP.args = {
+  ...SUCCESS.args,
+  status: ActionType.AddTip
+}
+
 export const ERROR = Template.bind({})
 ERROR.args = {
   status: ActionType.AddError,

@@ -1,5 +1,4 @@
-/* This example requires Tailwind CSS v2.0+ */
-import { Fragment, useState } from 'react'
+import { Fragment } from 'react'
 import { Transition } from '@headlessui/react'
 import { CheckCircleIcon } from '@heroicons/react/outline'
 import { XIcon } from '@heroicons/react/solid'
@@ -21,8 +20,6 @@ export const TxInfo = ({
   show,
   setShow
 }: ITxInfoProps) => {
-  // const [show, setShow] = useState(false)
-
   return (
     <>
       {status === ActionType.Reset ? (
@@ -43,11 +40,11 @@ export const TxInfo = ({
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="overflow-hidden w-full max-w-sm bg-white rounded-lg ring-1 ring-black ring-opacity-5 shadow-lg pointer-events-auto">
+              <div className="overflow-hidden w-full md:w-auto max-w-sm bg-white rounded-lg ring-1 ring-black ring-opacity-5 shadow-lg pointer-events-auto">
                 <div className="p-4">
                   <div className="flex items-start">
                     <div className="flex-shrink-0">
-                      {status === 'SUCCESS' ? (
+                      {status === 'SUCCESS' || status == 'TIP' ? (
                         <CheckCircleIcon
                           className="w-6 h-6 text-open"
                           aria-hidden="true"
@@ -90,8 +87,8 @@ export const TxInfo = ({
                         </svg>
                       )}
                     </div>
-                    <div className="flex-1 pt-0.5 ml-3 w-0">
-                      {status === 'SUCCESS' ? (
+                    <div className="flex-1 pt-0.5 ml-3">
+                      {status === 'SUCCESS' || status == 'TIP' ? (
                         <p className="text-sm font-medium text-gray-900">
                           Transaction success!
                         </p>
@@ -112,10 +109,10 @@ export const TxInfo = ({
                         </p>
                       ) : (
                         <a
-                          className="text-sm text-gray-400 hover:text-gray-600 underline"
+                          className="text-xs sm:text-sm text-gray-400 hover:text-gray-600 underline"
                           href={'https://flowscan.org/transaction/' + id}
                         >
-                          TX:{id?.slice(0, 32)}...
+                          TX:{id?.slice(0, 24)}...
                         </a>
                       )}
                     </div>

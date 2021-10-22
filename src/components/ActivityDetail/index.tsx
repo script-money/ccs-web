@@ -10,9 +10,9 @@ const ActivityDetail = ({
 }: ActivityDetailProps) => {
   return (
     <div className="relative min-h-screen">
-      <main className="sm:py-4">
+      <main className="py-4">
         {/* title+voteButton*/}
-        <div className="md:flex md:justify-between md:items-center sm:px-6 lg:px-8 mx-auto md:space-x-5 max-w-3xl lg:max-w-7xl">
+        <div className="md:flex md:justify-between md:items-center px-4 sm:px-6 lg:px-8 mx-auto md:space-x-5 max-w-3xl lg:max-w-7xl">
           {/* infomation */}
           <div className="flex flex-col flex-grow">
             {/* title+id */}
@@ -122,10 +122,7 @@ const ActivityDetail = ({
             <section aria-labelledby="applicant-information-title">
               <div className="bg-white sm:rounded-lg border">
                 <div className="py-5 px-4 sm:px-6 bg-gray-50">
-                  <h2
-                    id="applicant-information-title"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
+                  <h2 className="text-lg font-medium leading-6 text-gray-900">
                     Activity Detail
                   </h2>
                 </div>
@@ -216,10 +213,7 @@ const ActivityDetail = ({
               <section aria-labelledby="applicant-information-title">
                 <div className="bg-white sm:rounded-lg border">
                   <div className="py-5 px-4 sm:px-6 bg-gray-50">
-                    <h2
-                      id="applicant-information-title"
-                      className="text-lg font-medium leading-6 text-gray-900"
-                    >
+                    <h2 className="text-lg font-medium leading-6 text-gray-900">
                       Reward Detail
                     </h2>
                   </div>
@@ -273,10 +267,7 @@ const ActivityDetail = ({
             <div className="lg:col-span-2 lg:col-start-1 space-y-6">
               <div className="overflow-hidden sm:rounded-lg border border-gray-200">
                 <div className="py-5 px-4 sm:px-6 bg-gray-50 border-b">
-                  <h2
-                    id="applicant-information-title"
-                    className="text-lg font-medium leading-6 text-gray-900"
-                  >
+                  <h2 className="text-lg font-medium leading-6 text-gray-900">
                     Vote Result
                   </h2>
                 </div>
