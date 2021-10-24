@@ -58,6 +58,16 @@ export default function useActivity() {
         type: ActionType.AddSuccess,
         payload: { txID: transaction }
       })
+      txDispatch({
+        type: ActionType.AddTip,
+        payload: {
+          // eslint-disable-next-line prettier/prettier
+          text: `You have vote ${isUpVote ? '👍' : '👎'
+            // eslint-disable-next-line prettier/prettier
+            } for activity # ${activityId}`,
+          toHome: true
+        }
+      })
     } catch (err) {
       txDispatch({
         type: ActionType.AddError,
@@ -88,7 +98,8 @@ export default function useActivity() {
       txDispatch({
         type: ActionType.AddTip,
         payload: {
-          text: 'Activity will show in 1 - 2 minites'
+          text: 'Activity will show in 1 minite',
+          toHome: false
         }
       })
     } catch (err) {

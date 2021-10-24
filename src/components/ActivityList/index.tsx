@@ -92,7 +92,7 @@ export const ActivityList = ({
   )
 
   const Filter = (
-    <div className="flex items-center py-2 pr-2 sm:pr-4 pl-4 sm:pl-6 shadow">
+    <div className="flex relative z-10 items-center py-2 pr-2 sm:pr-4 pl-4 sm:pl-6 shadow">
       {/* canVote */}
       <div className="flex relative items-start">
         <div className="flex items-center h-5">
@@ -196,28 +196,42 @@ export const ActivityList = ({
     </nav>
   )
 
+  const Loading = (
+    <div className="flex overflow-hidden fixed top-0 right-0 bottom-0 left-0 z-50 flex-col justify-center items-center w-full h-scree">
+      <h2 className="text-xl font-semibold text-center text-gray-500 loading">
+        Loading
+      </h2>
+    </div>
+  )
+
+  const NoActivities = (
+    <div className="flex overflow-hidden fixed top-0 right-0 bottom-0 left-0 z-0 flex-col justify-center items-center w-full h-scree">
+      <h2 className="text-xl font-semibold text-center text-gray-500">
+        No activities found
+      </h2>
+    </div>
+  )
+
   if (isLoading) {
     return (
-      <div className="flex overflow-hidden fixed top-0 right-0 bottom-0 left-0 z-50 flex-col justify-center items-center w-full h-scree">
-        <h2 className="text-xl font-semibold text-center text-gray-500 loading">
-          Loading
-        </h2>
+      <div className="px-4 sm:px-6 lg:px-8">
+        {Filter}
+        {Loading}
       </div>
     )
   }
 
   if (activities.length === 0) {
     return (
-      <div className="flex overflow-hidden fixed top-0 right-0 bottom-0 left-0 flex-col justify-center items-center w-full h-scree">
-        <h2 className="text-xl font-semibold text-center text-gray-500">
-          No activities found
-        </h2>
+      <div className="px-4 sm:px-6 lg:px-8">
+        {Filter}
+        {NoActivities}
       </div>
     )
   }
 
   return (
-    <div>
+    <div className="px-4 sm:px-6 lg:px-8">
       {Filter}
       {InfoList}
       {Pagination}

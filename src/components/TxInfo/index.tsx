@@ -29,7 +29,7 @@ export const TxInfo = ({
           aria-live="assertive"
           className="flex fixed inset-0 z-20 items-end md:items-start sm:p-6 py-6 px-4 pointer-events-none"
         >
-          <div className="flex flex-col items-center sm:items-end space-y-4 w-full">
+          <div className="flex flex-col items-center md:items-end sm:mt-10 space-y-4 w-full">
             <Transition
               show={show}
               as={Fragment}

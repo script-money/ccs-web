@@ -14,6 +14,7 @@ export const getActivityList = async (
   pageSize: number,
   type?: categoriesType,
   canVote?: boolean,
+  address?: string,
   canJoin?: boolean,
   createBy?: string
 ): Promise<IGetActivitiesResponse> => {
@@ -23,6 +24,7 @@ export const getActivityList = async (
       offset: pageSize * (current - 1),
       type,
       canVote,
+      address,
       canJoin,
       createBy
     }

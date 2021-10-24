@@ -74,7 +74,7 @@ export const CreateActivityForm = ({
             <textarea
               id="content"
               name="content"
-              rows={6}
+              rows={2}
               value={content}
               onChange={e => setContent!(e.target.value)}
               className="block py-3 px-4 w-full rounded-md border border-gray-300 focus:border-main focus:ring-main shadow-sm"
@@ -135,6 +135,7 @@ export const CreateActivityForm = ({
               id="source"
               name="source"
               autoComplete="url"
+              rows={1}
               value={source}
               onChange={e => setSource!(e.target.value)}
               placeholder="(optional) the source URL activity publish"
@@ -201,6 +202,7 @@ export const CreateActivityForm = ({
               }
               if (selected.length === 0 || selected === undefined) {
                 alert('please select a category')
+                return
               }
               const categories = selected.map(category => category.type)
               const metadata = JSON.stringify({

@@ -14,6 +14,7 @@ export interface TxState {
   id?: string
   errorMessage?: string
   notification?: string
+  toHome?: boolean
   isLoading: boolean
   isError: boolean
 }
@@ -35,7 +36,7 @@ interface AddSuccess {
 
 interface AddTips {
   type: ActionType.AddTip
-  payload: { text: string }
+  payload: { text: string; toHome: boolean }
 }
 
 interface AddError {
@@ -70,7 +71,8 @@ export const txReducer = (state: TxState, action: TxActions) => {
       return {
         ...state,
         txStatusType: action.type,
-        notification: action.payload.text
+        notification: action.payload.text,
+        toHome: action.payload.toHome
       }
     case ActionType.AddError:
       return {

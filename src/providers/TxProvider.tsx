@@ -30,10 +30,7 @@ export default function TxProvider({
 
   useEffect(() => {
     let timer: any
-    if (
-      previousStatus === ActionType.AddProccesing &&
-      state.txStatusType === ActionType.AddSuccess
-    ) {
+    if (previousStatus === ActionType.AddProccesing) {
       timer = setTimeout(() => dispatch({ type: ActionType.Reset }), 5000)
     }
     return () => clearTimeout(timer)
@@ -61,7 +58,11 @@ export default function TxProvider({
           status={'SUCCESS'}
           notification={state.notification!}
           onConfirm={() => {
-            window.location.href = '/'
+            if (state.toHome) {
+              window.location.href = '/'
+            } else {
+              window.location.reload()
+            }
             dispatch({ type: ActionType.Reset })
           }}
         ></TxDetail>

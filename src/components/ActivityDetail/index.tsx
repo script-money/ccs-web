@@ -85,31 +85,42 @@ const ActivityDetail = ({
           </div>
           {/* voteButton */}
           {!activity.closed ? (
-            <div className="flex flex-shrink items-start mb-4 space-x-4">
-              <button
-                type="button"
-                className="justify-center p-4 w-12 h-12 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm disabled:opacity-50 focus:outline-none"
-                onClick={() => {
-                  onUpVote!()
-                }}
-                disabled={
-                  activity.creatorAddr === currentUserAddr ||
-                  currentUserAddr === undefined
-                }
-              >
-                <span>👍</span>
-              </button>
-              <button
-                type="button"
-                className="justify-center p-4 w-12 h-12 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm disabled:opacity-50 focus:outline-none"
-                onClick={() => onDownVote!()}
-                disabled={
-                  activity.creatorAddr === currentUserAddr ||
-                  currentUserAddr === undefined
-                }
-              >
-                <span>👎</span>
-              </button>
+            <div className="flex md:flex-col">
+              <div className="flex flex-shrink items-start mb-4 space-x-4">
+                <button
+                  type="button"
+                  className="justify-center p-4 w-12 h-12 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm disabled:opacity-50 focus:outline-none"
+                  onClick={() => {
+                    onUpVote!()
+                  }}
+                  disabled={
+                    activity.creatorAddr === currentUserAddr ||
+                    currentUserAddr === undefined
+                  }
+                >
+                  <span>👍</span>
+                </button>
+                <button
+                  type="button"
+                  className="justify-center p-4 w-12 h-12 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm disabled:opacity-50 focus:outline-none"
+                  onClick={() => onDownVote!()}
+                  disabled={
+                    activity.creatorAddr === currentUserAddr ||
+                    currentUserAddr === undefined
+                  }
+                >
+                  <span>👎</span>
+                </button>
+              </div>
+              <div className="flex items-center -mt-3 ml-4">
+                <span className="text-xs text-red-500">
+                  {activity.creatorAddr !== currentUserAddr
+                    ? currentUserAddr === undefined
+                      ? 'Log in to Vote'
+                      : 'Can vote once'
+                    : 'Already voted'}
+                </span>
+              </div>
             </div>
           ) : (
             <></>

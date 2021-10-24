@@ -3,8 +3,10 @@ import { getActivityList } from '../api/server'
 import { ActivityList } from '../components/ActivityList'
 import React, { useState } from 'react'
 import { categories, ICategoryType } from '../interface/activity'
+import { useAuth } from '../providers/AuthProvider'
 
 export const ActivityCluster = () => {
+  const { user } = useAuth()
   const [canVoteState, setCanVoteState] = useState<boolean>()
   const [canJoinState, setCanJoinState] = useState<boolean>()
   const [selectedCategory, setSelectedCategory] = useState<ICategoryType>(
@@ -17,6 +19,7 @@ export const ActivityCluster = () => {
         pageSize, // should adjust reference screen height
         selectedCategory.type === 'All' ? undefined : selectedCategory.type,
         canVoteState ? true : undefined,
+        user === undefined ? undefined : user!.addr!,
         canJoinState ? true : undefined
       ),
     {

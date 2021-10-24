@@ -18,7 +18,7 @@ export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
   }
 
   return (
-    <div className="flex items-center px-2 -my-3 -mx-2 space-x-4 rounded-xl">
+    <div className="flex items-center px-2 -my-2 -mx-2 space-x-4 rounded-xl">
       {/* infomation */}
       <div className="flex flex-col flex-grow">
         {/* icon+title+tags */}
