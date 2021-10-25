@@ -9,6 +9,7 @@ interface IUserDetailProps {
   ballotAmount?: number
   votingPower?: number
   tokenAmount?: number
+  ballotPrice?: number
   open: boolean
   onBuyClick?: (amount: number) => void
   onLinkClick?: () => void
@@ -18,13 +19,12 @@ interface IUserDetailProps {
 
 export const UserDetail = ({
   address,
-  userName,
   ballotAmount,
   votingPower,
   tokenAmount,
+  ballotPrice,
   open = true,
   onBuyClick,
-  onLinkClick,
   onLogoutClick,
   onCloseWindow
 }: IUserDetailProps) => {
@@ -108,7 +108,7 @@ export const UserDetail = ({
                 </div>
               </div>
               {/* username */}
-              <div className="userdetail-item">
+              {/* <div className="userdetail-item">
                 <Dialog.Title className="userdetail-title">
                   User Name
                 </Dialog.Title>
@@ -134,7 +134,7 @@ export const UserDetail = ({
                     </button>
                   </div>
                 )}
-              </div>
+              </div> */}
               {/* VotePower */}
               <div className="userdetail-item">
                 <Dialog.Title className="userdetail-title">
@@ -157,6 +157,19 @@ export const UserDetail = ({
                   <div className="flex">
                     <p className="userdetail-info">
                       Current: {tokenAmount ?? 0}
+                    </p>
+                  </div>
+                </div>
+              </div>
+              {/* BallotPrice */}
+              <div className="userdetail-item">
+                <Dialog.Title className="userdetail-title">
+                  Ballot Price
+                </Dialog.Title>
+                <div className="flex items-center space-x-4">
+                  <div className="flex">
+                    <p className="userdetail-info">
+                      Current: {ballotPrice ?? 0}
                     </p>
                   </div>
                 </div>

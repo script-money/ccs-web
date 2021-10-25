@@ -7,6 +7,7 @@ import useAccount from '../hooks/use-account.hook'
 import useBallot from '../hooks/use-ballot.hook'
 import useCCSToken from '../hooks/use-ccs-token.hook'
 import useCurrentUser, { SessionUser } from '../hooks/use-current-user.hook'
+import useBallotPrice from '../hooks/use-ballot-price.hook'
 import useUserDetail from '../hooks/use-user-detail.hook'
 import { IResponse } from '../interface/util'
 
@@ -28,6 +29,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [openUserDetail, setOpenUserDetail] = useState(false)
   const { data: ccsTokenAmount, getCCSBalance } = useCCSToken(user)
   const { data: ballotsAmount, buyBallots, getHodings } = useBallot(user!)
+  const { data: ballotPrice, getPrice } = useBallotPrice()
 
   const {
     data: isInitialized,
@@ -67,6 +69,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     if (openUserDetail) {
       getCCSBalance()
       getHodings()
+      getPrice()
     }
   }, [openUserDetail])
 
@@ -130,6 +133,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             address={address!}
             userName={userName ?? 'not set'}
             ballotAmount={ballotsAmount}
+            ballotPrice={ballotPrice}
             votingPower={votingPower}
             tokenAmount={ccsTokenAmount}
             open={openUserDetail}

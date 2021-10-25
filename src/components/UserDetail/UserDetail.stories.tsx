@@ -31,6 +31,7 @@ export const FULL = Template.bind({})
 FULL.args = {
   ...DEFAULT.args,
   userName: 'scriptmoney#7183',
+  ballotPrice: 1.12345678,
   ballotAmount: 34,
   votingPower: 1.532,
   tokenAmount: 123.12331442

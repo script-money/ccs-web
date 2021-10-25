@@ -4,7 +4,6 @@ import { defaultReducer } from '../reducer/defaultReducer'
 import { SessionUser } from './use-current-user.hook'
 import { GET_HODINGS } from '../flow/get-holdings.script'
 import { BUY_BALLOTS } from '../flow/buy-ballots.tx'
-import { formatError } from '../utils'
 import { useTx } from '../providers/TxProvider'
 import { ActionType } from '../reducer/txReducer'
 
