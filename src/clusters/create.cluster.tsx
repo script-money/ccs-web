@@ -4,7 +4,7 @@ import useActivity from '../hooks/use-activity.hook'
 import useCCSToken from '../hooks/use-ccs-token.hook'
 import { useAuth } from '../providers/AuthProvider'
 
-export const CreateActivityCluster = () => {
+const CreateActivityCluster = () => {
   const { user } = useAuth()
   const { createActivity } = useActivity()
   const { data: ccsToken } = useCCSToken(user!)
@@ -19,3 +19,5 @@ export const CreateActivityCluster = () => {
     </>
   )
 }
+
+export default CreateActivityCluster

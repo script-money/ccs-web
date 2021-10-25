@@ -9,7 +9,7 @@ import { GetActivityParams } from '../interface/activity'
 import ActivityDetail from '../components/ActivityDetail'
 import '../components/ActivityList/loading.css'
 
-export const ActivityDetailCluster = () => {
+const ActivityDetailCluster = () => {
   const { vote } = useActivity()
   const { id } = useParams<GetActivityParams>()
   const { user } = useAuth()
@@ -48,3 +48,5 @@ export const ActivityDetailCluster = () => {
     </>
   )
 }
+
+export default ActivityDetailCluster

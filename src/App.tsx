@@ -1,30 +1,39 @@
-import React from 'react'
-import Providers from './providers/Providers.comp'
+import React, { Suspense } from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
-import { ActivityCluster } from './clusters/activity.cluster'
-import { CreateActivityCluster } from './clusters/create.cluster'
-import { ActivityDetailCluster } from './clusters/activityDetail.cluster'
-import NotFound from './pages/NotFound.page'
+import { Loading } from './components/Loading'
+const Providers = React.lazy(() => import('./providers/Providers.comp'))
+const ActivityCluster = React.lazy(() => import('./clusters/activity.cluster'))
+const CreateActivityCluster = React.lazy(
+  () => import('./clusters/create.cluster')
+)
+const ActivityDetailCluster = React.lazy(
+  () => import('./clusters/activityDetail.cluster')
+)
+const NotFound = React.lazy(() => import('./pages/NotFound.page'))
 
 function App() {
   return (
-    <Providers>
-      <Switch>
-        <Route path="/create-activity">
-          <CreateActivityCluster />
-        </Route>
-        <Route path="/activity/:id">
-          <ActivityDetailCluster />
-        </Route>
+    <>
+      <Suspense fallback={<Loading></Loading>}>
+        <Providers>
+          <Switch>
+            <Route path="/create-activity">
+              <CreateActivityCluster />
+            </Route>
+            <Route path="/activity/:id">
+              <ActivityDetailCluster />
+            </Route>
 
-        <Route exact path="/">
-          <ActivityCluster />
-        </Route>
+            <Route exact path="/">
+              <ActivityCluster />
+            </Route>
 
-        <Route path="/404" component={NotFound} />
-        <Redirect to="/404" />
-      </Switch>
-    </Providers>
+            <Route path="/404" component={NotFound} />
+            <Redirect to="/404" />
+          </Switch>
+        </Providers>
+      </Suspense>
+    </>
   )
 }
 

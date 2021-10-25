@@ -5,7 +5,7 @@ import React, { useState } from 'react'
 import { categories, ICategoryType } from '../interface/activity'
 import { useAuth } from '../providers/AuthProvider'
 
-export const ActivityCluster = () => {
+const ActivityCluster = () => {
   const { user } = useAuth()
   const [canVoteState, setCanVoteState] = useState<boolean>()
   const [canJoinState, setCanJoinState] = useState<boolean>()
@@ -47,3 +47,5 @@ export const ActivityCluster = () => {
     ></ActivityList>
   )
 }
+
+export default ActivityCluster
