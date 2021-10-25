@@ -9,6 +9,9 @@ const CreateActivityCluster = React.lazy(
 const ActivityDetailCluster = React.lazy(
   () => import('./clusters/activityDetail.cluster')
 )
+const MemorialsCluster = React.lazy(
+  () => import('./clusters/memorials.cluster')
+)
 const NotFound = React.lazy(() => import('./pages/NotFound.page'))
 
 function App() {
@@ -22,6 +25,9 @@ function App() {
             </Route>
             <Route path="/activity/:id">
               <ActivityDetailCluster />
+            </Route>
+            <Route path="/momerials">
+              <MemorialsCluster />
             </Route>
 
             <Route exact path="/">

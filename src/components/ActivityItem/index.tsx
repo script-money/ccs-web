@@ -76,12 +76,12 @@ export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
         {/* start-end */}
         <div className="inline-flex items-center py-0.5 text-xs text-gray-400">
           {moment(activity.metadata.startDate ?? activity.createdAt).format(
-            'lll'
+            'L'
           )}{' '}
           ——{' '}
           {activity.metadata.endDate === undefined
             ? 'TBD'
-            : moment(activity.metadata.endDate).format('lll')}
+            : moment(activity.metadata.endDate).format('L')}
         </div>
       </div>
       {/* button */}

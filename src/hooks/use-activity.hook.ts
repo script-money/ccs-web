@@ -28,14 +28,12 @@ export default function useActivity() {
 
   const getConsumption = async () => {
     dispatch({ type: 'PROCESSING' })
-    console.log('getConsumption start')
 
     try {
       const response = await query({
         cadence: GET_CREATE_CONSUMPTION
       })
       dispatch({ type: 'SUCCESS', payload: response })
-      console.log('getConsumption end', response)
     } catch (err) {
       dispatch({ type: 'ERROR' })
       console.log(err)
@@ -98,7 +96,7 @@ export default function useActivity() {
       txDispatch({
         type: ActionType.AddTip,
         payload: {
-          text: 'Activity will show in 1 minite',
+          text: 'Activity will show in 1 minute',
           toHome: false
         }
       })

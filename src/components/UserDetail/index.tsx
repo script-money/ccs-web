@@ -11,10 +11,12 @@ interface IUserDetailProps {
   tokenAmount?: number
   ballotPrice?: number
   open: boolean
+  setOpen?: (isOpen: boolean) => void
   onBuyClick?: (amount: number) => void
   onLinkClick?: () => void
   onLogoutClick?: () => void
   onCloseWindow?: () => void
+  onViewMemorials?: () => void
 }
 
 export const UserDetail = ({
@@ -24,9 +26,11 @@ export const UserDetail = ({
   tokenAmount,
   ballotPrice,
   open = true,
+  setOpen,
   onBuyClick,
   onLogoutClick,
-  onCloseWindow
+  onCloseWindow,
+  onViewMemorials
 }: IUserDetailProps) => {
   // const [open, setOpen] = useState(false)
   const [ballotCount, setBallotCount] = useState(0)
@@ -147,6 +151,15 @@ export const UserDetail = ({
                     </p>
                   </div>
                 </div>
+                <a
+                  className="text-xs text-blue-600 visited:text-purple-600 hover:text-blue-800 underline break-all"
+                  onClick={() => {
+                    onViewMemorials!()
+                    setOpen!(false)
+                  }}
+                >
+                  view detail
+                </a>
               </div>
               {/* CCSToken */}
               <div className="userdetail-item">

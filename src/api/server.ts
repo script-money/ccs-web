@@ -6,6 +6,7 @@ import {
   IGetActivitiesResponse,
   IGetActivityResponse
 } from '../interface/activity'
+import { IGetMemorialsResponse } from '../interface/memorials'
 import { IGetUserResponse } from '../interface/user'
 import { IResponse } from '../interface/util'
 
@@ -48,5 +49,18 @@ export const requestToken = async (addr: string): Promise<IResponse> => {
   const result = (await axios.post(
     `${BASE_URL}/token/free?address=${addr}`
   )) as IResponse
+  return result.data
+}
+
+export const getMemorials = async (
+  activityId: number,
+  userAddress: string
+): Promise<IGetMemorialsResponse> => {
+  const result = await axios.get(`${BASE_URL}/memorials`, {
+    params: {
+      activityId,
+      userAddress
+    }
+  })
   return result.data
 }

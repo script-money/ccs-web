@@ -3,5 +3,9 @@ export function classNames(...classes: string[]) {
 }
 
 export function formatError(errorMessage: string): string {
-  return errorMessage.split('\n')[1]
+  try {
+    return errorMessage.split('\n')[1]
+  } catch (error) {
+    return errorMessage
+  }
 }

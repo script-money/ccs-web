@@ -10,6 +10,7 @@ import useCurrentUser, { SessionUser } from '../hooks/use-current-user.hook'
 import useBallotPrice from '../hooks/use-ballot-price.hook'
 import useUserDetail from '../hooks/use-user-detail.hook'
 import { IResponse } from '../interface/util'
+import { useHistory } from 'react-router-dom'
 
 export interface IAuthContext {
   user?: SessionUser
@@ -30,6 +31,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const { data: ccsTokenAmount, getCCSBalance } = useCCSToken(user)
   const { data: ballotsAmount, buyBallots, getHodings } = useBallot(user!)
   const { data: ballotPrice, getPrice } = useBallotPrice()
+  const history = useHistory()
 
   const {
     data: isInitialized,
@@ -137,10 +139,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             votingPower={votingPower}
             tokenAmount={ccsTokenAmount}
             open={openUserDetail}
+            setOpen={(isOpen: boolean) => setOpenUserDetail(isOpen)}
             onBuyClick={handleBuyBallots}
             onLinkClick={() => alert('coming soon')}
-            onLogoutClick={() => logOut()}
+            onLogoutClick={() => {
+              logOut()
+              history.push('/')
+            }}
             onCloseWindow={hideUserDetail}
+            onViewMemorials={() => history.push('/momerials')}
           />
         </>
       ) : (
@@ -148,7 +155,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           isLogin={true}
           address={user!.addr}
           isSetup={false}
-          onUserDetailClick={() => logOut()}
+          onUserDetailClick={() => {
+            logOut()
+            history.push('/')
+          }}
           onSetUpClick={() => {
             initializeAccount()
           }}

@@ -23,7 +23,7 @@ export const SUCCESS = Template.bind({})
 SUCCESS.args = {
   status: 'SUCCESS',
   id: 'eec9911e824f8125f88c1d579136bc91326da5619e4830a53fe6fa34ecd04676',
-  notification: 'Activity will show in 1-2 minites'
+  notification: 'Activity will show in 1-2 minutes'
 }
 
 export const ERROR = Template.bind({})
