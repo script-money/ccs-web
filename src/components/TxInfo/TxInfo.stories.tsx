@@ -20,7 +20,8 @@ export const SUCCESS = Template.bind({})
 SUCCESS.args = {
   status: ActionType.AddSuccess,
   id: 'eec9911e824f8125f88c1d579136bc91326da5619e4830a53fe6fa34ecd04676',
-  show: true
+  show: true,
+  isMainnet: false
 }
 
 export const TIP = Template.bind({})
@@ -40,4 +41,10 @@ export const NONE = Template.bind({})
 NONE.args = {
   status: ActionType.Reset,
   show: true
+}
+
+export const MAINNET = Template.bind({})
+MAINNET.args = {
+  ...SUCCESS.args,
+  isMainnet: true
 }

@@ -10,6 +10,7 @@ export interface ITxInfoProps {
   errorMessage?: string
   status: ActionType
   show: boolean
+  isMainnet?: boolean
   setShow?: React.Dispatch<React.SetStateAction<boolean>>
 }
 
@@ -18,6 +19,7 @@ export const TxInfo = ({
   errorMessage,
   status,
   show,
+  isMainnet,
   setShow
 }: ITxInfoProps) => {
   return (
@@ -110,7 +112,9 @@ export const TxInfo = ({
                       ) : (
                         <a
                           className="text-xs sm:text-sm text-gray-400 hover:text-gray-600 underline"
-                          href={'https://flowscan.org/transaction/' + id}
+                          href={`https://${
+                            isMainnet ? '' : 'testnet.'
+                          }flowscan.org/transaction/${id}`}
                         >
                           TX:{id?.slice(0, 24)}...
                         </a>

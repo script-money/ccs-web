@@ -1,7 +1,13 @@
-import React, { useEffect, useReducer, useContext, createContext } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useReducer,
+  useContext,
+  createContext
+} from 'react'
 import { TxInfo } from '../components/TxInfo'
 import usePrevious from '../hooks/use-previous.hook'
-
+import * as fcl from '@onflow/fcl'
 import {
   txReducer,
   initialTxState,
@@ -10,6 +16,7 @@ import {
   ActionType
 } from '../reducer/txReducer'
 import { TxDetail } from '../components/TxDetail'
+import { useMount } from 'ahooks'
 
 export const TxContext = createContext<{
   state: TxState
@@ -25,8 +32,15 @@ export default function TxProvider({
   children: React.ReactNode
 }) {
   const [state, dispatch] = useReducer(txReducer, initialTxState)
+  const [isMainnet, setIsMainnet] = useState<boolean>(false)
 
   const previousStatus = usePrevious(state.txStatusType)
+
+  useMount(async () => {
+    const result = await fcl.config().get('network.mainnet', false)
+    console.log('is mainnet:', result)
+    setIsMainnet(result)
+  })
 
   useEffect(() => {
     let timer: any
@@ -50,6 +64,7 @@ export default function TxProvider({
         errorMessage={state.errorMessage}
         status={state.txStatusType}
         show={state.txStatusType !== 'NONE' && state.txStatusType !== undefined}
+        isMainnet={isMainnet}
         setShow={() => dispatch({ type: ActionType.Reset })}
       ></TxInfo>
       {state.txStatusType === 'TIP' ? (
@@ -57,6 +72,7 @@ export default function TxProvider({
           id={state.id}
           status={'SUCCESS'}
           notification={state.notification!}
+          isMainnet={isMainnet}
           onConfirm={() => {
             if (state.toHome) {
               window.location.href = '/'

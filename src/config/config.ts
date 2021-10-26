@@ -1,7 +1,7 @@
 import { config } from '@onflow/fcl'
 
 config({
-  env: 'local',
+  env: import.meta.env.MODE,
   'accessNode.api': import.meta.env.VITE_FLOW_HTTP_URL,
   'discovery.wallet': import.meta.env.VITE_WALLET_DISCOVERY,
   '0xFungibleToken': import.meta.env.VITE_FLOW_FUNGIBLETOKEN,
@@ -9,7 +9,8 @@ config({
   '0xCCSToken': import.meta.env.VITE_PROJECT_CCSTOKEN,
   '0xBallotContract': import.meta.env.VITE_PROJECT_BALLOTCONTRACT,
   '0xActivityContract': import.meta.env.VITE_PROJECT_ACTIVITYCONTRACT,
-  '0xMemorials': import.meta.env.VITE_PROJECT_MEMORIALS
+  '0xMemorials': import.meta.env.VITE_PROJECT_MEMORIALS,
+  'network.mainnet': import.meta.env.VITE_IS_MAINNET
 })
 
 export const BASE_URL = 'http://localhost:7005/api'

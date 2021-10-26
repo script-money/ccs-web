@@ -5,6 +5,7 @@
   },
   "scripts": {
     "dev": "vite",
+    "testnet": "vite --mode testnet",
     "build": "tsc && vite build && yarn cp-libs",
     "cp-libs": "cp ./browserified-libs/browserified-libs.js ./dist/",
     "serve": "vite preview",

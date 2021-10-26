@@ -8,6 +8,7 @@ export interface ITxDetailProps {
   id?: string
   status: txStatus
   notification?: string
+  isMainnet: boolean
   onConfirm?: () => void
 }
 
@@ -15,6 +16,7 @@ export const TxDetail = ({
   id,
   status,
   notification,
+  isMainnet,
   onConfirm
 }: ITxDetailProps) => {
   const [open, setOpen] = useState(true)
@@ -97,7 +99,9 @@ export const TxDetail = ({
                     ) : (
                       <a
                         className="text-gray-400 hover:text-gray-600 underline"
-                        href={'https://flowscan.org/transaction/' + id}
+                        href={`https://${
+                          isMainnet ? '' : 'testnet.'
+                        }flowscan.org/transaction/${id}`}
                       >
                         TX:{id?.slice(0, 32)}...
                       </a>
