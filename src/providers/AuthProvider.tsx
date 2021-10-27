@@ -46,7 +46,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       throwOnError: true,
       onSuccess: (data: IResponse) => {
         if (data.errorMessage) {
-          alert(data.errorMessage)
+          alert(
+            data.errorMessage ??
+              'something wrong, please wait 1 minutes and try again'
+          )
         } else {
           alert('get 1000 ccsToken success')
         }

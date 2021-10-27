@@ -214,7 +214,7 @@ export const ActivityList = ({
 
   if (isLoading) {
     return (
-      <div className="px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
         {Filter}
         {Loading}
       </div>
@@ -223,7 +223,7 @@ export const ActivityList = ({
 
   if (activities.length === 0) {
     return (
-      <div className="px-4 sm:px-6 lg:px-8">
+      <div className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
         {Filter}
         {NoActivities}
       </div>
@@ -231,7 +231,7 @@ export const ActivityList = ({
   }
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
+    <div className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
       {Filter}
       {InfoList}
       {Pagination}
