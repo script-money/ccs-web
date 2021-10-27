@@ -122,7 +122,7 @@ export const TxInfo = ({
                     </div>
                     <div className="flex flex-shrink-0 ml-4">
                       <button
-                        className="inline-flex text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                        className="inline-flex text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
                         onClick={() => {
                           setShow!(false)
                         }}

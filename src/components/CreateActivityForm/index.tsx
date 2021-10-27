@@ -166,7 +166,7 @@ export const CreateActivityForm = ({
                       void 0
                     }}
                     onClick={() => toggle(category)}
-                    className="w-4 h-4 text-indigo-600 rounded border-gray-300 focus:ring-indigo-500"
+                    className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                   />
                 </div>
                 <div className="ml-3 text-sm">

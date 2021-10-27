@@ -49,7 +49,7 @@ export const Modals = ({ onSubmit }: IModalsProps) => {
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
                   type="button"
-                  className="text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none"
+                  className="text-gray-400 hover:text-gray-500 bg-white rounded-md focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
                   onClick={() => setOpen(false)}
                 >
                   <span className="sr-only">Close</span>

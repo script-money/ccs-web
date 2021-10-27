@@ -5,17 +5,11 @@ import reactRefresh from '@vitejs/plugin-react-refresh'
 export default defineConfig({
   resolve: {
     alias: {
-      // process: 'process/browser',
-      // stream: 'stream-browserify',
       stream: 'vite-compatible-readable-stream',
       zlib: 'browserify-zlib',
       util: 'util',
-      // http: 'http-browserify',
       http: 'stream-http',
       https: 'https-browserify'
-      // grpc: '@improbable-eng/grpc-web',
-      // 'node-fetch': 'isomorphic-fetch',
-      // 'process.env': 'import.meta.env'
     }
   },
   plugins: [
@@ -25,5 +19,9 @@ export default defineConfig({
       // Only .tsx files
       include: '**/*.tsx'
     })
-  ]
+  ],
+  build: {
+    cssCodeSplit: false,
+    chunkSizeWarningLimit: 1024 * 1024
+  }
 })

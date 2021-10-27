@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "testnet": "vite --mode testnet",
-    "build": "tsc && vite build && yarn cp-libs",
-    "cp-libs": "cp ./browserified-libs/browserified-libs.js ./dist/",
+    "build": "tsc && NODE_ENV=production vite --mode testnet build && yarn cp-libs",
+    "cp-libs": "cd browserified-libs && yarn && npx browserify index.js > browserified-libs.js && mv browserified-libs.js ../dist/",
     "serve": "vite preview",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",

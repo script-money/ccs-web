@@ -120,7 +120,7 @@ export const UserDetail = ({
                   <div>
                     <button
                       type="button"
-                      className="inline-flex items-center py-1.5 px-2.5 text-xs font-medium text-white bg-discord hover:bg-indigo-700 rounded border border-transparent shadow-sm focus:outline-none"
+                      className="inline-flex items-center py-1.5 px-2.5 text-xs font-medium text-white bg-discord hover:bg-blue-700 rounded border border-transparent shadow-sm focus:outline-none"
                       onClick={() => onLinkClick!()}
                     >
                       Link Discord
@@ -131,7 +131,7 @@ export const UserDetail = ({
                     <p className="userdetail-info">{userName}</p>
                     <button
                       type="button"
-                      className="items-center px-1 mx-1 ml-auto h-10 text-xs font-medium text-white bg-discord hover:bg-indigo-700 rounded border border-transparent shadow-sm focus:outline-none w-18"
+                      className="items-center px-1 mx-1 ml-auto h-10 text-xs font-medium text-white bg-discord hover:bg-blue-700 rounded border border-transparent shadow-sm focus:outline-none w-18"
                       onClick={() => onLinkClick!()}
                     >
                       ReLink
@@ -152,7 +152,7 @@ export const UserDetail = ({
                   </div>
                 </div>
                 <a
-                  className="text-xs text-blue-600 visited:text-purple-600 hover:text-blue-800 underline break-all"
+                  className="text-xs text-blue-600 hover:text-blue-800 underline break-all"
                   onClick={() => {
                     onViewMemorials!()
                     setOpen!(false)

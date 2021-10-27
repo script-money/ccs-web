@@ -188,7 +188,7 @@ const ActivityDetail = ({
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
                         <div className="pr-4">
-                          <a className="text-blue-600 visited:text-purple-600 hover:text-blue-800 underline break-all">
+                          <a className="text-blue-600 hover:text-blue-800 underline break-all">
                             {activity.source}
                           </a>
                         </div>
