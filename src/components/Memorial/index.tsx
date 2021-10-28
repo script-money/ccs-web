@@ -1,5 +1,6 @@
 import moment from 'moment'
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import { MemorialsData } from '../../interface/memorials'
 
 interface MemorialProp {
@@ -7,6 +8,8 @@ interface MemorialProp {
 }
 
 export const Memorial = ({ data }: MemorialProp) => {
+  const history = useHistory()
+
   return (
     <div className="">
       {!data.isPositive ? (
@@ -38,7 +41,9 @@ export const Memorial = ({ data }: MemorialProp) => {
         <div className="flex flex-col max-w-max">
           <a
             className="w-60 h-60 shadow"
-            href={'/activity/' + data.activity.id}
+            onClick={() => {
+              history.push('/activity/' + data.activity.id)
+            }}
           >
             <div className="overflow-hidden p-2 text-xs whitespace-nowrap">
               <p>Title: {data.activity.title}</p>
