@@ -154,34 +154,34 @@ export const CreateActivityForm = ({
             categories
           </label>
           <div className="grid grid-cols-3 gap-4 mt-3">
-            {categoriesToSelect.map(category => (
-              <div key={category.id} className="flex relative items-start">
-                <div className="flex items-center h-5">
-                  <input
-                    id={category.type}
-                    name={category.type}
-                    type="checkbox"
-                    checked={isSelected(category)}
-                    onChange={() => {
-                      void 0
-                    }}
-                    onClick={() => toggle(category)}
-                    className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
-                  />
+            {categoriesToSelect.map(category => {
+              const category_text = `text-${category.type}-500`
+              return (
+                <div key={category.id} className="flex relative items-start">
+                  <div className="flex items-center h-5">
+                    <input
+                      id={category.type}
+                      name={category.type}
+                      type="checkbox"
+                      checked={isSelected(category)}
+                      onChange={() => {
+                        void 0
+                      }}
+                      onClick={() => toggle(category)}
+                      className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label
+                      htmlFor={category.type}
+                      className={classNames('font-medium', category_text)}
+                    >
+                      {category.type}
+                    </label>
+                  </div>
                 </div>
-                <div className="ml-3 text-sm">
-                  <label
-                    htmlFor={category.type}
-                    className={classNames(
-                      'font-medium',
-                      `text-${category.type}-500`
-                    )}
-                  >
-                    {category.type}
-                  </label>
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         </div>
 

@@ -58,33 +58,36 @@ export const ActivityList = ({
           leaveTo="opacity-0"
         >
           <Listbox.Options className="overflow-auto absolute z-10 py-1 mt-1 w-full max-h-60 text-base sm:text-sm bg-white rounded-md ring-1 ring-black ring-opacity-5 shadow-lg focus:outline-none">
-            {categories.map(category => (
-              <Listbox.Option
-                key={category.id}
-                className={({ active }) =>
-                  classNames(
-                    active
-                      ? `text-white bg-${category.type}-100`
-                      : 'text-gray-900',
-                    `cursor-default select-none relative py-2 px-2 text-${category.type}-800`
-                  )
-                }
-                value={category}
-              >
-                {({ selected }) => (
-                  <>
-                    <span
-                      className={classNames(
-                        selected ? 'font-semibold' : 'font-normal',
-                        'block truncate'
-                      )}
-                    >
-                      {category.type}
-                    </span>
-                  </>
-                )}
-              </Listbox.Option>
-            ))}
+            {categories.map(category => {
+              const categoryBg = `bg-${category.type}-100`
+              const categoryText = `text-${category.type}-800`
+              return (
+                <Listbox.Option
+                  key={category.id}
+                  className={({ active }) =>
+                    classNames(
+                      active ? categoryBg : 'text-gray-900',
+                      'cursor-default select-none relative py-2 px-2',
+                      categoryText
+                    )
+                  }
+                  value={category}
+                >
+                  {({ selected }) => (
+                    <>
+                      <span
+                        className={classNames(
+                          selected ? 'font-semibold' : 'font-normal',
+                          'block truncate'
+                        )}
+                      >
+                        {category.type}
+                      </span>
+                    </>
+                  )}
+                </Listbox.Option>
+              )
+            })}
           </Listbox.Options>
         </Transition>
       </div>
