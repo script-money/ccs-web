@@ -13,4 +13,4 @@ config({
   'network.mainnet': import.meta.env.VITE_IS_MAINNET
 })
 
-export const BASE_URL = 'http://localhost:7005/api'
+export const BASE_URL = import.meta.env.BASE_URL
