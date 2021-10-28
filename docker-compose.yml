@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    privileged: true
+    volumes:
+      - ./dist:/usr/share/nginx/html
+      - ./nginx.conf:/etc/nginx/conf.d/ccs.conf
+    ports:
+      - '80:8000'
+    extra_hosts:
+      - 'host.docker.internal:host-gateway'
+    container_name: web
