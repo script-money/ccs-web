@@ -96,7 +96,7 @@ export const PageHeadings = ({
                     />
                   </svg>
                 )}
-                <span>Faucet</span>
+                <span>Wallet</span>
               </div>
             ) : (
               <></>
@@ -106,7 +106,7 @@ export const PageHeadings = ({
                 className="inline-block py-2 px-2 sm:px-4 mr-1 text-xs text-white bg-main hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"
                 onClick={() => onSetUpClick!()}
               >
-                SetUp
+                Logout
               </a>
             ) : (
               <></>
