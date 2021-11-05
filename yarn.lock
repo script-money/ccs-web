@@ -2566,14 +2566,6 @@
   resolved "https://registry.nlark.com/@types/history/download/@types/history-4.7.9.tgz#1cfb6d60ef3822c589f18e70f8b12f9a28ce8724"
   integrity sha1-HPttYO84IsWJ8Y5w+LEvmijOhyQ=
 
-"@types/hookrouter@^2.2.5":
-  version "2.2.5"
-  resolved "https://registry.nlark.com/@types/hookrouter/download/@types/hookrouter-2.2.5.tgz#f04dafd1e073da01ba85f79100c41de530969cea"
-  integrity sha1-8E2v0eBz2gG6hfeRAMQd5TCWnOo=
-  dependencies:
-    "@types/react" "*"
-    csstype "^3.0.2"
-
 "@types/html-minifier-terser@^5.0.0":
   version "5.1.2"
   resolved "https://registry.nlark.com/@types/html-minifier-terser/download/@types/html-minifier-terser-5.1.2.tgz"
@@ -6585,11 +6577,6 @@ hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.3.0:
   integrity sha1-7OCsr3HWLClpwuxZ/v9CpLGoW0U=
   dependencies:
     react-is "^16.7.0"
-
-hookrouter@^1.2.5:
-  version "1.2.5"
-  resolved "https://registry.nlark.com/hookrouter/download/hookrouter-1.2.5.tgz#ea1b88fd9f6a48816b17145bfb2b38dfc93df21e"
-  integrity sha1-6huI/Z9qSIFrFxRb+ys438k98h4=
 
 hosted-git-info@^2.1.4:
   version "2.8.9"
