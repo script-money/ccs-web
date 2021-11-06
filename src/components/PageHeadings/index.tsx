@@ -31,26 +31,32 @@ export const PageHeadings = ({
       <nav className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
         <div className="flex py-3 w-full border-b">
           {/* uncomment below line in storybook */}
-          {/* <MemoryRouter> */}
-          {/* logo */}
-          <div className="flex items-center">
-            <Link to="/">
-              <img className="w-8 h-8" src={logo} alt="" />
-            </Link>
-          </div>
-          {/* createActivity */}
-          {isSetup ? (
-            <Link
-              to="/create-activity"
-              className="inline-block py-2 px-2 ml-2 w-14 text-xs text-main whitespace-nowrap hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none"
-            >
-              Create
-            </Link>
-          ) : (
-            <></>
-          )}
-          {/* uncomment below line in storybook */}
-          {/* </MemoryRouter> */}
+          <MemoryRouter>
+            {/* logo */}
+            <div className="flex items-center">
+              <Link to="/">
+                <img className="w-8 h-8" src={logo} alt="" />
+              </Link>
+              <Link
+                to="/"
+                className="hidden lg:inline-block py-2 px-2 ml-4 w-14 text-xs text-main whitespace-nowrap hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none"
+              >
+                Home
+              </Link>
+            </div>
+            {/* createActivity */}
+            {isSetup ? (
+              <Link
+                to="/create-activity"
+                className="inline-block py-2 px-2 ml-2 w-14 text-xs text-main whitespace-nowrap hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none"
+              >
+                Create
+              </Link>
+            ) : (
+              <></>
+            )}
+            {/* uncomment below line in storybook */}
+          </MemoryRouter>
           {/* tokens */}
           <div className="flex flex-shrink-0 self-center ml-auto">
             {/* faucet */}
