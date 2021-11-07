@@ -235,7 +235,7 @@ export const UserDetail = ({
               </div>
 
               {/* logout */}
-              <div className="sm:flex sm:flex-row-reverse mt-5 sm:mt-4">
+              <div className="sm:flex sm:flex-row-reverse mt-16 sm:mt-16">
                 <button
                   type="button"
                   className="inline-flex justify-center py-2 px-4 sm:ml-3 w-full sm:w-auto text-base sm:text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"
