@@ -39,7 +39,7 @@ export default function TxProvider({
   useMount(async () => {
     const result = await fcl.config().get('network.mainnet', false)
     console.log('is mainnet:', result)
-    setIsMainnet(result)
+    setIsMainnet(result === 'false' ? false : true)
   })
 
   useEffect(() => {

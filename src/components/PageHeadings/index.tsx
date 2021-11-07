@@ -132,9 +132,10 @@ export const PageHeadings = ({
                   className="overflow-hidden"
                   onClick={() => onUserDetailClick!()}
                 >
-                  {address!.substring(0, 6) +
+                  {/* {address!.substring(0, 6) +
                     '......' +
-                    address!.substring(14, 18)}
+                    address!.substring(14, 18)} */}
+                  {isSetup ? 'Wallet' : 'Logout'}
                 </a>
               </div>
             )}
