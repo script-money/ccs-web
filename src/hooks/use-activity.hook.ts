@@ -8,6 +8,7 @@ import useCCSToken from './use-ccs-token.hook'
 import { useAuth } from '../providers/AuthProvider'
 import { useTx } from '../providers/TxProvider'
 import { ActionType } from '../reducer/txReducer'
+import useRemoteAuthz from './use-remote-authz.hook'
 
 export default function useActivity() {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -18,6 +19,7 @@ export default function useActivity() {
 
   const { user } = useAuth()
   const { getCCSBalance } = useCCSToken(user!)
+  const [remoteAuthz, errorMessage] = useRemoteAuthz()
 
   const { state: txState, dispatch: txDispatch } = useTx()
 
@@ -49,7 +51,8 @@ export default function useActivity() {
         args: (arg: any, t: any) => [
           arg(activityId, t.UInt64),
           arg(isUpVote, t.Bool)
-        ]
+        ],
+        payer: remoteAuthz
       })
       await tx(transaction).onceSealed()
       txDispatch({
@@ -70,7 +73,7 @@ export default function useActivity() {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: err as string
+          error: errorMessage!
         }
       })
     }
@@ -85,7 +88,8 @@ export default function useActivity() {
         args: (arg: any, t: any) => [
           arg(title, t.String),
           arg(metadata, t.String)
-        ]
+        ],
+        payer: remoteAuthz
       })
       await tx(transaction).onceSealed()
       txDispatch({
@@ -104,7 +108,7 @@ export default function useActivity() {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: err as string
+          error: errorMessage!
         }
       })
     }

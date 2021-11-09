@@ -1,13 +1,13 @@
 import React, { useReducer } from 'react'
 import { defaultReducer } from '../reducer/defaultReducer'
-import { query, mutate, tx, currentUser } from '@onflow/fcl'
+import { query, mutate, tx } from '@onflow/fcl'
 import { SessionUser } from './use-current-user.hook'
 import { IS_ACCOUNT_INITIALIZED } from '../flow/is_account_initialized.script'
 import { INITIALIZED_ACCOUNT } from '../flow/initialized-account.tx'
 import { useLocalStorageState } from 'ahooks'
 import { useTx } from '../providers/TxProvider'
 import { ActionType } from '../reducer/txReducer'
-import { formatError } from '../utils'
+import useRemoteAuthz from './use-remote-authz.hook'
 
 export default function useAccount(user: SessionUser) {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -16,7 +16,9 @@ export default function useAccount(user: SessionUser) {
     data: null
   })
 
-  const { state: txState, dispatch: txDispatch } = useTx()
+  const [remoteAuthz, errorMessage] = useRemoteAuthz()
+
+  const { dispatch: txDispatch } = useTx()
 
   const [accountInitStatus, setAccountInitStatus] = useLocalStorageState<{
     [address: string]: boolean
@@ -54,7 +56,8 @@ export default function useAccount(user: SessionUser) {
     try {
       const transaction = await mutate({
         cadence: INITIALIZED_ACCOUNT,
-        limit: 100
+        limit: 100,
+        payer: remoteAuthz
       })
       await tx(transaction).onceSealed()
       const newStorageUsers = { ...accountInitStatus, [user!.addr!]: true }
@@ -68,7 +71,7 @@ export default function useAccount(user: SessionUser) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: err as string
+          error: errorMessage!
         }
       })
     }

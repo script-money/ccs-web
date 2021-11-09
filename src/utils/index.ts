@@ -3,8 +3,12 @@ export function classNames(...classes: string[]) {
 }
 
 export function formatError(errorMessage: string): string {
+  if (errorMessage === undefined) {
+    return 'unknow error, please try again'
+  }
   try {
-    return errorMessage.split('\n')[1]
+    const splited = errorMessage.split('\n')[1]
+    return splited ?? errorMessage
   } catch (error) {
     return errorMessage
   }

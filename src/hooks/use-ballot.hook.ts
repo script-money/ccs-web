@@ -6,6 +6,7 @@ import { GET_HODINGS } from '../flow/get-holdings.script'
 import { BUY_BALLOTS } from '../flow/buy-ballots.tx'
 import { useTx } from '../providers/TxProvider'
 import { ActionType } from '../reducer/txReducer'
+import useRemoteAuthz from './use-remote-authz.hook'
 
 export default function useBallot(user: SessionUser | undefined) {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -14,17 +15,9 @@ export default function useBallot(user: SessionUser | undefined) {
     data: null
   })
 
-  const { state: txState, dispatch: txDispatch } = useTx()
+  const [remoteAuthz, errorMessage] = useRemoteAuthz()
 
-  // useEffect(() => {
-  //   if (txState.txStatusType === 'PROCESSING')
-  //     console.log('txState useBallot loading')
-  //   if (txState.txStatusType === 'ERROR')
-  //     console.log('txState useBallot error', txState.errorMessage)
-  //   if (txState.txStatusType === 'SUCCESS')
-  //     console.log('txState useBallot success', txState.id)
-  //   if (txState.txStatusType === 'NONE') console.log('txState useBallot reset')
-  // }, [txState.isLoading, txState.isError])
+  const { dispatch: txDispatch } = useTx()
 
   const getHodings = async () => {
     dispatch({ type: 'PROCESSING' })
@@ -46,7 +39,8 @@ export default function useBallot(user: SessionUser | undefined) {
       const transaction = await mutate({
         cadence: BUY_BALLOTS,
         limit: 9999,
-        args: (arg: any, t: any) => [arg(count, t.Int)]
+        args: (arg: any, t: any) => [arg(count, t.Int)],
+        payer: remoteAuthz
       })
       await tx(transaction).onceSealed()
       txDispatch({
@@ -57,7 +51,7 @@ export default function useBallot(user: SessionUser | undefined) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: err as string
+          error: errorMessage!
         }
       })
     }
