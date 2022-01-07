@@ -1,5 +1,5 @@
 import { useEffect, useReducer } from 'react'
-import { query, mutate, tx } from '@onflow/fcl'
+import { query, mutate, tx, currentUser } from '@onflow/fcl'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { GET_CREATE_CONSUMPTION } from '../flow/get_create_consumption.script'
 import { VOTE } from '../flow/vote.tx'
@@ -9,6 +9,7 @@ import { useAuth } from '../providers/AuthProvider'
 import { useTx } from '../providers/TxProvider'
 import { ActionType } from '../reducer/txReducer'
 import useRemoteAuthz from './use-remote-authz.hook'
+import { compositeSignature } from '../interface/flow'
 
 export default function useActivity() {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -114,10 +115,22 @@ export default function useActivity() {
     }
   }
 
+  const updateActivitySign = async (metadata: string) => {
+    try {
+      const MSG = Buffer.from(metadata).toString('hex')
+      const signatures: [compositeSignature] =
+        await currentUser().signUserMessage(MSG)
+      return { message: metadata, signature: signatures }
+    } catch (error) {
+      console.warn('updateActivitySign', error)
+    }
+  }
+
   return {
     ...state,
     getConsumption,
     vote,
-    createActivity
+    createActivity,
+    updateActivitySign
   }
 }

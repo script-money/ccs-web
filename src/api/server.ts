@@ -6,6 +6,7 @@ import {
   IGetActivitiesResponse,
   IGetActivityResponse
 } from '../interface/activity'
+import { compositeSignature } from '../interface/flow'
 import { IGetMemorialsResponse } from '../interface/memorials'
 import { IGetUserResponse } from '../interface/user'
 import { IResponse } from '../interface/util'
@@ -61,6 +62,19 @@ export const getMemorials = async (
       activityId,
       userAddress
     }
+  })
+  return result.data
+}
+
+export const updateActivity = async (
+  id: number,
+  message: string,
+  compositeSignatures: compositeSignature[]
+) => {
+  const result = await axios.put(`${BASE_URL}/activity`, {
+    id,
+    message,
+    compositeSignatures
   })
   return result.data
 }

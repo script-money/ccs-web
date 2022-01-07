@@ -1,6 +1,7 @@
 import React from 'react'
 import { ActivityDetailProps } from '../../interface/activity'
 import moment from 'moment'
+import { Link, MemoryRouter } from 'react-router-dom'
 
 const ActivityDetail = ({
   activity,
@@ -15,7 +16,7 @@ const ActivityDetail = ({
         <div className="md:flex md:justify-between md:items-center px-4 sm:px-6 lg:px-8 mx-auto md:space-x-5 max-w-3xl lg:max-w-7xl">
           {/* infomation */}
           <div className="flex flex-col flex-grow">
-            {/* title+id */}
+            {/* title+id+edit */}
             <div className="flex flex-wrap items-center">
               <div className="inline-flex space-x-1">
                 <span className="text-xl sm:text-2xl lg:text-3xl font-normal">
@@ -24,6 +25,36 @@ const ActivityDetail = ({
                 <span className="text-xl sm:text-2xl lg:text-3xl font-light text-gray-500">
                   #{activity.id}
                 </span>
+                {currentUserAddr === activity.creatorAddr ? (
+                  <>
+                    {/* uncomment below line in storybook */}
+                    {/* <MemoryRouter> */}
+                    <Link
+                      className="flex-shrink-0 self-center flex-grow-1"
+                      to={`/update-activity/${activity.id}`}
+                      rel="noopener noreferrer"
+                    >
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="w-8 h-8"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                      >
+                        <path
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={2}
+                          d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                        />
+                      </svg>
+                    </Link>
+                    {/* uncomment below line in storybook */}
+                    {/* </MemoryRouter> */}
+                  </>
+                ) : (
+                  <></>
+                )}
               </div>
             </div>
             <div className="flex flex-wrap items-center">

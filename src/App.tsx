@@ -4,10 +4,13 @@ import { Loading } from './components/Loading'
 const Providers = React.lazy(() => import('./providers/Providers.comp'))
 const ActivityCluster = React.lazy(() => import('./clusters/activity.cluster'))
 const CreateActivityCluster = React.lazy(
-  () => import('./clusters/create.cluster')
+  () => import('./clusters/activityCreate.cluster')
 )
 const ActivityDetailCluster = React.lazy(
   () => import('./clusters/activityDetail.cluster')
+)
+const UpdateActivityCluster = React.lazy(
+  () => import('./clusters/activityUpdate.cluster')
 )
 const MemorialsCluster = React.lazy(
   () => import('./clusters/memorials.cluster')
@@ -25,6 +28,9 @@ function App() {
             </Route>
             <Route path="/activity/:id">
               <ActivityDetailCluster />
+            </Route>
+            <Route path="/update-activity/:id">
+              <UpdateActivityCluster />
             </Route>
             <Route path="/momerials">
               <MemorialsCluster />

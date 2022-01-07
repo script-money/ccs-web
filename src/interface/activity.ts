@@ -44,7 +44,7 @@ export interface ActivityData {
   createdAt: moment.Moment | string
   updatedAt: moment.Moment | string
   startDate: moment.Moment | string
-  endDate: moment.Moment | string
+  endDate: moment.Moment | string | null
   metadata: {
     source: string | null
     content: string | null
