@@ -32,7 +32,7 @@ export default function useRemoteAuthz(): [
       body: JSON.stringify(signable)
     }),
     {
-      ready: !!resolveAccountRequest.data,
+      manual: true,
       onError: error => {
         setErrorMessage(error.message + ' /sign')
       }
@@ -44,9 +44,9 @@ export default function useRemoteAuthz(): [
 
     return {
       ...resolvedAccount,
-      signingFunction: signatureFromServerRequest.run
+      signingFunction: (signable: any) =>
+        signatureFromServerRequest.run(signable)
     }
   }
-
   return [remoteAuthz, errorMessage]
 }
