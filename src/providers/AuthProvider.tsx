@@ -136,7 +136,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           />
           <UserDetail
             address={address!}
-            userName={userName === 'null' ? null : userName}
+            userName={
+              userName === 'null' || userName === undefined ? null : userName
+            }
             ballotAmount={ballotsAmount}
             ballotPrice={ballotPrice}
             votingPower={votingPower}

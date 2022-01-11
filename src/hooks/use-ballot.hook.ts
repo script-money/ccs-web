@@ -40,7 +40,7 @@ export default function useBallot(user: SessionUser | undefined) {
         cadence: BUY_BALLOTS,
         limit: 9999,
         args: (arg: any, t: any) => [arg(count, t.Int)],
-        payer: remoteAuthz
+        payer: import.meta.env.MODE === 'development' ? undefined : remoteAuthz
       })
       await tx(transaction).onceSealed()
       txDispatch({

@@ -53,7 +53,7 @@ export default function useActivity() {
           arg(activityId, t.UInt64),
           arg(isUpVote, t.Bool)
         ],
-        payer: remoteAuthz
+        payer: import.meta.env.MODE === 'development' ? undefined : remoteAuthz
       })
       await tx(transaction).onceSealed()
       txDispatch({
@@ -90,7 +90,7 @@ export default function useActivity() {
           arg(title, t.String),
           arg(metadata, t.String)
         ],
-        payer: remoteAuthz
+        payer: import.meta.env.MODE === 'development' ? undefined : remoteAuthz
       })
       await tx(transaction).onceSealed()
       txDispatch({
