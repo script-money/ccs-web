@@ -83,6 +83,7 @@ export const UpdateActivityForm = ({
                 onChange={setStartDate}
                 value={startDate}
                 calendarIcon={null}
+                clearIcon={<div></div>}
                 format={'y-MM-dd'}
                 name="startDate"
               />
@@ -156,6 +157,8 @@ export const UpdateActivityForm = ({
                   new Date(activity.endDate as string).valueOf()
                     ? undefined
                     : endDate
+              } else if (endDate === null) {
+                endDateToSubmit = null
               }
 
               if (
