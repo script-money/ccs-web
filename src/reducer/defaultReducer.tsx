@@ -1,7 +1,7 @@
-export type txStatus = 'PROCESSING' | 'SUCCESS' | 'ERROR'
+export type defaultStatus = 'PROCESSING' | 'SUCCESS' | 'ERROR'
 
 type Action = {
-  type: txStatus
+  type: defaultStatus
   payload?: any
 }
 

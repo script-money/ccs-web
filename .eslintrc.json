@@ -38,5 +38,6 @@
     "@typescript-eslint/no-non-null-assertion": "off",
     "react/prop-types": "off",
     "tailwindcss/no-custom-classname": "off"
-  }
+  },
+  "ignorePatterns": ["dist/*"]
 }

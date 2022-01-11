@@ -1,12 +1,12 @@
 import React from 'react'
-import { txStatus } from '../../reducer/defaultReducer'
+import { defaultStatus } from '../../reducer/defaultReducer'
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { CheckIcon, ExclamationIcon } from '@heroicons/react/outline'
 
 export interface ITxDetailProps {
   id?: string
-  status: txStatus
+  status: defaultStatus
   notification?: string
   isMainnet: boolean
   onConfirm?: () => void

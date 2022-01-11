@@ -36,9 +36,7 @@ function App() {
               <MemorialsCluster />
             </Route>
 
-            <Route exact path="/">
-              <ActivityCluster />
-            </Route>
+            <Route exact path="/" component={ActivityCluster}></Route>
 
             <Route path="/404" component={NotFound} />
             <Redirect to="/404" />

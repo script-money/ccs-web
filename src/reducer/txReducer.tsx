@@ -1,4 +1,3 @@
-import React from 'react'
 import { formatError } from '../utils'
 
 export enum ActionType {

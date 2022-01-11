@@ -1,17 +1,35 @@
 import { useRequest } from 'ahooks'
-import { getActivityList } from '../api/server'
+import { getActivityList, updateUser } from '../api/server'
 import { ActivityList } from '../components/ActivityList'
-import React, { useState } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { categories, ICategoryType } from '../interface/activity'
 import { useAuth } from '../providers/AuthProvider'
+import { useHistory } from 'react-router-dom'
+import { IResponse } from '../interface/util'
+import {
+  alertReducer,
+  AlertType,
+  initialAlertState
+} from '../reducer/alertReducer'
+import { Alerts } from '../components/Alerts'
+interface ILocation {
+  hash: string
+  pathname: string
+  search: string
+  state: undefined
+}
 
-const ActivityCluster = () => {
+const ActivityCluster = ({ location }: { location: ILocation }) => {
   const { user } = useAuth()
   const [canVoteState, setCanVoteState] = useState<boolean>()
   const [canJoinState, setCanJoinState] = useState<boolean>()
   const [selectedCategory, setSelectedCategory] = useState<ICategoryType>(
     categories[0] as ICategoryType
   )
+  const [state, dispatch] = useReducer(alertReducer, initialAlertState)
+
+  const history = useHistory()
+
   const { data, loading, pagination } = useRequest(
     ({ current, pageSize }) =>
       getActivityList(
@@ -32,19 +50,70 @@ const ActivityCluster = () => {
     }
   )
 
+  const { data: updateResponse, run: runUpdateUser } = useRequest<IResponse>(
+    (code, state) => updateUser(code, state),
+    {
+      manual: true
+    }
+  )
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search)
+    const code = params.get('code')
+    const state = params.get('state')
+    if (code && state) {
+      runUpdateUser(code, state)
+      history.push('/')
+    }
+  }, [])
+
+  useEffect(() => {
+    if (updateResponse !== undefined) {
+      let timer: any = null
+      if (updateResponse?.success) {
+        dispatch({
+          alertType: AlertType.Success,
+          message: 'Link discord success'
+        })
+      } else {
+        dispatch({
+          alertType: AlertType.Error,
+          message: state.message
+        })
+      }
+
+      // close alert after 3 seconds
+      timer = setTimeout(
+        () =>
+          dispatch({
+            alertType: AlertType.None
+          }),
+        3000
+      )
+      return () => clearTimeout(timer)
+    }
+  }, [updateResponse])
+
   return (
-    <ActivityList
-      isLoading={loading ?? true}
-      activities={data === undefined ? [] : data.list}
-      total={pagination.total}
-      pageSize={10}
-      currentPage={pagination.current}
-      changeCurrent={pagination.changeCurrent}
-      changeCanVoteState={value => setCanVoteState(value)}
-      changeCanJoinState={value => setCanJoinState(value)}
-      selectedCategory={selectedCategory}
-      changeSelectType={setSelectedCategory}
-    ></ActivityList>
+    <>
+      {state.alertType !== AlertType.None ? (
+        <Alerts status={state.alertType} message={state.message}></Alerts>
+      ) : (
+        <></>
+      )}
+      <ActivityList
+        isLoading={loading ?? true}
+        activities={data === undefined ? [] : data.list}
+        total={pagination.total}
+        pageSize={10}
+        currentPage={pagination.current}
+        changeCurrent={pagination.changeCurrent}
+        changeCanVoteState={value => setCanVoteState(value)}
+        changeCanJoinState={value => setCanJoinState(value)}
+        selectedCategory={selectedCategory}
+        changeSelectType={setSelectedCategory}
+      ></ActivityList>
+    </>
   )
 }
 

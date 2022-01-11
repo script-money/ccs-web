@@ -136,7 +136,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
           />
           <UserDetail
             address={address!}
-            userName={userName ?? 'not set'}
+            userName={userName === 'null' ? null : userName}
             ballotAmount={ballotsAmount}
             ballotPrice={ballotPrice}
             votingPower={votingPower}
@@ -144,7 +144,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             open={openUserDetail}
             setOpen={(isOpen: boolean) => setOpenUserDetail(isOpen)}
             onBuyClick={handleBuyBallots}
-            onLinkClick={() => alert('coming soon')}
             onLogoutClick={() => {
               logOut()
               history.push('/')

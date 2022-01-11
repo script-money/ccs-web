@@ -5,7 +5,7 @@ import './userDetail.css'
 
 interface IUserDetailProps {
   address: string
-  userName?: string
+  userName?: string | null
   ballotAmount?: number
   votingPower?: number
   tokenAmount?: number
@@ -13,7 +13,6 @@ interface IUserDetailProps {
   open: boolean
   setOpen?: (isOpen: boolean) => void
   onBuyClick?: (amount: number) => void
-  onLinkClick?: () => void
   onLogoutClick?: () => void
   onCloseWindow?: () => void
   onViewMemorials?: () => void
@@ -21,6 +20,7 @@ interface IUserDetailProps {
 
 export const UserDetail = ({
   address,
+  userName,
   ballotAmount,
   votingPower,
   tokenAmount,
@@ -34,6 +34,14 @@ export const UserDetail = ({
 }: IUserDetailProps) => {
   // const [open, setOpen] = useState(false)
   const [ballotCount, setBallotCount] = useState(0)
+
+  const OAuthData = new URLSearchParams({
+    response_type: 'code',
+    client_id: import.meta.env.VITE_DISCORD_CLIENT_ID as string,
+    redirect_uri: `${import.meta.env.VITE_DOMAIN}`,
+    scope: ['identify'].join(' '),
+    state: address
+  })
 
   return (
     <Transition.Root show={open} as={Fragment}>
@@ -112,33 +120,37 @@ export const UserDetail = ({
                 </div>
               </div>
               {/* username */}
-              {/* <div className="userdetail-item">
+              <div className="userdetail-item">
                 <Dialog.Title className="userdetail-title">
                   User Name
                 </Dialog.Title>
-                {userName === undefined ? (
-                  <div>
+                {userName === null ? (
+                  <a
+                    href={`https://discordapp.com/oauth2/authorize?${OAuthData}`}
+                  >
                     <button
                       type="button"
                       className="inline-flex items-center py-1.5 px-2.5 text-xs font-medium text-white bg-discord hover:bg-blue-700 rounded border border-transparent shadow-sm focus:outline-none"
-                      onClick={() => onLinkClick!()}
                     >
                       Link Discord
                     </button>
-                  </div>
+                  </a>
                 ) : (
                   <div className="flex flex-shrink-0 items-baseline space-x-4">
                     <p className="userdetail-info">{userName}</p>
-                    <button
-                      type="button"
-                      className="items-center px-1 mx-1 ml-auto h-10 text-xs font-medium text-white bg-discord hover:bg-blue-700 rounded border border-transparent shadow-sm focus:outline-none w-18"
-                      onClick={() => onLinkClick!()}
+                    <a
+                      href={`https://discordapp.com/oauth2/authorize?${OAuthData}`}
                     >
-                      ReLink
-                    </button>
+                      <button
+                        type="button"
+                        className="items-center px-1 mx-1 ml-auto h-10 text-xs font-medium text-white bg-discord hover:bg-blue-700 rounded border border-transparent shadow-sm focus:outline-none w-18"
+                      >
+                        ReLink
+                      </button>
+                    </a>
                   </div>
                 )}
-              </div> */}
+              </div>
               {/* VotePower */}
               <div className="userdetail-item">
                 <Dialog.Title className="userdetail-title">

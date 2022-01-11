@@ -78,3 +78,13 @@ export const updateActivity = async (
   })
   return result.data
 }
+
+export const updateUser = async (code: string, state: string) => {
+  const result = await axios.get(`${BASE_URL}/user/update-discord`, {
+    params: {
+      code,
+      state
+    }
+  })
+  return result.data
+}
