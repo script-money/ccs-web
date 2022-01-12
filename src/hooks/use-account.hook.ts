@@ -57,7 +57,7 @@ export default function useAccount(user: SessionUser) {
       const transaction = await mutate({
         cadence: INITIALIZED_ACCOUNT,
         limit: 100,
-        payer: import.meta.env.MODE === 'development' ? undefined : remoteAuthz
+        payer: remoteAuthz
       })
       await tx(transaction).onceSealed()
       const newStorageUsers = { ...accountInitStatus, [user!.addr!]: true }
