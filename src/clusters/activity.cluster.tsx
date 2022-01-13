@@ -78,7 +78,7 @@ const ActivityCluster = ({ location }: { location: ILocation }) => {
       } else {
         dispatch({
           alertType: AlertType.Error,
-          message: state.message
+          message: updateResponse!.errorMessage!
         })
       }
 
