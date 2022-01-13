@@ -79,7 +79,8 @@ export const ActivityItem = ({ activity, onEnter }: ActivityItemProps) => {
             'L'
           )}{' '}
           ——{' '}
-          {activity.metadata.endDate === undefined
+          {activity.metadata.endDate === undefined ||
+          activity.metadata.endDate === null
             ? 'TBD'
             : moment(activity.metadata.endDate).format('L')}
         </div>
