@@ -115,6 +115,8 @@ export const TxInfo = ({
                           href={`https://${
                             isMainnet ? '' : 'testnet.'
                           }flowscan.org/transaction/${id}`}
+                          target="_blank"
+                          rel="noreferrer"
                         >
                           TX:{id?.slice(0, 24)}...
                         </a>
