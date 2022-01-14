@@ -60,14 +60,14 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     }
   )
 
-  const { error, loading, run, address, userName, discord, votingPower } =
-    useUserDetail(user!)
+  const { run, address, userName, votingPower } = useUserDetail(user!)
 
   useEffect(() => {
     if (isLogIn) {
       console.log(`checking ${user?.addr} isAccountInitialized`)
       isAccountInitialized()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogIn])
 
   useEffect(() => {
@@ -76,6 +76,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       getHodings()
       getPrice()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openUserDetail])
 
   const handleBuyBallots = async (count: number) => {

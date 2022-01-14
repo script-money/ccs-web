@@ -4,13 +4,12 @@ import useActivity from '../hooks/use-activity.hook'
 import { getActivityDetail, updateActivity } from '../api/server'
 import { useMount, useRequest } from 'ahooks'
 import { useHistory, useParams } from 'react-router-dom'
-import { GetActivityParams } from '../interface/activity'
 import '../components/ActivityList/loading.css'
 
 const UpdateActivityCluster = () => {
   const { updateActivitySign } = useActivity()
 
-  const { id } = useParams<GetActivityParams>()
+  const { id } = useParams()
   const history = useHistory()
 
   const { data, run } = useRequest(getActivityDetail, {
@@ -20,11 +19,16 @@ const UpdateActivityCluster = () => {
     loadingDelay: 300,
     onError: () => {
       history.push('/404')
+    },
+    onSuccess: res => {
+      if (!res.success) {
+        history.push('/404')
+      }
     }
   })
 
   useMount(() => {
-    run(parseInt(id))
+    run(parseInt(id!))
   })
 
   return (

@@ -1,5 +1,5 @@
-import React, { useReducer } from 'react'
 import { defaultReducer } from '../reducer/defaultReducer'
+import { useReducer } from 'react'
 import { query, mutate, tx } from '@onflow/fcl'
 import { SessionUser } from './use-current-user.hook'
 import { IS_ACCOUNT_INITIALIZED } from '../flow/is_account_initialized.script'

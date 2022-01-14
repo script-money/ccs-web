@@ -7,6 +7,6 @@ export default {
   component: Loading
 } as ComponentMeta<typeof Loading>
 
-const Template: ComponentStory<typeof Loading> = args => <Loading />
+const Template: ComponentStory<typeof Loading> = () => <Loading />
 
 export const DEFAULT = Template.bind({})

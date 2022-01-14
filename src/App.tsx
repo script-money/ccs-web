@@ -1,5 +1,10 @@
 import React, { Suspense } from 'react'
-import { Switch, Route, Redirect } from 'react-router-dom'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect
+} from 'react-router-dom'
 import { Loading } from './components/Loading'
 const Providers = React.lazy(() => import('./providers/Providers.comp'))
 const ActivityCluster = React.lazy(() => import('./clusters/activity.cluster'))
@@ -19,7 +24,7 @@ const NotFound = React.lazy(() => import('./pages/NotFound.page'))
 
 function App() {
   return (
-    <>
+    <Router>
       <Suspense fallback={<Loading></Loading>}>
         <Providers>
           <Switch>
@@ -36,14 +41,15 @@ function App() {
               <MemorialsCluster />
             </Route>
 
+            {/* @ts-ignore */}
             <Route exact path="/" component={ActivityCluster}></Route>
-
+            {/* @ts-ignore */}
             <Route path="/404" component={NotFound} />
             <Redirect to="/404" />
           </Switch>
         </Providers>
       </Suspense>
-    </>
+    </Router>
   )
 }
 

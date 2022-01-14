@@ -54,8 +54,8 @@ export const requestToken = async (addr: string): Promise<IResponse> => {
 }
 
 export const getMemorials = async (
-  activityId: number,
-  userAddress: string
+  userAddress: string,
+  activityId?: number
 ): Promise<IGetMemorialsResponse> => {
   const result = await axios.get(`${BASE_URL}/memorials`, {
     params: {

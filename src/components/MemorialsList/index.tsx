@@ -20,7 +20,7 @@ const MemorialsList = ({ data }: MemorialsListProp) => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 lg:grid-flow-col-dense gap-6 justify-items-center px-4 sm:px-6 lg:px-8 mt-4">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 justify-items-center px-4 sm:px-6 lg:px-20 mt-4">
       {data.map((memorialData, index) => {
         return <Memorial key={index} data={memorialData}></Memorial>
       })}

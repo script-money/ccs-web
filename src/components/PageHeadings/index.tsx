@@ -1,5 +1,6 @@
 import logo from '../../images/cryptochasers.png'
 import React from 'react'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Link, MemoryRouter } from 'react-router-dom'
 
 export interface IPageHeadingsProps {
@@ -17,7 +18,6 @@ export interface IPageHeadingsProps {
 
 export const PageHeadings = ({
   isLogin,
-  address,
   isSetup,
   isMainnet,
   isFaucetLoading,
@@ -127,7 +127,7 @@ export const PageHeadings = ({
                 Sign in
               </a>
             ) : (
-              <div className="inline-flex items-center py-2 px-2 sm:px-4 w-16 sm:w-auto text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm focus:outline-none">
+              <div className="inline-flex items-center py-2 px-3 sm:px-4 w-16 sm:w-auto text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm focus:outline-none">
                 <a
                   className="overflow-hidden"
                   onClick={() => onUserDetailClick!()}

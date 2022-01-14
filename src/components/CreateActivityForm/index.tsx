@@ -43,7 +43,7 @@ export const CreateActivityForm = ({
         className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-8 gap-y-3"
       >
         {/* title */}
-        <div className="sm:col-span-2">
+        <div className="col-span-2 md:col-span-1">
           <label
             htmlFor="title"
             className="block text-sm font-medium text-gray-700"
@@ -58,8 +58,9 @@ export const CreateActivityForm = ({
               id="title"
               autoComplete="off"
               value={title}
+              maxLength={32}
               onChange={e => setTitle!(e.target.value)}
-              placeholder="Example: Flow Fest mystery NFT giveaways"
+              placeholder="Example: Flow Fest mystery NFT giveaways (text max 32)"
               className="block py-3 px-4 w-full rounded-md border border-gray-300 focus:border-main focus:ring-main shadow-sm"
             />
           </div>

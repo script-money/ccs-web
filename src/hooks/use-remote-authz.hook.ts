@@ -1,5 +1,5 @@
 import { useRequest } from 'ahooks'
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BASE_URL } from '../config/config'
 import { Account } from '../interface/flow'
 

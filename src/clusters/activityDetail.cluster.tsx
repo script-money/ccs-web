@@ -4,14 +4,13 @@ import { useAuth } from '../providers/AuthProvider'
 import { getActivityDetail } from '../api/server'
 import { useMount, useRequest } from 'ahooks'
 import { useHistory, useParams } from 'react-router-dom'
-import { GetActivityParams } from '../interface/activity'
 // const ActivityDetail = React.lazy(() => import('../components/ActivityDetail'))
 import ActivityDetail from '../components/ActivityDetail'
 import '../components/ActivityList/loading.css'
 
 const ActivityDetailCluster = () => {
   const { vote } = useActivity()
-  const { id } = useParams<GetActivityParams>()
+  const { id } = useParams()
   const { user } = useAuth()
   const history = useHistory()
 
@@ -22,11 +21,16 @@ const ActivityDetailCluster = () => {
     loadingDelay: 300,
     onError: () => {
       history.push('/404')
+    },
+    onSuccess: res => {
+      if (!res.success) {
+        history.push('/404')
+      }
     }
   })
 
   useMount(() => {
-    run(parseInt(id))
+    run(parseInt(id!))
   })
 
   return (
@@ -35,8 +39,8 @@ const ActivityDetailCluster = () => {
         <ActivityDetail
           activity={data?.data}
           currentUserAddr={user === undefined ? undefined : user!.addr!}
-          onUpVote={() => vote(parseInt(id), true)}
-          onDownVote={() => vote(parseInt(id), false)}
+          onUpVote={() => vote(parseInt(id!), true)}
+          onDownVote={() => vote(parseInt(id!), false)}
         />
       ) : (
         <div className="flex overflow-hidden fixed top-0 right-0 bottom-0 left-0 z-50 flex-col justify-center items-center w-full h-scree">

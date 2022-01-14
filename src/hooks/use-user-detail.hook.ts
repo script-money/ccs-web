@@ -1,4 +1,3 @@
-import React from 'react'
 import { SessionUser } from './use-current-user.hook'
 import { useRequest } from 'ahooks'
 import { getUser } from '../api/server'

@@ -19,7 +19,7 @@ interface ILocation {
   state: undefined
 }
 
-const ActivityCluster = ({ location }: { location: ILocation }) => {
+const ActivityCluster = ({ location }: { location?: ILocation }) => {
   const { user } = useAuth()
   const [canVoteState, setCanVoteState] = useState<boolean>()
   const [canJoinState, setCanJoinState] = useState<boolean>()
@@ -58,13 +58,14 @@ const ActivityCluster = ({ location }: { location: ILocation }) => {
   )
 
   useEffect(() => {
-    const params = new URLSearchParams(location.search)
+    const params = new URLSearchParams(location!.search)
     const code = params.get('code')
     const state = params.get('state')
     if (code && state) {
       runUpdateUser(code, state)
       history.push('/')
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {

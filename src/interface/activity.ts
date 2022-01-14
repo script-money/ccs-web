@@ -5,10 +5,6 @@ export interface IGetActivitiesResponse extends IResponse {
   total: number
 }
 
-export interface GetActivityParams {
-  id: string
-}
-
 export interface IGetActivityResponse extends IResponse {
   data: ActivityData | null
   total: number

@@ -1,7 +1,9 @@
 import React from 'react'
 import { ActivityDetailProps } from '../../interface/activity'
 import moment from 'moment'
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Link, MemoryRouter } from 'react-router-dom'
+import { urlRegex } from '../../utils'
 
 const ActivityDetail = ({
   activity,
@@ -184,7 +186,7 @@ const ActivityDetail = ({
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
                         {activity.lockDate === null
-                          ? moment(activity.startDate)
+                          ? moment(activity.createdAt)
                               .add(1, 'days')
                               .startOf('hour')
                               .fromNow()
@@ -219,9 +221,19 @@ const ActivityDetail = ({
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
                         <div className="pr-4">
-                          <a className="text-blue-600 hover:text-blue-800 underline break-all">
-                            {activity.source}
-                          </a>
+                          {activity.source !== null &&
+                          urlRegex.test(activity.source) ? (
+                            <a
+                              className="text-blue-600 hover:text-blue-800 underline break-all"
+                              href={activity.source}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              {activity.source}
+                            </a>
+                          ) : (
+                            <div className="break-all">{activity.source}</div>
+                          )}
                         </div>
                       </dd>
                     </div>

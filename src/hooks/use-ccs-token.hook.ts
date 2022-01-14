@@ -1,8 +1,9 @@
-import React, { useReducer, useEffect } from 'react'
+import { useReducer } from 'react'
 import { GET_CCS_BALANCE } from '../flow/get-ccs-balance.script'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { query } from '@onflow/fcl'
 import { SessionUser } from './use-current-user.hook'
+import { useMount } from 'ahooks'
 
 export default function useCCSToken(user: SessionUser | undefined) {
   const [state, dispatch] = useReducer(defaultReducer, {
@@ -11,11 +12,11 @@ export default function useCCSToken(user: SessionUser | undefined) {
     data: null
   })
 
-  useEffect(() => {
+  useMount(() => {
     if (user !== undefined) {
       getCCSBalance()
     }
-  }, [])
+  })
 
   const getCCSBalance = async () => {
     dispatch({ type: 'PROCESSING' })

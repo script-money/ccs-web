@@ -174,6 +174,7 @@ export const ActivityList = ({
             className="inline-flex relative items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300"
             onClick={() => {
               changeCurrent!(currentPage - 1)
+              window.scrollTo({ top: 0 })
             }}
           >
             Previous
@@ -188,6 +189,7 @@ export const ActivityList = ({
             className="inline-flex relative items-center py-2 px-4 ml-auto text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300"
             onClick={() => {
               changeCurrent!(currentPage + 1)
+              window.scrollTo({ top: 0 })
             }}
           >
             Next

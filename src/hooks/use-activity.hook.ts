@@ -22,7 +22,7 @@ export default function useActivity() {
   const { getCCSBalance } = useCCSToken(user!)
   const [remoteAuthz, errorMessage] = useRemoteAuthz()
 
-  const { state: txState, dispatch: txDispatch } = useTx()
+  const { dispatch: txDispatch } = useTx()
 
   useEffect(() => {
     getConsumption()

@@ -1,11 +1,10 @@
 import { useRequest, useMount } from 'ahooks'
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { getMemorials } from '../api/server'
 const MemorialsList = React.lazy(() => import('../components/MemorialsList'))
 import { useAuth } from '../providers/AuthProvider'
 
 const MemorialsCluster = () => {
-  const [activityId, setActivityId] = useState<number>()
   const { user } = useAuth()
 
   const { data, run } = useRequest(getMemorials, {
@@ -13,7 +12,7 @@ const MemorialsCluster = () => {
   })
 
   useMount(() => {
-    if (user !== undefined) run(activityId!, user!.addr!)
+    if (user !== undefined) run(user!.addr!)
   })
 
   return (

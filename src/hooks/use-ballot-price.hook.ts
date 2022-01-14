@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import { useReducer } from 'react'
 import { query } from '@onflow/fcl'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { GET_PRICE } from '../flow/get-price.script'

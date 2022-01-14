@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import { useReducer } from 'react'
 import { query, mutate, tx } from '@onflow/fcl'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { SessionUser } from './use-current-user.hook'
