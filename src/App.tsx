@@ -21,6 +21,7 @@ const MemorialsCluster = React.lazy(
   () => import('./clusters/memorials.cluster')
 )
 const NotFound = React.lazy(() => import('./pages/NotFound.page'))
+const InternalError = React.lazy(() => import('./pages/InternalError.page'))
 
 function App() {
   return (
@@ -45,6 +46,8 @@ function App() {
             <Route exact path="/" component={ActivityCluster}></Route>
             {/* @ts-ignore */}
             <Route path="/404" component={NotFound} />
+            {/* @ts-ignore */}
+            <Route path="/error" component={InternalError} />
             <Redirect to="/404" />
           </Switch>
         </Providers>

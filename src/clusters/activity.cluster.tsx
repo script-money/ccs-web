@@ -46,7 +46,12 @@ const ActivityCluster = ({ location }: { location?: ILocation }) => {
         return { list: i.data, total: i.total }
       },
       refreshDeps: [canVoteState, canJoinState, selectedCategory],
-      loadingDelay: 200
+      loadingDelay: 200,
+      throwOnError: true,
+      onError: (err: any) => {
+        history.push('/error')
+        console.log(err)
+      }
     }
   )
 
