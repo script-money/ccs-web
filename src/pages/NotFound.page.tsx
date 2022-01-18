@@ -10,7 +10,7 @@ export default function NotFound() {
               Page not found.
             </h1>
             <div className="mt-6">
-              <a href="#" className="text-base font-medium text-main">
+              <a href="/" className="text-base font-medium text-main">
                 Go back home<span aria-hidden="true"> &rarr;</span>
               </a>
             </div>
