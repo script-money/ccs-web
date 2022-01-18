@@ -60,14 +60,14 @@ export const CreateActivityForm = ({
               value={title}
               maxLength={32}
               onChange={e => setTitle!(e.target.value)}
-              placeholder="Example: Flow Fest mystery NFT giveaways (text max 32)"
+              placeholder="Example: Flow Fest mystery NFT giveaways (max 32)"
               className="block py-3 px-4 w-full rounded-md border border-gray-300 focus:border-main focus:ring-main shadow-sm"
             />
           </div>
         </div>
 
         {/* content */}
-        <div className="sm:col-span-2">
+        <div className="col-span-2">
           <label
             htmlFor="content"
             className="block text-sm font-medium text-gray-700"
@@ -127,7 +127,7 @@ export const CreateActivityForm = ({
         </div>
 
         {/* source */}
-        <div className="sm:col-span-2 md:col-span-1">
+        <div className="col-span-2 md:col-span-1">
           <label
             htmlFor="source"
             className="block text-sm font-medium text-gray-700"
@@ -149,7 +149,7 @@ export const CreateActivityForm = ({
         </div>
 
         {/* categories */}
-        <div className="sm:col-span-2">
+        <div className="col-span-2">
           <label
             htmlFor="categories"
             className="block text-sm font-medium text-gray-700"
@@ -157,7 +157,7 @@ export const CreateActivityForm = ({
             <span className="text-closed"> * </span>
             categories
           </label>
-          <div className="grid grid-cols-3 gap-4 mt-3">
+          <div className="grid grid-cols-4 gap-4 mt-3">
             {categoriesToSelect.map(category => {
               const category_text = `text-${category.type}-500`
               return (
@@ -175,7 +175,7 @@ export const CreateActivityForm = ({
                       className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                     />
                   </div>
-                  <div className="ml-3 text-sm">
+                  <div className="ml-1 sm:ml-3 text-sm">
                     <label
                       htmlFor={category.type}
                       className={classNames('font-medium', category_text)}

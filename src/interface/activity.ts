@@ -90,26 +90,34 @@ export const categories = [
   {
     id: 1,
     type: 'Interact',
-    comment: 'use product with no reward, for future airdrop'
+    comment: 'Use product with no reward, for future airdrop'
   },
-  { id: 2, type: 'Form', comment: 'do some task and fill form' },
-  { id: 3, type: 'Vote', comment: 'voting for governance' },
-  { id: 4, type: 'Test', comment: 'test product and report bug' },
-  { id: 5, type: 'Node', comment: "run testnet node'" },
-  { id: 6, type: 'Learn', comment: 'learn to earn' },
-  { id: 7, type: 'Create', comment: 'create media, meme, aircle...' },
-  { id: 8, type: 'Develop', comment: 'develop a product or module' },
-  { id: 9, type: 'Whitelist', comment: 'join whitelist' },
-  { id: 10, type: 'IXO', comment: 'join inital offerings' },
-  { id: 11, type: 'LuckDraw', comment: 'join luckdraw' },
   {
-    id: 12,
+    id: 2,
+    type: 'Meeting',
+    comment: 'Join community call to get poap/role/reward'
+  },
+  { id: 3, type: 'Vote', comment: 'voting for governance' },
+  { id: 4, type: 'Claim', comment: 'Claim airdrop' },
+  { id: 5, type: 'Whitelist', comment: 'join whitelist' },
+  { id: 6, type: 'Mint', comment: 'Mint NFT' },
+  { id: 7, type: 'Create', comment: 'create media, meme, aircle...' },
+  { id: 8, type: 'LuckDraw', comment: 'join luckdraw' },
+  { id: 9, type: 'Learn', comment: 'learn to earn' },
+  { id: 10, type: 'Node', comment: "run testnet node'" },
+  { id: 11, type: 'Test', comment: 'test product and report bug' },
+  { id: 12, type: 'Develop', comment: 'develop a product or module' },
+  {
+    id: 13,
     type: 'Register',
     comment:
       'register join Discord,join telegram,create account,subcribe email,signUp website...'
   },
+  { id: 14, type: 'Form', comment: 'do some task and fill form' },
+  { id: 15, type: 'IXO', comment: 'join inital offerings' },
+  { id: 16, type: 'Other', comment: 'Other activity not in category' },
   {
-    id: 13,
+    id: 17,
     type: 'Airdrop',
     comment: 'only use for activity/create_airdrop, not confuse with other'
   }
@@ -130,6 +138,10 @@ export type categoriesType =
   | 'LuckDraw'
   | 'Register'
   | 'Airdrop'
+  | 'Mint'
+  | 'Claim'
+  | 'Meeting'
+  | 'Other'
 
 export interface ICategoryType {
   id: number
