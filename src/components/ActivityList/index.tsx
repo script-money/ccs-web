@@ -58,7 +58,7 @@ export const ActivityList = ({
           leaveTo="opacity-0"
         >
           <Listbox.Options className="overflow-auto absolute z-10 py-1 mt-1 w-full max-h-60 text-base sm:text-sm bg-white rounded-md ring-1 ring-black ring-opacity-5 shadow-lg focus:outline-none">
-            {categories.map(category => {
+            {categories.slice(0, -1).map(category => {
               const categoryBg = `bg-${category.type}-100`
               const categoryText = `text-${category.type}-800`
               return (
