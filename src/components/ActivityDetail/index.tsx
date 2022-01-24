@@ -182,7 +182,7 @@ const ActivityDetail = ({
                     </div>
                     <div className="sm:col-span-2 md:col-span-1">
                       <dt className="text-sm font-medium text-gray-500">
-                        Close At
+                        Voting Close At
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
                         {activity.lockDate === null
