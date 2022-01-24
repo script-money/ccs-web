@@ -130,7 +130,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
               run(user)
               showUserDetail()
             }}
-            onCreateClick={() => (window.location.href = '/create-activity')}
+            onCreateClick={() => history.push('/create-activity')}
             onFaucetClick={() => {
               requestTokenRun(user.addr!)
             }}
