@@ -4,3 +4,4 @@ dist
 dist-ssr
 .eslintcache
 .env
+src/secret
