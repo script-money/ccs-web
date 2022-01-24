@@ -66,9 +66,14 @@ const ActivityCluster = ({ location }: { location?: ILocation }) => {
     const params = new URLSearchParams(location!.search)
     const code = params.get('code')
     const state = params.get('state')
+    const activity = params.get('activity')
     if (code && state) {
       runUpdateUser(code, state)
       history.push('/')
+      return
+    }
+    if (activity) {
+      history.push(`/activity/${activity}`)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])

@@ -1,9 +1,14 @@
 {
-  "routes": [
+  "rewrites": [
     {
-      "src": "/[^.]+",
-      "dest": "/",
-      "status": 200
+      "source": "/(.*)",
+      "destination": "/"
+    }
+  ],
+  "redirects": [
+    {
+      "source": "/activity/:id*",
+      "destination": "/?activity=:id*"
     }
   ]
 }
