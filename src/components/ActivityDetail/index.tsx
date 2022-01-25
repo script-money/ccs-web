@@ -249,7 +249,7 @@ const ActivityDetail = ({
                       <dt className="text-sm font-medium text-gray-500">
                         Content
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900">
+                      <dd className="mt-1 text-sm text-gray-900 whitespace-pre-line">
                         {activity.content}
                       </dd>
                     </div>
