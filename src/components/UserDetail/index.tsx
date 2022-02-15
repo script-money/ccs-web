@@ -33,7 +33,7 @@ export const UserDetail = ({
   onViewMemorials
 }: IUserDetailProps) => {
   // const [open, setOpen] = useState(false)
-  const [ballotCount, setBallotCount] = useState(0)
+  const [ballotCount, setBallotCount] = useState<number>(10)
 
   const OAuthData = new URLSearchParams({
     response_type: 'code',
@@ -76,7 +76,7 @@ export const UserDetail = ({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block overflow-hidden sm:p-6 px-4 pt-5 pb-4 sm:my-8 sm:w-full sm:max-w-lg text-left align-bottom sm:align-middle bg-white rounded-lg shadow-xl transition-all transform">
+            <div className="inline-block overflow-hidden sm:p-6 px-4 pt-5 pb-4 sm:my-8 sm:w-96 sm:max-w-lg text-left align-bottom sm:align-middle bg-white rounded-lg shadow-xl transition-all transform">
               {/* closeButton */}
               <div className="hidden sm:block absolute top-0 right-0 pt-4 pr-4">
                 <button
@@ -158,9 +158,7 @@ export const UserDetail = ({
                 </Dialog.Title>
                 <div className="flex items-center space-x-4">
                   <div className="flex">
-                    <p className="userdetail-info">
-                      Current: {votingPower ?? 0}
-                    </p>
+                    <p className="userdetail-info">{votingPower ?? 0}</p>
                   </div>
                 </div>
                 <a
@@ -180,9 +178,7 @@ export const UserDetail = ({
                 </Dialog.Title>
                 <div className="flex items-center space-x-4">
                   <div className="flex">
-                    <p className="userdetail-info">
-                      Current: {tokenAmount ?? 0}
-                    </p>
+                    <p className="userdetail-info">{tokenAmount ?? 0}</p>
                   </div>
                 </div>
               </div>
@@ -193,9 +189,7 @@ export const UserDetail = ({
                 </Dialog.Title>
                 <div className="flex items-center space-x-4">
                   <div className="flex">
-                    <p className="userdetail-info">
-                      Current: {ballotPrice ?? 0}
-                    </p>
+                    <p className="userdetail-info">{ballotPrice ?? 0}</p>
                   </div>
                 </div>
               </div>
@@ -205,40 +199,33 @@ export const UserDetail = ({
                   <Dialog.Title className="userdetail-title">
                     Ballots
                   </Dialog.Title>
-                  <p className="userdetail-info">
-                    Current: {ballotAmount ?? 0}
-                  </p>
+                  <p className="userdetail-info">{ballotAmount ?? 0}</p>
                 </div>
+              </div>
+              <div className="userdetail-item">
                 {/* ballots buy selector */}
+                <Dialog.Title className="userdetail-title">
+                  Buy Ballots
+                </Dialog.Title>
                 <div className="flex items-center space-x-4">
-                  <div className="flex relative flex-row flex-shrink mt-1 w-full h-10 bg-transparent rounded-lg">
-                    <button
-                      data-action="decrement"
-                      className="w-20 h-full text-gray-600 hover:text-gray-700 bg-gray-300 hover:bg-gray-400 rounded-l cursor-pointer outline-none"
-                      onClick={() =>
-                        setBallotCount(Math.max(0, ballotCount - 1))
-                      }
-                    >
-                      <span className="m-auto text-2xl font-thin">−</span>
-                    </button>
+                  <div>
                     <input
                       type="number"
-                      className="flex items-center w-full font-semibold text-center text-gray-700 hover:text-black focus:text-black bg-gray-300 outline-none focus:outline-none text-md md:text-basecursor-default"
+                      className="flex items-center ml-auto w-20 font-semibold leading-8 text-center text-gray-700 hover:text-black focus:text-black bg-gray-300 outline-none focus:outline-none text-md md:text-basecursor-default"
                       name="custom-input-number"
-                      value={ballotCount}
-                      onChange={value => console.log(value)}
+                      defaultValue={ballotCount}
+                      placeholder="Max 500"
+                      max={500}
+                      onChange={e =>
+                        setBallotCount(
+                          Math.min(500, parseInt(e.target.value) || ballotCount)
+                        )
+                      }
                     ></input>
-                    <button
-                      data-action="increment"
-                      className="w-20 h-full text-gray-600 hover:text-gray-700 bg-gray-300 hover:bg-gray-400 rounded-r cursor-pointer"
-                      onClick={() => setBallotCount(ballotCount + 1)}
-                    >
-                      <span className="m-auto text-2xl font-thin">+</span>
-                    </button>
                   </div>
                   <button
                     type="button"
-                    className="inline-flex items-center p-2 my-2 mx-1 font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 shadow-sm focus:outline-none"
+                    className="inline-flex items-center p-2 mx-1 font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 shadow-sm focus:outline-none"
                     onClick={() => onBuyClick!(ballotCount)}
                   >
                     Buy
@@ -247,7 +234,7 @@ export const UserDetail = ({
               </div>
 
               {/* logout */}
-              <div className="sm:flex sm:flex-row-reverse mt-16 sm:mt-16">
+              <div className="sm:flex sm:flex-row-reverse mt-8">
                 <button
                   type="button"
                   className="inline-flex justify-center py-2 px-4 sm:ml-3 w-full sm:w-auto text-base sm:text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"
