@@ -127,17 +127,14 @@ export const PageHeadings = ({
                 Sign in
               </a>
             ) : (
-              <div className="inline-flex items-center py-2 px-3 sm:px-4 w-16 sm:w-auto text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm focus:outline-none">
-                <a
-                  className="overflow-hidden"
-                  onClick={() => onUserDetailClick!()}
-                >
-                  {/* {address!.substring(0, 6) +
-                    '......' +
-                    address!.substring(14, 18)} */}
+              <a
+                className="overflow-hidden"
+                onClick={() => onUserDetailClick!()}
+              >
+                <div className="inline-flex items-center py-2 px-3 sm:px-4 w-16 sm:w-auto text-xs font-medium text-gray-700 bg-white hover:bg-gray-50 rounded border border-gray-300 focus:ring-2 focus:ring-main focus:ring-offset-2 shadow-sm focus:outline-none">
                   {isSetup ? 'Wallet' : 'Logout'}
-                </a>
-              </div>
+                </div>
+              </a>
             )}
           </div>
         </div>
