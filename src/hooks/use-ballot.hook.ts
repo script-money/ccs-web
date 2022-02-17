@@ -47,11 +47,11 @@ export default function useBallot(user: SessionUser | undefined) {
         type: ActionType.AddSuccess,
         payload: { txID: transaction }
       })
-    } catch (err) {
+    } catch (err: unknown) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: errorMessage!
+          error: errorMessage ?? (err as Error).message
         }
       })
     }

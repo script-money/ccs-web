@@ -44,6 +44,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     {
       manual: true,
       throwOnError: true,
+      debounceInterval: 500,
       onSuccess: (data: IResponse) => {
         if (data.errorMessage) {
           alert(
@@ -79,10 +80,22 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [openUserDetail])
 
+  let timer: NodeJS.Timeout
+
   const handleBuyBallots = async (count: number) => {
-    await buyBallots(count)
-    await getHodings()
-    await getCCSBalance()
+    clearTimeout(timer)
+    timer = setTimeout(async () => {
+      await buyBallots(count)
+      await getHodings()
+      await getCCSBalance()
+    }, 500)
+  }
+
+  const handleIntializeAccount = () => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      initializeAccount()
+    }, 500)
   }
 
   const showUserDetail = () => {
@@ -164,9 +177,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             logOut()
             history.push('/')
           }}
-          onSetUpClick={() => {
-            initializeAccount()
-          }}
+          onSetUpClick={handleIntializeAccount}
         />
       )}
       {children}

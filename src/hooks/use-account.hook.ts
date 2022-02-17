@@ -67,11 +67,11 @@ export default function useAccount(user: SessionUser) {
         payload: { txID: transaction }
       })
       await isAccountInitialized()
-    } catch (err) {
+    } catch (err: unknown) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: errorMessage!
+          error: errorMessage ?? (err as Error).message
         }
       })
     }

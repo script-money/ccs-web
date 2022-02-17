@@ -9,12 +9,21 @@ const CreateActivityCluster = () => {
   const { createActivity } = useActivity()
   const { data: ccsToken } = useCCSToken(user!)
 
+  let timer: NodeJS.Timeout
+
+  const handleSubmit = (title: string, metadata: string) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      createActivity(title!, metadata!)
+    }, 500)
+  }
+
   return (
     <>
       <CreateActivityForm
         sendAmount={100}
         hasAmount={ccsToken}
-        onSubmit={(title, metadata) => createActivity(title!, metadata!)}
+        onSubmit={handleSubmit}
       ></CreateActivityForm>
     </>
   )

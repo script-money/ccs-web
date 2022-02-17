@@ -70,11 +70,11 @@ export default function useActivity() {
           toHome: true
         }
       })
-    } catch (err) {
+    } catch (err: unknown) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: errorMessage!
+          error: errorMessage ?? (err as Error).message
         }
       })
     }
@@ -105,11 +105,11 @@ export default function useActivity() {
           toHome: false
         }
       })
-    } catch (err) {
+    } catch (err: unknown) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: errorMessage!
+          error: errorMessage ?? (err as Error).message
         }
       })
     }
