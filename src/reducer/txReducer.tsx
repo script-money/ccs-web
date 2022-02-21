@@ -1,6 +1,7 @@
 import { formatError } from '../utils'
 
 export enum ActionType {
+  AddSigning = 'SIGNING',
   AddProccesing = 'PROCESSING',
   AddSuccess = 'SUCCESS',
   AddTip = 'TIP',
@@ -22,6 +23,10 @@ export const initialTxState: TxState = {
   txStatusType: ActionType.Reset,
   isLoading: false,
   isError: false
+}
+
+interface AddSigning {
+  type: ActionType.AddSigning
 }
 
 interface AddProccesing {
@@ -47,10 +52,23 @@ interface Reset {
   type: ActionType.Reset
 }
 
-export type TxActions = AddProccesing | AddSuccess | AddTips | AddError | Reset
+export type TxActions =
+  | AddSigning
+  | AddProccesing
+  | AddSuccess
+  | AddTips
+  | AddError
+  | Reset
 
 export const txReducer = (state: TxState, action: TxActions) => {
   switch (action.type) {
+    case ActionType.AddSigning:
+      return {
+        ...state,
+        txStatusType: action.type,
+        isLoading: true,
+        isError: false
+      }
     case ActionType.AddProccesing:
       return {
         ...state,

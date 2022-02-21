@@ -34,7 +34,7 @@ export default function useBallot(user: SessionUser | undefined) {
   }
 
   const buyBallots = async (count: number) => {
-    txDispatch({ type: ActionType.AddProccesing })
+    txDispatch({ type: ActionType.AddSigning })
     try {
       const transaction = await mutate({
         cadence: BUY_BALLOTS,
@@ -42,7 +42,8 @@ export default function useBallot(user: SessionUser | undefined) {
         args: (arg: any, t: any) => [arg(count, t.Int)],
         payer: remoteAuthz
       })
-      await tx(transaction).onceSealed()
+      txDispatch({ type: ActionType.AddProccesing })
+      await tx(transaction).onceExecuted()
       txDispatch({
         type: ActionType.AddSuccess,
         payload: { txID: transaction }
@@ -51,7 +52,7 @@ export default function useBallot(user: SessionUser | undefined) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: errorMessage ?? (err as Error).message
+          error: errorMessage ?? (err as Error).message ?? (err as string)
         }
       })
     }

@@ -44,7 +44,7 @@ export default function useActivity() {
   }
 
   const vote = async (activityId: number, isUpVote: boolean) => {
-    txDispatch({ type: ActionType.AddProccesing })
+    txDispatch({ type: ActionType.AddSigning })
     try {
       const transaction = await mutate({
         cadence: VOTE,
@@ -55,7 +55,8 @@ export default function useActivity() {
         ],
         payer: remoteAuthz
       })
-      await tx(transaction).onceSealed()
+      txDispatch({ type: ActionType.AddProccesing })
+      await tx(transaction).onceExecuted()
       txDispatch({
         type: ActionType.AddSuccess,
         payload: { txID: transaction }
@@ -74,14 +75,14 @@ export default function useActivity() {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: errorMessage ?? (err as Error).message
+          error: errorMessage ?? (err as Error).message ?? (err as string)
         }
       })
     }
   }
 
   const createActivity = async (title: string, metadata: string) => {
-    txDispatch({ type: ActionType.AddProccesing })
+    txDispatch({ type: ActionType.AddSigning })
     try {
       const transaction = await mutate({
         cadence: CREATE_ACTIVITY,
@@ -92,12 +93,12 @@ export default function useActivity() {
         ],
         payer: remoteAuthz
       })
-      await tx(transaction).onceSealed()
+      txDispatch({ type: ActionType.AddProccesing })
+      await tx(transaction).onceExecuted()
       txDispatch({
         type: ActionType.AddSuccess,
         payload: { txID: transaction }
       })
-      await getCCSBalance()
       txDispatch({
         type: ActionType.AddTip,
         payload: {
@@ -105,11 +106,12 @@ export default function useActivity() {
           toHome: false
         }
       })
+      await getCCSBalance()
     } catch (err: unknown) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: errorMessage ?? (err as Error).message
+          error: errorMessage ?? (err as Error).message ?? (err as string)
         }
       })
     }

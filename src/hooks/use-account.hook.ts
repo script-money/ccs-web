@@ -51,15 +51,15 @@ export default function useAccount(user: SessionUser) {
   }
 
   const initializeAccount = async () => {
-    txDispatch({ type: ActionType.AddProccesing })
-
+    txDispatch({ type: ActionType.AddSigning })
     try {
       const transaction = await mutate({
         cadence: INITIALIZED_ACCOUNT,
         limit: 100,
         payer: remoteAuthz
       })
-      await tx(transaction).onceSealed()
+      txDispatch({ type: ActionType.AddProccesing })
+      await tx(transaction).onceExecuted()
       const newStorageUsers = { ...accountInitStatus, [user!.addr!]: true }
       setAccountInitStatus(newStorageUsers)
       txDispatch({
@@ -71,7 +71,7 @@ export default function useAccount(user: SessionUser) {
       txDispatch({
         type: ActionType.AddError,
         payload: {
-          error: errorMessage ?? (err as Error).message
+          error: errorMessage ?? (err as Error).message ?? (err as string)
         }
       })
     }

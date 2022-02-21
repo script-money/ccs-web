@@ -94,16 +94,20 @@ export const TxInfo = ({
                         <p className="text-sm font-medium text-gray-900">
                           Transaction success!
                         </p>
+                      ) : status === 'SIGNING' ? (
+                        <p className="text-sm font-medium text-gray-900">
+                          Transaction signing...
+                        </p>
                       ) : status === 'PROCESSING' ? (
                         <p className="text-sm font-medium text-gray-900">
-                          Transaction confirming...
+                          Transaction executing...
                         </p>
                       ) : (
                         <p className="text-sm font-medium text-gray-900">
                           Transaction failed!
                         </p>
                       )}
-                      {status === 'PROCESSING' ? (
+                      {status === 'PROCESSING' || status === 'SIGNING' ? (
                         <></>
                       ) : status === 'ERROR' ? (
                         <p className="text-sm text-gray-400">
