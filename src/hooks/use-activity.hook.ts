@@ -1,7 +1,4 @@
-import { useEffect, useReducer } from 'react'
-import { query, mutate, tx, currentUser } from '@onflow/fcl'
-import { defaultReducer } from '../reducer/defaultReducer'
-import { GET_CREATE_CONSUMPTION } from '../flow/get_create_consumption.script'
+import { mutate, tx, currentUser } from '@onflow/fcl'
 import { VOTE } from '../flow/vote.tx'
 import { CREATE_ACTIVITY } from '../flow/create-activity.tx'
 import useCCSToken from './use-ccs-token.hook'
@@ -12,36 +9,11 @@ import useRemoteAuthz from './use-remote-authz.hook'
 import { compositeSignature } from '../interface/flow'
 
 export default function useActivity() {
-  const [state, dispatch] = useReducer(defaultReducer, {
-    loading: true,
-    error: false,
-    data: null
-  })
-
   const { user } = useAuth()
   const { getCCSBalance } = useCCSToken(user!)
   const [remoteAuthz, errorMessage] = useRemoteAuthz()
 
   const { dispatch: txDispatch } = useTx()
-
-  useEffect(() => {
-    getConsumption()
-    //eslint-disable-next-line
-  }, [])
-
-  const getConsumption = async () => {
-    dispatch({ type: 'PROCESSING' })
-
-    try {
-      const response = await query({
-        cadence: GET_CREATE_CONSUMPTION
-      })
-      dispatch({ type: 'SUCCESS', payload: response })
-    } catch (err) {
-      dispatch({ type: 'ERROR' })
-      console.log(err)
-    }
-  }
 
   const vote = async (activityId: number, isUpVote: boolean) => {
     txDispatch({ type: ActionType.AddSigning })
@@ -129,8 +101,6 @@ export default function useActivity() {
   }
 
   return {
-    ...state,
-    getConsumption,
     vote,
     createActivity,
     updateActivitySign

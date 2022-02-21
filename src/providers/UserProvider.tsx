@@ -30,7 +30,7 @@ export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     initializeAccount
   } = useAccount(user!)
   const { data: ballotAmount, getHodings, buyBallots } = useBallot(user!)
-  const { data: ccsAmount, getCCSBalance } = useCCSToken(user!)
+  const { data: ccsAmount, getCCSBalance } = useCCSToken(user!) // use authprovider balance?
 
   return (
     <UserContext.Provider

@@ -3,19 +3,12 @@ import { GET_CCS_BALANCE } from '../flow/get-ccs-balance.script'
 import { defaultReducer } from '../reducer/defaultReducer'
 import { query } from '@onflow/fcl'
 import { SessionUser } from './use-current-user.hook'
-import { useMount } from 'ahooks'
 
 export default function useCCSToken(user: SessionUser | undefined) {
   const [state, dispatch] = useReducer(defaultReducer, {
     loading: true,
     error: false,
     data: null
-  })
-
-  useMount(() => {
-    if (user !== undefined) {
-      getCCSBalance()
-    }
   })
 
   const getCCSBalance = async () => {
