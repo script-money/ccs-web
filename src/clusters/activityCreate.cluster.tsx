@@ -20,9 +20,12 @@ const CreateActivityCluster = () => {
   }
 
   useMount(() => {
-    if (user !== undefined) {
-      getCCSBalance()
-    }
+    // wait 10 seconds
+    timer = setTimeout(() => {
+      if (user !== undefined) {
+        getCCSBalance()
+      }
+    }, 0)
   })
 
   return (

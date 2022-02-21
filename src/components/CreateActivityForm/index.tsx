@@ -193,7 +193,7 @@ export const CreateActivityForm = ({
         <div className="sm:col-span-2 mt-4">
           <button
             type="submit"
-            disabled={sendAmount > hasAmount}
+            disabled={hasAmount === undefined || sendAmount > hasAmount}
             onClick={e => {
               e.preventDefault()
               if (
@@ -220,7 +220,9 @@ export const CreateActivityForm = ({
             }}
             className="main-button"
           >
-            Spend {sendAmount} CCS to Create Activity. Has {hasAmount} in wallet
+            {hasAmount
+              ? `Spend ${sendAmount} CCS to Create Activity. Has ${hasAmount} in wallet`
+              : 'loading...'}
           </button>
         </div>
       </form>
