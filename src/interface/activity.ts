@@ -77,6 +77,7 @@ export interface ActivityItemProps {
 export interface ActivityDetailProps {
   activity: ActivityData
   currentUserAddr?: string
+  hasBallots: boolean
   onUpVote?: () => void
   onDownVote?: () => void
 }

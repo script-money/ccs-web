@@ -8,6 +8,7 @@ import { urlRegex } from '../../utils'
 const ActivityDetail = ({
   activity,
   currentUserAddr,
+  hasBallots,
   onUpVote,
   onDownVote
 }: ActivityDetailProps) => {
@@ -128,7 +129,8 @@ const ActivityDetail = ({
                   }}
                   disabled={
                     activity.creatorAddr === currentUserAddr ||
-                    currentUserAddr === undefined
+                    currentUserAddr === undefined ||
+                    !hasBallots
                   }
                 >
                   <span>👍</span>
@@ -139,7 +141,8 @@ const ActivityDetail = ({
                   onClick={() => onDownVote!()}
                   disabled={
                     activity.creatorAddr === currentUserAddr ||
-                    currentUserAddr === undefined
+                    currentUserAddr === undefined ||
+                    !hasBallots
                   }
                 >
                   <span>👎</span>
@@ -150,6 +153,8 @@ const ActivityDetail = ({
                   {activity.creatorAddr !== currentUserAddr
                     ? currentUserAddr === undefined
                       ? 'Log in to Vote'
+                      : !hasBallots
+                      ? 'Have at least one ballot to vote'
                       : 'Can vote once'
                     : 'Already voted'}
                 </span>

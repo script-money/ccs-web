@@ -4,16 +4,16 @@ import { useAuth } from '../providers/AuthProvider'
 import { getActivityDetail } from '../api/server'
 import { useMount, useRequest } from 'ahooks'
 import { useHistory, useParams } from 'react-router-dom'
-// const ActivityDetail = React.lazy(() => import('../components/ActivityDetail'))
 import ActivityDetail from '../components/ActivityDetail'
 import '../components/ActivityList/loading.css'
+import useBallot from '../hooks/use-ballot.hook'
 
 const ActivityDetailCluster = () => {
   const { vote } = useActivity()
   const { id } = useParams()
   const { user } = useAuth()
   const history = useHistory()
-
+  const { data: ballotsAmount, getHodings } = useBallot(user)
   const { data, run } = useRequest(getActivityDetail, {
     manual: true,
     debounceInterval: 500,
@@ -31,6 +31,7 @@ const ActivityDetailCluster = () => {
 
   useMount(() => {
     run(parseInt(id!))
+    getHodings()
   })
 
   let timer: NodeJS.Timeout
@@ -48,6 +49,7 @@ const ActivityDetailCluster = () => {
         <ActivityDetail
           activity={data?.data}
           currentUserAddr={user === undefined ? undefined : user!.addr!}
+          hasBallots={ballotsAmount > 0}
           onUpVote={() => handleVote(id, true)}
           onDownVote={() => handleVote(id, false)}
         />
