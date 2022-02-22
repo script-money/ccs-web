@@ -334,12 +334,6 @@ const ActivityDetail = ({
                       <tr>
                         <th
                           scope="col"
-                          className="hidden md:block py-3 md:w-1/4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                        >
-                          ID
-                        </th>
-                        <th
-                          scope="col"
                           className="py-3 md:w-1/4 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                         >
                           Address
@@ -361,9 +355,6 @@ const ActivityDetail = ({
                     <tbody>
                       {activity!.voteResult!.map(vote => (
                         <tr key={vote.id}>
-                          <td className="hidden md:block py-3 lg:px-0 text-sm text-gray-500 whitespace-nowrap">
-                            {vote.id}
-                          </td>
                           <td className="py-3 text-xs sm:text-sm font-medium text-gray-900 whitespace-nowrap">
                             {vote.voterAddr}
                           </td>
