@@ -1,5 +1,5 @@
 import { useRequest } from 'ahooks'
-import { getActivityList, updateUser } from '../api/server'
+import { getActivityList, getMaintenance, updateUser } from '../api/server'
 import { ActivityList } from '../components/ActivityList'
 import React, { useEffect, useReducer, useState } from 'react'
 import { categories, ICategoryType } from '../interface/activity'
@@ -12,6 +12,7 @@ import {
   initialAlertState
 } from '../reducer/alertReducer'
 import { Alerts } from '../components/Alerts'
+import { MaintenanceBanner } from '../components/MaintenanceBanner'
 interface ILocation {
   hash: string
   pathname: string
@@ -23,6 +24,9 @@ const ActivityCluster = ({ location }: { location?: ILocation }) => {
   const { user } = useAuth()
   const [canVoteState, setCanVoteState] = useState<boolean>()
   const [canJoinState, setCanJoinState] = useState<boolean>()
+  const [maintenanceState, setMaintenanceState] = useState<boolean>()
+  const [showBanner, setShowBanner] = useState<boolean>(false)
+
   const [selectedCategory, setSelectedCategory] = useState<ICategoryType>(
     categories[0] as ICategoryType
   )
@@ -62,6 +66,11 @@ const ActivityCluster = ({ location }: { location?: ILocation }) => {
     }
   )
 
+  const { data: getMaintenanceResponse, run: runGetMaintenance } =
+    useRequest<IResponse>(() => getMaintenance(), {
+      manual: true
+    })
+
   useEffect(() => {
     const params = new URLSearchParams(location!.search)
     const code = params.get('code')
@@ -75,8 +84,19 @@ const ActivityCluster = ({ location }: { location?: ILocation }) => {
     if (activity) {
       history.push(`/activity/${activity}`)
     }
+    runGetMaintenance()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (getMaintenanceResponse && getMaintenanceResponse.success) {
+      const isMaintenance = getMaintenanceResponse.data.maintenance
+      setMaintenanceState(isMaintenance)
+      if (isMaintenance) {
+        setShowBanner(true)
+      }
+    }
+  }, [getMaintenanceResponse])
 
   useEffect(() => {
     if (updateResponse !== undefined) {
@@ -109,6 +129,13 @@ const ActivityCluster = ({ location }: { location?: ILocation }) => {
     <>
       {state.alertType !== AlertType.None ? (
         <Alerts status={state.alertType} message={state.message}></Alerts>
+      ) : (
+        <></>
+      )}
+      {maintenanceState && showBanner ? (
+        <MaintenanceBanner
+          onClose={() => setShowBanner(false)}
+        ></MaintenanceBanner>
       ) : (
         <></>
       )}

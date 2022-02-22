@@ -88,3 +88,8 @@ export const updateUser = async (code: string, state: string) => {
   })
   return result.data
 }
+
+export const getMaintenance = async (): Promise<IResponse> => {
+  const result = await axios.get(`${BASE_URL}/manage/maintenance`)
+  return result.data
+}
