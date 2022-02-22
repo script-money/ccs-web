@@ -182,7 +182,7 @@ const ActivityDetail = ({
                         Create At
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
-                        {moment(activity.createdAt).startOf('hour').fromNow()}
+                        {moment(activity.createdAt).fromNow()}
                       </dd>
                     </div>
                     <div className="sm:col-span-2 md:col-span-1">
@@ -195,7 +195,7 @@ const ActivityDetail = ({
                               .add(1, 'days')
                               .startOf('hour')
                               .fromNow()
-                          : moment(activity.lockDate).startOf('hour').fromNow()}
+                          : moment(activity.lockDate).fromNow()}
                       </dd>
                     </div>
                     <div className="sm:col-span-2 md:col-span-1">
@@ -205,9 +205,7 @@ const ActivityDetail = ({
                       <dd className="mt-1 text-sm text-gray-900">
                         {activity.startDate === null
                           ? 'TBD'
-                          : moment(activity.startDate)
-                              .startOf('hour')
-                              .fromNow()}
+                          : moment(activity.startDate).fromNow()}
                       </dd>
                     </div>
                     <div className="sm:col-span-2 md:col-span-1">
@@ -217,7 +215,7 @@ const ActivityDetail = ({
                       <dd className="mt-1 text-sm text-gray-900">
                         {activity.endDate === null
                           ? 'TBD'
-                          : moment(activity.endDate).startOf('hour').fromNow()}
+                          : moment(activity.endDate).fromNow()}
                       </dd>
                     </div>
                     <div className="col-span-2 sm:col-span-4 lg:col-span-2">
