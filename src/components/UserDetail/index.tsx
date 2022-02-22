@@ -178,7 +178,9 @@ export const UserDetail = ({
                 </Dialog.Title>
                 <div className="flex items-center space-x-4">
                   <div className="flex">
-                    <p className="userdetail-info">{tokenAmount ?? 0}</p>
+                    <p className="userdetail-info">
+                      {tokenAmount ?? 'loading...'}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -189,7 +191,9 @@ export const UserDetail = ({
                 </Dialog.Title>
                 <div className="flex items-center space-x-4">
                   <div className="flex">
-                    <p className="userdetail-info">{ballotPrice ?? 0}</p>
+                    <p className="userdetail-info">
+                      {ballotPrice ?? 'loading...'}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -199,7 +203,9 @@ export const UserDetail = ({
                   <Dialog.Title className="userdetail-title">
                     Ballots
                   </Dialog.Title>
-                  <p className="userdetail-info">{ballotAmount ?? 0}</p>
+                  <p className="userdetail-info">
+                    {ballotAmount ?? 'loading...'}
+                  </p>
                 </div>
               </div>
               <div className="userdetail-item">
