@@ -1,4 +1,5 @@
 import { useSelections } from 'ahooks'
+import moment from 'moment'
 import React, { useState } from 'react'
 import DatePicker from 'react-date-picker/dist/entry.nostyle'
 import { categories } from '../../interface/activity'
@@ -28,7 +29,7 @@ export const CreateActivityForm = ({
   const [title, setTitle] = useState<string>('')
   const [source, setSource] = useState<string>('')
   const [content, setContent] = useState<string>('')
-  const [startDate, setStartDate] = useState(new Date())
+  const [startDate, setStartDate] = useState(moment().startOf('day').toDate())
   const [endDate, setEndDate] = useState<Date | null>(null)
   const { selected, isSelected, toggle } = useSelections(categoriesToSelect)
 
