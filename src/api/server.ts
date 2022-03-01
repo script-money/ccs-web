@@ -93,3 +93,16 @@ export const getMaintenance = async (): Promise<IResponse> => {
   const result = await axios.get(`${BASE_URL}/manage/maintenance`)
   return result.data
 }
+
+export const getCalendarViewActivities = async (
+  date: string,
+  voter: string
+): Promise<IResponse> => {
+  const result = await axios.get(`${BASE_URL}/calendarView`, {
+    params: {
+      date,
+      voter
+    }
+  })
+  return result.data
+}

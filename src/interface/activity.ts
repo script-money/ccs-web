@@ -82,6 +82,15 @@ export interface ActivityDetailProps {
   onDownVote?: () => void
 }
 
+export interface CalendarViewActivity {
+  id: number
+  title: string
+  endDate: string | null
+  content: string
+  source: string
+  categories: string[]
+}
+
 export const categories = [
   {
     id: 0,

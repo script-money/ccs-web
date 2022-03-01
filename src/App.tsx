@@ -20,6 +20,10 @@ const UpdateActivityCluster = React.lazy(
 const MemorialsCluster = React.lazy(
   () => import('./clusters/memorials.cluster')
 )
+const CalendarViewCluster = React.lazy(
+  () => import('./clusters/calendarView.cluster')
+)
+
 const NotFound = React.lazy(() => import('./pages/NotFound.page'))
 const InternalError = React.lazy(() => import('./pages/InternalError.page'))
 
@@ -40,6 +44,9 @@ function App() {
             </Route>
             <Route path="/momerials">
               <MemorialsCluster />
+            </Route>
+            <Route path="/calendar">
+              <CalendarViewCluster />
             </Route>
 
             {/* @ts-ignore */}

@@ -4,20 +4,19 @@ import { ActivityItemProps, categoriesType } from '../../interface/activity'
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Link, MemoryRouter } from 'react-router-dom'
 
+export const Badget = ({ category }: { category: categoriesType | string }) => {
+  return (
+    <span
+      className={`my-0.5 inline-flex h-6 items-center py-0.5 px-2.5 mx-0.5 text-xs font-medium text-${category}-800 bg-${category}-100 rounded-full`}
+    >
+      {category}
+    </span>
+  )
+}
 /**
  * Primary UI component for user interaction
  */
 export const ActivityItem = ({ activity }: ActivityItemProps) => {
-  const Badget = ({ category }: { category: categoriesType }) => {
-    return (
-      <span
-        className={`inline-flex items-center py-0.5 px-2.5 mx-0.5 text-xs font-medium text-${category}-800 bg-${category}-100 rounded-full`}
-      >
-        {category}
-      </span>
-    )
-  }
-
   return (
     <div className="flex items-center px-2 -my-2 -mx-2 space-x-4 rounded-xl">
       {/* infomation */}

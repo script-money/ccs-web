@@ -55,6 +55,17 @@ export const PageHeadings = ({
           ) : (
             <></>
           )}
+          {/* calendarView */}
+          {isSetup ? (
+            <Link
+              to="/calendar"
+              className="inline-block py-2 px-2 ml-2 w-18 text-xs text-main whitespace-nowrap hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 focus:outline-none"
+            >
+              Calendar
+            </Link>
+          ) : (
+            <></>
+          )}
           {/* uncomment below line in storybook */}
           {/* </MemoryRouter> */}
           {/* tokens */}

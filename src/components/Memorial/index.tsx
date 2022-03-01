@@ -8,8 +8,6 @@ interface MemorialProp {
   data: MemorialsData
 }
 
-classNames
-
 export const Memorial = ({ data }: MemorialProp) => {
   const history = useHistory()
 

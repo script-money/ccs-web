@@ -3,6 +3,7 @@ import moment from 'moment'
 import React, { useState } from 'react'
 import DatePicker from 'react-date-picker/dist/entry.nostyle'
 import { categories } from '../../interface/activity'
+import { classNames } from '../../utils'
 import './Calendar.css'
 import './DatePicker.css'
 
@@ -16,10 +17,6 @@ export interface ICreateActivityFormProps {
 const categoriesToSelect = categories.filter(
   category => category.type !== 'All' && category.type !== 'Airdrop'
 )
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export const CreateActivityForm = ({
   sendAmount,

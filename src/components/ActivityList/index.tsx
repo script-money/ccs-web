@@ -8,6 +8,7 @@ import {
   ICategoryType
 } from '../../interface/activity'
 import './loading.css'
+import { classNames } from '../../utils'
 
 export interface IActivityListProps {
   isLoading: boolean
@@ -20,10 +21,6 @@ export interface IActivityListProps {
   changeCanVoteState?: (checked: boolean) => void
   changeCanJoinState?: (checked: boolean) => void
   changeSelectType?: (newCategory: ICategoryType) => void
-}
-
-function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
 }
 
 export const ActivityList = ({
