@@ -166,7 +166,7 @@ const ActivityDetail = ({
         </div>
 
         {/* Activity Detail*/}
-        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-flow-col-dense gap-6 sm:px-6 mx-auto mt-2 max-w-3xl lg:max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-3 lg:grid-flow-col-dense gap-6 sm:px-6 mx-auto md:mt-2 max-w-3xl lg:max-w-7xl">
           <div className="col-span-3 col-start-1 space-y-6">
             <section aria-labelledby="applicant-information-title">
               <div className="bg-white sm:rounded-lg border">

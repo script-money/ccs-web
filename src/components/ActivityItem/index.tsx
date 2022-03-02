@@ -18,7 +18,7 @@ export const Badget = ({ category }: { category: categoriesType | string }) => {
  */
 export const ActivityItem = ({ activity }: ActivityItemProps) => {
   return (
-    <div className="flex items-center px-2 -my-2 -mx-2 space-x-4 rounded-xl">
+    <div className="flex items-center sm:px-2 -my-2 -mx-2 space-x-4">
       {/* infomation */}
       <div className="flex flex-col flex-grow">
         {/* icon+title+tags */}
@@ -79,7 +79,7 @@ export const ActivityItem = ({ activity }: ActivityItemProps) => {
         </div>
         {/* created at by */}
         <div className="text-xs text-gray-600 whitespace-nowrap">
-          #{activity.id} created at{' '}
+          #{activity.id} in{' '}
           {moment(activity.createdAt).startOf('hour').fromNow()} by{' '}
           {activity.creator.discord ?? activity.creator.address}
         </div>

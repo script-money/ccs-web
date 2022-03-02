@@ -24,7 +24,7 @@ export const UpdateActivityForm = ({
 
   return (
     <div
-      className="overflow-hidden p-4 sm:px-6 lg:px-8 mx-auto max-w-7xl bg-white"
+      className="overflow-hidden bg-white outer-container"
       style={{ minHeight: 'calc(100vh - 16px)' }}
     >
       <form

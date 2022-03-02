@@ -38,8 +38,10 @@ export const ActivityList = ({
   const CategorySelector = (
     <Listbox value={selectedCategory} onChange={changeSelectType!}>
       <div className="relative mx-2">
-        <Listbox.Button className="relative py-2 pr-10 pl-2 w-full sm:text-sm text-left bg-white rounded-md border border-gray-300 focus:ring-1 shadow-sm cursor-default focus:outline-none focus:ring-main-500 focus:border-main-500">
-          <span className="block w-10 truncate">{selectedCategory.type}</span>
+        <Listbox.Button className="relative py-2 pr-6 pl-2 w-full text-xs sm:text-sm text-left bg-white rounded-md border border-gray-300 focus:ring-1 shadow-sm cursor-default focus:outline-none focus:ring-main-500 focus:border-main-500">
+          <span className="block w-10 sm:w-18 truncate">
+            {selectedCategory.type}
+          </span>
           <span className="flex absolute inset-y-0 right-0 items-center pr-2 pointer-events-none">
             <SelectorIcon
               className="w-5 h-5 text-gray-400"
@@ -54,7 +56,7 @@ export const ActivityList = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Listbox.Options className="overflow-auto absolute z-10 py-1 mt-1 w-full max-h-60 text-base sm:text-sm bg-white rounded-md ring-1 ring-black ring-opacity-5 shadow-lg focus:outline-none">
+          <Listbox.Options className="overflow-auto absolute z-10 py-1 mt-1 w-full max-h-60 text-xs sm:text-sm bg-white rounded-md ring-1 ring-black ring-opacity-5 shadow-lg focus:outline-none">
             {categories.slice(0, -1).map(category => {
               const categoryBg = `bg-${category.type}-100`
               const categoryText = `text-${category.type}-800`
@@ -92,7 +94,7 @@ export const ActivityList = ({
   )
 
   const Filter = (
-    <div className="flex relative z-10 items-center py-2 pr-2 sm:pr-4 pl-4 sm:pl-6 shadow">
+    <div className="flex relative z-10 items-center py-2 sm:pr-4 pl-2 sm:pl-6 shadow">
       {/* canVote */}
       <div className="flex relative items-start">
         <div className="flex items-center h-5">
@@ -102,7 +104,7 @@ export const ActivityList = ({
             onChange={event => changeCanVoteState!(event.target.checked)}
           />
         </div>
-        <div className="ml-1 text-sm">
+        <div className="ml-1 text-xs sm:text-sm">
           <label
             htmlFor="comments"
             className="font-medium tracking-tighter text-gray-700"
@@ -121,7 +123,7 @@ export const ActivityList = ({
             onChange={event => changeCanJoinState!(event.target.checked)}
           />
         </div>
-        <div className="ml-1 text-sm">
+        <div className="ml-1 text-xs sm:text-sm">
           <label
             htmlFor="comments"
             className="font-medium tracking-tighter text-gray-700"
@@ -148,7 +150,7 @@ export const ActivityList = ({
 
   const Pagination = (
     <nav
-      className="flex justify-between items-center py-3 pr-2 sm:pr-4 pl-4 sm:pl-6 bg-white border-t border-gray-200"
+      className="flex justify-between items-center py-3 pr-2 sm:pr-4 pl-2 sm:pl-4 bg-white border-t border-gray-200"
       aria-label="Pagination"
     >
       <div className="hidden sm:block mr-4">
@@ -164,10 +166,9 @@ export const ActivityList = ({
           of <span className="font-medium">{total}</span> results
         </p>
       </div>
-      <div className="flex flex-1 justify-between sm:justify-end space-x-1">
+      <div className="flex flex-1 justify-between sm:justify-end">
         {currentPage > 1 ? (
           <a
-            // href="#"
             className="inline-flex relative items-center py-2 px-4 text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300"
             onClick={() => {
               changeCurrent!(currentPage - 1)
@@ -182,7 +183,6 @@ export const ActivityList = ({
 
         {currentPage * pageSize < total ? (
           <a
-            // href="#"
             className="inline-flex relative items-center py-2 px-4 ml-auto text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 rounded-md border border-gray-300"
             onClick={() => {
               changeCurrent!(currentPage + 1)
@@ -216,7 +216,7 @@ export const ActivityList = ({
 
   if (isLoading) {
     return (
-      <div className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+      <div className="outer-container">
         {Filter}
         {Loading}
       </div>
@@ -225,7 +225,7 @@ export const ActivityList = ({
 
   if (activities.length === 0) {
     return (
-      <div className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+      <div className="outer-container">
         {Filter}
         {NoActivities}
       </div>
@@ -233,7 +233,7 @@ export const ActivityList = ({
   }
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+    <div className="outer-container">
       {Filter}
       {InfoList}
       {Pagination}

@@ -4,7 +4,7 @@
 
 @layer components {
   .main-button {
-    @apply disabled:opacity-50 inline-flex justify-center items-center py-3 px-6 w-full text-base font-medium text-white bg-main hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none;
+    @apply disabled:opacity-50 inline-flex justify-center items-center py-3 px-6 w-full text-sm md:text-base font-medium text-white bg-main hover:bg-orange-600 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none;
   }
 
   .userdetail-item {
@@ -12,10 +12,22 @@
   }
 
   .userdetail-title {
-    @apply w-1/3 text-xs sm:text-base font-medium text-gray-900 whitespace-nowrap;
+    @apply w-20 flex-none sm:w-24 text-xs sm:text-base font-medium text-gray-900 whitespace-nowrap;
   }
 
   .userdetail-info {
     @apply text-xs sm:text-base text-gray-500;
+  }
+
+  .userdetail-discord {
+    @apply items-center ml-auto w-16 h-10 text-xs font-medium text-white bg-discord hover:bg-blue-700 rounded border border-transparent shadow-sm focus:outline-none;
+  }
+
+  .create-activity-form-content {
+    @apply block py-3 px-4 w-full text-sm rounded-md border border-gray-300 focus:border-main focus:ring-main shadow-sm;
+  }
+
+  .outer-container {
+    @apply p-2 sm:px-6 lg:px-8 mx-auto max-w-7xl;
   }
 }

@@ -67,7 +67,7 @@ export const CalendarView = ({
           )}
         >
           <h2 className="font-semibold text-gray-900">{month.name}</h2>
-          <div className="grid grid-cols-7 mt-6 text-xs leading-6 text-gray-500">
+          <div className="grid grid-cols-7 mt-2 md:mt-6 text-xs leading-6 text-gray-500">
             <div>M</div>
             <div>T</div>
             <div>W</div>
@@ -100,7 +100,7 @@ export const CalendarView = ({
                   dateTime={day.date}
                   className={classNames(
                     day.isToday && 'font-semibold',
-                    'text-lg text-gray-900'
+                    'text-sm lg:text-lg text-gray-900'
                   )}
                 >
                   {day.date.split('-').pop()!.replace(/^0/, '')}
@@ -114,7 +114,7 @@ export const CalendarView = ({
   )
 
   const selectedDateElement = (
-    <div className="flex items-center mt-4">
+    <div className="flex items-center mt-2 sm:mt-4 ">
       <CalendarIcon className="mr-1 w-5 h-5" aria-hidden="true"></CalendarIcon>
       <h2 className="text-lg font-semibold text-gray-900">{selectedDate}</h2>
     </div>
@@ -137,45 +137,47 @@ export const CalendarView = ({
   )
 
   const activityList = (
-    <section className="mt-2 md:mt-8 border-t border-b">
+    <section className="overflow-hidden mt-2 md:mt-8 bg-white shadow">
       <ol className="text-sm leading-4 text-gray-500 divide-y divide-gray-200">
         {data.length > 0 &&
           data.map((activity, idx) => {
             return (
-              <li className="md:flex py-2" key={idx}>
-                <div className="flex flex-1 pr-2">
-                  <h4 className="self-center font-semibold text-gray-900">
-                    {activity.title}
-                  </h4>
-                </div>
+              <div className="px-2" key={idx}>
+                <li className="md:flex py-2">
+                  <div className="flex flex-1 pr-2">
+                    <h4 className="self-center font-semibold text-gray-900">
+                      {activity.title}
+                    </h4>
+                  </div>
 
-                <div className="flex p-1">
-                  {activity.source !== null &&
-                  urlRegex.test(activity.source) ? (
-                    <a
-                      className="self-center text-blue-600 hover:text-blue-800 underline break-all"
-                      href={activity.source}
-                      target="_blank"
-                      rel="noreferrer"
-                    >
-                      {activity.source}
-                    </a>
-                  ) : (
-                    <div className="break-all">{activity.source}</div>
-                  )}
-                </div>
-                <div className="flex-none mt-2 md:mt-0 md:w-40">
-                  {activity.categories.map((category, index) => {
-                    return <Badget key={index} category={category}></Badget>
-                  })}
-                </div>
-                <time className="hidden md:block flex-none self-center md:px-1 mb-2 md:mb-0 w-20">
-                  End at{' '}
-                  {activity.endDate === undefined || activity.endDate === null
-                    ? 'TBD'
-                    : moment(activity.endDate).format('YYYY/MM/DD')}
-                </time>
-              </li>
+                  <div className="flex p-1">
+                    {activity.source !== null &&
+                    urlRegex.test(activity.source) ? (
+                      <a
+                        className="self-center text-blue-600 hover:text-blue-800 underline break-all"
+                        href={activity.source}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {activity.source}
+                      </a>
+                    ) : (
+                      <div className="break-all">{activity.source}</div>
+                    )}
+                  </div>
+                  <div className="flex-none mt-2 md:mt-0 md:w-40">
+                    {activity.categories.map((category, index) => {
+                      return <Badget key={index} category={category}></Badget>
+                    })}
+                  </div>
+                  <time className="hidden md:block flex-none self-center md:px-1 mb-2 md:mb-0 w-20">
+                    End at{' '}
+                    {activity.endDate === undefined || activity.endDate === null
+                      ? 'TBD'
+                      : moment(activity.endDate).format('YYYY/MM/DD')}
+                  </time>
+                </li>
+              </div>
             )
           })}
       </ol>
@@ -183,7 +185,7 @@ export const CalendarView = ({
   )
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8 mx-auto mt-4 max-w-7xl">
+    <div className="outer-container">
       {calendar}
       {selectedDateElement}
       {isLoading ? loading : data.length === 0 ? empty : activityList}

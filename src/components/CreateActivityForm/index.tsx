@@ -32,13 +32,13 @@ export const CreateActivityForm = ({
 
   return (
     <div
-      className="overflow-hidden p-4 sm:px-6 lg:px-8 mx-auto max-w-7xl bg-white"
+      className="overflow-hidden bg-white outer-container"
       style={{ minHeight: 'calc(100vh - 16px)' }}
     >
       <form
         action="#"
         method="POST"
-        className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-8 gap-y-3"
+        className="grid grid-cols-1 sm:grid-cols-2 sm:gap-x-8 gap-y-1 sm:gap-y-3"
       >
         {/* title */}
         <div className="col-span-2 md:col-span-1">
@@ -59,7 +59,7 @@ export const CreateActivityForm = ({
               maxLength={32}
               onChange={e => setTitle!(e.target.value)}
               placeholder="Example: Flow Fest mystery NFT giveaways (max 32)"
-              className="block py-3 px-4 w-full rounded-md border border-gray-300 focus:border-main focus:ring-main shadow-sm"
+              className="create-activity-form-content"
             />
           </div>
         </div>
@@ -79,7 +79,7 @@ export const CreateActivityForm = ({
               rows={2}
               value={content}
               onChange={e => setContent!(e.target.value)}
-              className="block py-3 px-4 w-full rounded-md border border-gray-300 focus:border-main focus:ring-main shadow-sm"
+              className="create-activity-form-content"
               placeholder="(optional) the details of what you need to pay attention for participate"
             />
           </div>
@@ -101,6 +101,7 @@ export const CreateActivityForm = ({
                 calendarIcon={null}
                 format={'y-MM-dd'}
                 name="startDate"
+                className="text-sm"
               />
             </div>
           </div>
@@ -119,6 +120,7 @@ export const CreateActivityForm = ({
                 format={'y-MM-dd'}
                 name="endDate"
                 minDate={startDate}
+                className="text-sm"
               />
             </div>
           </div>
@@ -141,7 +143,7 @@ export const CreateActivityForm = ({
               value={source}
               onChange={e => setSource!(e.target.value)}
               placeholder="(optional) the source URL activity publish"
-              className="block py-3 px-4 w-full rounded-md border border-gray-300 focus:border-main focus:ring-main shadow-sm"
+              className="create-activity-form-content"
             />
           </div>
         </div>
@@ -155,7 +157,7 @@ export const CreateActivityForm = ({
             <span className="text-closed"> * </span>
             categories
           </label>
-          <div className="grid grid-cols-4 gap-4 mt-3">
+          <div className="grid grid-cols-4 sm:gap-4 gap-x-1 gap-y-2 mt-3">
             {categoriesToSelect.map(category => {
               const category_text = `text-${category.type}-500`
               return (
@@ -173,7 +175,7 @@ export const CreateActivityForm = ({
                       className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500"
                     />
                   </div>
-                  <div className="ml-1 sm:ml-3 text-sm">
+                  <div className="ml-0.5 sm:ml-3 text-xs sm:text-sm">
                     <label
                       htmlFor={category.type}
                       className={classNames('font-medium', category_text)}
@@ -219,7 +221,7 @@ export const CreateActivityForm = ({
             className="main-button"
           >
             {hasAmount
-              ? `Spend ${sendAmount} CCS to Create Activity. Has ${hasAmount} in wallet`
+              ? `Spend ${sendAmount} CCS to Create Activity, has ${hasAmount} in wallet`
               : 'loading...'}
           </button>
         </div>

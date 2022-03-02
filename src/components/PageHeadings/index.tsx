@@ -28,7 +28,7 @@ export const PageHeadings = ({
 }: IPageHeadingsProps) => {
   return (
     <header className="relative z-10">
-      <nav className="px-4 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+      <nav className="outer-container">
         <div className="flex py-3 w-full border-b">
           {/* uncomment below line in storybook */}
           {/* <MemoryRouter> */}

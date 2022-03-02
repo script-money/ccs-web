@@ -53,7 +53,7 @@ export const UserDetail = ({
           onCloseWindow!()
         }}
       >
-        <div className="flex justify-center items-center px-4 pt-4 pb-20 min-h-screen text-center">
+        <div className="flex justify-center items-center min-h-screen text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -124,27 +124,21 @@ export const UserDetail = ({
                 <Dialog.Title className="userdetail-title">
                   User Name
                 </Dialog.Title>
-                {userName === null ? (
+                {userName === null || userName === undefined ? (
                   <a
                     href={`https://discordapp.com/oauth2/authorize?${OAuthData}`}
                   >
-                    <button
-                      type="button"
-                      className="inline-flex items-center py-1.5 px-2.5 text-xs font-medium text-white bg-discord hover:bg-blue-700 rounded border border-transparent shadow-sm focus:outline-none"
-                    >
+                    <button type="button" className="w-24 userdetail-discord">
                       Link Discord
                     </button>
                   </a>
                 ) : (
-                  <div className="flex flex-shrink-0 items-baseline space-x-4">
+                  <div className="flex flex-shrink-0 items-baseline space-x-1">
                     <p className="userdetail-info">{userName}</p>
                     <a
                       href={`https://discordapp.com/oauth2/authorize?${OAuthData}`}
                     >
-                      <button
-                        type="button"
-                        className="items-center px-1 mx-1 ml-auto h-10 text-xs font-medium text-white bg-discord hover:bg-blue-700 rounded border border-transparent shadow-sm focus:outline-none w-18"
-                      >
+                      <button type="button" className="userdetail-discord">
                         ReLink
                       </button>
                     </a>
@@ -154,27 +148,29 @@ export const UserDetail = ({
               {/* VotePower */}
               <div className="userdetail-item">
                 <Dialog.Title className="userdetail-title">
-                  Voting Power
+                  VotingPower
                 </Dialog.Title>
-                <div className="flex items-center space-x-4">
+                <div className="flex items-center">
                   <div className="flex">
                     <p className="userdetail-info">{votingPower ?? 0}</p>
                   </div>
                 </div>
-                <a
-                  className="text-xs text-blue-600 hover:text-blue-800 underline break-all"
-                  onClick={() => {
-                    onViewMemorials!()
-                    setOpen!(false)
-                  }}
-                >
-                  view detail
-                </a>
+                {votingPower && (
+                  <a
+                    className="text-xs text-blue-600 hover:text-blue-800 underline break-all"
+                    onClick={() => {
+                      onViewMemorials!()
+                      setOpen!(false)
+                    }}
+                  >
+                    view detail
+                  </a>
+                )}
               </div>
               {/* CCSToken */}
               <div className="userdetail-item">
                 <Dialog.Title className="userdetail-title">
-                  CCSToken
+                  CCS Token
                 </Dialog.Title>
                 <div className="flex items-center space-x-4">
                   <div className="flex">
@@ -240,7 +236,7 @@ export const UserDetail = ({
               </div>
 
               {/* logout */}
-              <div className="sm:flex sm:flex-row-reverse mt-8">
+              <div className="sm:flex sm:flex-row-reverse mt-8 h-10">
                 <button
                   type="button"
                   className="inline-flex justify-center py-2 px-4 sm:ml-3 w-full sm:w-auto text-base sm:text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 rounded-md border border-transparent focus:ring-2 focus:ring-orange-500 focus:ring-offset-2 shadow-sm focus:outline-none"

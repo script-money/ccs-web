@@ -8,11 +8,11 @@ export interface IMaintenanceBannerProps {
 export const MaintenanceBanner = ({ onClose }: IMaintenanceBannerProps) => {
   return (
     <div className="fixed inset-x-0 bottom-0 pb-2 sm:pb-5">
-      <div className="px-2 sm:px-6 lg:px-8 mx-auto max-w-7xl">
+      <div className="px-2 outer-container">
         <div className="p-2 sm:p-3 bg-red-600 rounded-lg shadow-lg">
           <div className="flex flex-wrap justify-between items-center">
             <div className="flex flex-1 items-center w-0">
-              <p className="ml-3 font-medium text-white truncate">
+              <p className="ml-3 text-sm md:text-base font-medium text-white truncate">
                 <span className="md:hidden">Server is under maintenance</span>
                 <span className="hidden md:inline">
                   Server is under maintenance. View details in{' '}

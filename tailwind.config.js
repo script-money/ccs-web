@@ -110,6 +110,9 @@ module.exports = {
         open: '#1a7f37',
         closed: '#cf222e',
         discord: '#586aea'
+      },
+      width: {
+        18: '4.5rem'
       }
     }
   },

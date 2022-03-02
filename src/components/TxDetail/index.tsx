@@ -29,7 +29,7 @@ export const TxDetail = ({
         onClose={setOpen}
       >
         {/* background */}
-        <div className="block justify-center items-end pt-32 sm:pt-0 min-h-screen text-center">
+        <div className="block justify-center items-end min-h-screen text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -44,7 +44,7 @@ export const TxDetail = ({
 
           {/* This element is to trick the browser into centering the modal contents. */}
           <span
-            className="hidden sm:inline-block sm:h-screen sm:align-middle"
+            className="inline-block h-screen align-middle"
             aria-hidden="true"
           >
             &#8203;
@@ -59,7 +59,7 @@ export const TxDetail = ({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block overflow-hidden sm:p-6 px-4 pt-5 pb-4 my-8 sm:w-full sm:max-w-sm text-left align-bottom sm:align-middle bg-white rounded-lg shadow-xl transition-all transform">
+            <div className="inline-block overflow-hidden p-4 text-left align-middle bg-white rounded-lg shadow-xl transition-all transform">
               <div>
                 <div className="flex justify-center items-center mx-auto w-16 h-16">
                   {status === 'PROCESSING' ? (
@@ -112,7 +112,7 @@ export const TxDetail = ({
                 </div>
               </div>
               {status !== 'PROCESSING' ? (
-                <div className="mt-5 sm:mt-6">
+                <div className="mt-5">
                   <button
                     type="button"
                     className="main-button"

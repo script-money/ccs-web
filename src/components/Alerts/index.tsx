@@ -12,16 +12,16 @@ export const Alerts = ({ status, message }: IAlertsProps) => {
   const [open, setOpen] = useState(true)
   if (status === 'SUCCESS' && open) {
     return (
-      <div className="p-4 m-4 sm:mx-6 bg-green-50 rounded-md">
-        <div className="flex">
+      <div className="p-4 sm:mx-4 bg-green-50 rounded-md sm-4">
+        <div className="flex items-center">
           <div className="flex-shrink-0">
             <CheckCircleIcon
               className="w-5 h-5 text-green-400"
               aria-hidden="true"
             />
           </div>
-          <div className="ml-3">
-            <p className="text-sm font-medium text-green-800">{message}</p>
+          <div className="ml-1 sm:ml-3 text-xs sm:text-sm font-medium text-green-800 text-ellipsis">
+            {message}
           </div>
           <div className="pl-3 ml-auto">
             <div className="-my-1.5 -mx-1.5">
@@ -40,15 +40,15 @@ export const Alerts = ({ status, message }: IAlertsProps) => {
     )
   } else if (status === 'ERROR' && open) {
     return (
-      <div className="p-4 m-4 sm:mx-6 bg-red-50 rounded-md">
-        <div className="flex">
+      <div className="p-4 sm:mx-4 bg-red-50 rounded-md">
+        <div className="flex items-center">
           <div className="flex-shrink-0">
             <XCircleIcon className="w-5 h-5 text-red-400" aria-hidden="true" />
           </div>
-          <div className="ml-3">
-            <h3 className="text-sm font-medium text-red-800">{message}</h3>
+          <div className="ml-1 sm:ml-3 text-xs sm:text-sm font-medium text-red-800 truncate">
+            {message}
           </div>
-          <div className="self-center pr-3 ml-auto">
+          <div className="flex-none self-center sm:pr-3 ml-auto">
             <div className="-my-1.5 -mx-1.5">
               <button
                 type="button"
