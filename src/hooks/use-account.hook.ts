@@ -67,6 +67,13 @@ export default function useAccount(user: SessionUser) {
         payload: { txID: transaction }
       })
       await isAccountInitialized()
+      txDispatch({
+        type: ActionType.AddTip,
+        payload: {
+          text: 'Account has been initialized',
+          toHome: true
+        }
+      })
     } catch (err: unknown) {
       txDispatch({
         type: ActionType.AddError,
