@@ -191,10 +191,7 @@ const ActivityDetail = ({
                       </dt>
                       <dd className="mt-1 text-sm text-gray-900">
                         {activity.lockDate === null
-                          ? moment(activity.createdAt)
-                              .add(1, 'days')
-                              .startOf('hour')
-                              .fromNow()
+                          ? moment(activity.createdAt).add(1, 'days').fromNow()
                           : moment(activity.lockDate).fromNow()}
                       </dd>
                     </div>

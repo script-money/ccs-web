@@ -79,8 +79,7 @@ export const ActivityItem = ({ activity }: ActivityItemProps) => {
         </div>
         {/* created at by */}
         <div className="text-xs text-gray-600 whitespace-nowrap">
-          #{activity.id} in{' '}
-          {moment(activity.createdAt).startOf('hour').fromNow()} by{' '}
+          #{activity.id} in {moment(activity.createdAt).fromNow()} by{' '}
           {activity.creator.discord ?? activity.creator.address}
         </div>
         {/* start-end */}
