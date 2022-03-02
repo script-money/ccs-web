@@ -14,4 +14,4 @@
 1. use `yarn build` generate files
 2. copy dist, docker-compose.yml and nginx.conf to server
 3. use `sh run_web.sh` launch nginx web container
-4. change VITE_BASE_URL (backend domain) and VITE_DOMAIN (front domain) in .env
+4. change VITE_SERVER_URL (backend domain) and VITE_WEB_URL (front domain) in .env

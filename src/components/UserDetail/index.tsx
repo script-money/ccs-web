@@ -38,7 +38,7 @@ export const UserDetail = ({
   const OAuthData = new URLSearchParams({
     response_type: 'code',
     client_id: import.meta.env.VITE_DISCORD_CLIENT_ID as string,
-    redirect_uri: `${import.meta.env.VITE_DOMAIN}`,
+    redirect_uri: `${import.meta.env.VITE_WEB_URL}`,
     scope: ['identify'].join(' '),
     state: address
   })
